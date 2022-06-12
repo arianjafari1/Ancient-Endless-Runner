@@ -35,17 +35,34 @@ public class TileManager : MonoBehaviour
         /// Code done by Arian- end
 
 
-        /// Code done by Arian
+        /// Code done by Arian- start
         //tilePosition.transform.position = new Vector3(0, 0, transform.position.z - movementSpeed);
 
 
         //Vector3 a = tilePosition.transform.position;
         //Vector3 b = targetZ.position;
         //tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed);
-        /// Code done by Arian
+        /// Code done by Arian- end
 
     }
 
+    /// Code done by Arian- start
+    
+    private void OnTriggerEnter(Collider collisionInfo) //check for collision infor
+    {
+
+        if (collisionInfo.gameObject.CompareTag("TileDeath")) //if collision info comapre with the tile death point tag, then execute the code undeneath
+        {
+            Destroy(gameObject); //destroy the tile
+            Debug.Log("Collision has happened");
+
+        }
+
+
+
+    }
+
+    /// Code done by Arian- end
 
 
 
