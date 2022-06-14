@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    /// <summary>
+    /// Code by Malachi
+    /// </summary>
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private enum Lanes
         {
@@ -19,7 +22,6 @@ public class Movement : MonoBehaviour
     private InputAction right;
 
     private Lanes currentLane;
-    private Vector2 inputDirection;
 
     private void Awake()
     {
@@ -29,8 +31,7 @@ public class Movement : MonoBehaviour
     }
     private void OnEnable()
     {
-        //move = movementInputActions.Player.Move;
-        //move.Enable();
+        
         left = movementInputActions.Player.Left;
         right = movementInputActions.Player.Right;
         left.Enable();
@@ -54,9 +55,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        //inputDirection = move.ReadValue<Vector2>();
-        //if (inputDirection.x <= -0.5) { GoLeft(); }
-        //else if (inputDirection.x >= 0.5) { GoRight(); }
+
     }
 
     // Update is called once per frame

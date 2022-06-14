@@ -5,7 +5,7 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     /// Code done by Arian- start
-    [SerializeField] private float movementSpeed = 0.000000001f; //declare variable float for movement speed of the tile to be edited in Unity editor
+    [SerializeField] private float movementSpeed; //declare variable float for movement speed of the tile to be edited in Unity editor
     [SerializeField] private Transform tilePosition; //getting the position of tile
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
     private float t = 0.1f;
