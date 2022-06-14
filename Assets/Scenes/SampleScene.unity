@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &433636784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8100739140064079360, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+  m_PrefabInstance: {fileID: 1425386983907937395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &663092677
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +509,18 @@ PrefabInstance:
       propertyPath: targetZ
       value: 
       objectReference: {fileID: 1777264713}
+    - target: {fileID: 1425386983842709312, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 433636784}
+    - target: {fileID: 1425386983842709312, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: tilePrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425386983842709312, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: tilePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1425386983842709314, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
     - target: {fileID: 1425386983842709313, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -551,6 +568,14 @@ PrefabInstance:
     - target: {fileID: 1425386983842709314, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
       propertyPath: m_Name
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010607273907299302, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: m_TagString
+      value: spawnPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100739140064079360, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}

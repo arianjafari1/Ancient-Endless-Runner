@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tile
   - TileDeath
+  - spawnPoint
   layers:
   - Default
   - TransparentFX

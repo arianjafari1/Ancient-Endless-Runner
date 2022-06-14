@@ -9,6 +9,11 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Transform tilePosition; //getting the position of tile
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
     private float t = 0.1f;
+
+
+    [SerializeField] private GameObject[] tilePrefabs; //array of tile prefabs
+    [SerializeField] private Transform spawnPoint; //spawn point for new tiles
+
     /// Code done by Arian- end
 
     // Start is called before the first frame update
