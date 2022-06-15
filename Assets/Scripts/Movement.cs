@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
     [Tooltip("How high the player's jump reaches")]
     [SerializeField] private float maxJumpHeight;
     private bool isJumping = false;
+    private bool isFalling = false;
     private bool isSliding = false;
 
     private void Awake()
@@ -104,11 +105,30 @@ public class Movement : MonoBehaviour
         {
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
-            player.transform.position = Vector3.MoveTowards(currentPos, targetPos, currentJumpVelocity * Time.fixedDeltaTime);
+            //player.transform.position = Vector3.MoveTowards(currentPos, targetPos, currentJumpVelocity * Time.fixedDeltaTime);
+            player.transform.Translate(Vector3.up * currentJumpVelocity * Time.fixedDeltaTime);
             if (player.transform.position.y >= maxJumpHeight)
             {
+                player.transform.position = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
+                currentJumpVelocity = 0;
                 isJumping = false;
+                isFalling = true;
                 Debug.Log("Height reached");
+            }
+        }
+        //falling from jump
+        if (isFalling)
+        {
+            currentJumpVelocity -= gravity * Time.fixedDeltaTime;
+            Vector3 targetPos = new Vector3(currentPos.x, groundHeight, currentPos.z);
+            //player.transform.position = Vector3.MoveTowards(currentPos, targetPos, currentJumpVelocity * Time.fixedDeltaTime);
+            player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
+            if (player.transform.position.y <= groundHeight)
+            {
+                player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
+                currentJumpVelocity = 0;
+                isFalling = false;
+                Debug.Log("Back to ground");
             }
         }
 
@@ -153,8 +173,11 @@ public class Movement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        currentJumpVelocity = jumpForce;
-        isJumping = true;
+        if (!isJumping && !isFalling) 
+        {
+            currentJumpVelocity = jumpForce;
+            isJumping = true;
+        }
     }
 
     public void Slide(InputAction.CallbackContext context)
