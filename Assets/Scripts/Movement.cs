@@ -20,13 +20,25 @@ public class Movement : MonoBehaviour
     private MovementInputActions movementInputActions;
     private InputAction left;
     private InputAction right;
+    private InputAction jump;
+    private InputAction slide;
 
     private Lanes currentLane;
+
+    private float gravity = -9.8f;
+    [Tooltip("How quickly the player jumps")]
+    [SerializeField] private float jumpForce;
+    private float currentJumpVelocity;
+    private float groundHeight;
+    [Tooltip("How high the player's jump reaches")]
+    [SerializeField] private float maxJumpHeight;
+    private bool isJumping = false;
+    private bool isSliding = false;
 
     private void Awake()
     {
         movementInputActions = new MovementInputActions();
-
+        
         
     }
     private void OnEnable()
@@ -34,16 +46,23 @@ public class Movement : MonoBehaviour
         
         left = movementInputActions.Player.Left;
         right = movementInputActions.Player.Right;
+        jump = movementInputActions.Player.Jump;
+        slide = movementInputActions.Player.Slide;
         left.Enable();
         right.Enable();
+        jump.Enable();
+        slide.Enable();
         left.performed += GoLeft;
         right.performed += GoRight;
+        jump.performed += Jump;
+        slide.performed += Slide;
     }
     private void OnDisable()
     {
-        //move.Disable();
         left.Disable();
         right.Disable();
+        jump.Disable();
+        slide.Disable();
     }
 
 
@@ -51,6 +70,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         currentLane = Lanes.center;
+        groundHeight = player.transform.position.y;
     }
 
     void Update()
@@ -64,6 +84,7 @@ public class Movement : MonoBehaviour
         int targetLane = ((int)currentLane);
         Vector3 currentPos = player.transform.position;
 
+        //Lane switching
         if (Math.Abs(targetLane - player.transform.position.x) > 0.005)
         {
             if (player.transform.position.x > targetLane)
@@ -77,6 +98,26 @@ public class Movement : MonoBehaviour
                 player.transform.Translate(Vector3.right * horizontalSpeed / 10);
             }
         }
+
+        //Jumping
+        if (isJumping)
+        {
+            currentJumpVelocity += gravity * Time.fixedDeltaTime;
+            Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
+            player.transform.position = Vector3.MoveTowards(currentPos, targetPos, currentJumpVelocity * Time.fixedDeltaTime);
+            if (player.transform.position.y >= maxJumpHeight)
+            {
+                isJumping = false;
+                Debug.Log("Height reached");
+            }
+        }
+
+        //Sliding
+        if (isSliding)
+        {
+            //
+        }
+
 
     }
 
@@ -110,7 +151,16 @@ public class Movement : MonoBehaviour
         Debug.Log(currentLane);
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        currentJumpVelocity = jumpForce;
+        isJumping = true;
+    }
 
+    public void Slide(InputAction.CallbackContext context)
+    {
+        isSliding = false;
+    }
 
 
 
