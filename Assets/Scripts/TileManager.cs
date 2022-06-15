@@ -8,24 +8,28 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float movementSpeed; //declare variable float for movement speed of the tile to be edited in Unity editor
     [SerializeField] private Transform tilePosition; //getting the position of tile
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
-    private float t = 0.1f;
+    private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
+
+    [SerializeField] private Transform tileSpawnStart;
+    [SerializeField] private Transform groundLength; //ground child object of tile
+    //private float tileLength = 0f; //assign tileLength to 0, then changing it later in the start function
 
 
-    [SerializeField] private GameObject[] tilePrefabs; //array of tile prefabs
-    [SerializeField] private Transform spawnPoint; //spawn point for new tiles
+    [SerializeField] private GameObject tilePrefab;
+    //[SerializeField] private GameObject[] tilePrefabs; //array of tile prefabs
+
 
     /// Code done by Arian- end
 
     // Start is called before the first frame update
     private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
+        /// Code done by Arian- start
+        //tileLength = groundLength.transform.localScale.z; //assiging the tileLenght the Length of Ground child object of the tile on the z axis, it is more scalable than hardcoding it
         
+
+        /// Code done by Arian- end
+
     }
 
 
@@ -33,33 +37,29 @@ public class TileManager : MonoBehaviour
     {
 
         /// Code done by Arian- start
-        //combining MoveTowards and Lerp to move the tiles towards the camera, MoveTowards for constant speed, and lerp for smooth movement
-        Vector3 a = tilePosition.transform.position; //assigning Vector3 the position of tilePosition
-        Vector3 b = targetZ.position; //assigning Vector3 b the postion of targetZ
-        tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed);
-        /// Code done by Arian- end
 
+        if (tilePosition != null) //preventing an error by first checking if transform tilePosition is not null
+        {
+            //combining MoveTowards and Lerp to move the tiles towards the camera, MoveTowards for constant speed, and lerp for smooth movement:
+            Vector3 a = tilePosition.transform.position; //assigning Vector3 the position of tilePosition
+            Vector3 b = targetZ.position; //assigning Vector3 b the postion of targetZ
+            tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed); //using movetowards and lerp to move tile backwards at constant speed
+        }
 
-        /// Code done by Arian- start
-        //tilePosition.transform.position = new Vector3(0, 0, transform.position.z - movementSpeed);
-
-
-        //Vector3 a = tilePosition.transform.position;
-        //Vector3 b = targetZ.position;
-        //tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed);
         /// Code done by Arian- end
 
     }
 
+
     /// Code done by Arian- start
-    
     private void OnTriggerEnter(Collider collisionInfo) //check for collision infor
     {
 
-        if (collisionInfo.gameObject.CompareTag("TileDeath")) //if collision info comapre with the tile death point tag, then execute the code undeneath
+
+        if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
-            Destroy(gameObject); //destroy the tile
-            Debug.Log("Collision has happened");
+            Instantiate(tilePrefab, tileSpawnStart.position, tileSpawnStart.rotation);
+            Debug.Log("New Tile spawned");
 
         }
 
