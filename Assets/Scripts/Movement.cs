@@ -110,7 +110,7 @@ public class Movement : MonoBehaviour
             if (player.transform.position.y >= maxJumpHeight)
             {
                 player.transform.position = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
-                currentJumpVelocity = 0;
+                //currentJumpVelocity = 0;
                 isJumping = false;
                 isFalling = true;
                 Debug.Log("Height reached");
