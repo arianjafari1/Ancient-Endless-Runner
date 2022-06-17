@@ -5,7 +5,9 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     /// Code done by Arian- start
-    [SerializeField] private float movementSpeed; //declare variable float for movement speed of the tile to be edited in Unity editor
+    [SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
+    private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
+    private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
     [SerializeField] private Transform tilePosition; //getting the position of tile
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
     private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
@@ -46,6 +48,17 @@ public class TileManager : MonoBehaviour
             tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed); //using movetowards and lerp to move tile backwards at constant speed
         }
 
+        if (movementSpeed > maxMovementSpeed) //check if movement speed is higher than maximum speed
+        {
+            Debug.LogError("Movement speed should be lower than " + maxMovementSpeed); //custom error message in case movementSpeed goes over the maximum speed
+            return; //returning nothing
+        }
+
+
+        if (movementSpeed < maxMovementSpeed) //if the movement speed is lower than 0.5 then
+        {
+            movementSpeed += speedIncreaseEverySecond; //increase speed by this amount
+        }
         /// Code done by Arian- end
 
     }
