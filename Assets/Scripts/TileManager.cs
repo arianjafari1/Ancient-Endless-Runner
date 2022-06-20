@@ -48,7 +48,7 @@ public class TileManager : MonoBehaviour
             tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed); //using movetowards and lerp to move tile backwards at constant speed
         }
 
-        if (movementSpeed > maxMovementSpeed) //check if movement speed is higher than maximum speed
+        if (movementSpeed > maxMovementSpeed + maxMovementSpeed * 20 / 100) //check if movement speed is higher than maximum speed + 20 %
         {
             Debug.LogError("Movement speed should be lower than " + maxMovementSpeed); //custom error message in case movementSpeed goes over the maximum speed
             return; //returning nothing
