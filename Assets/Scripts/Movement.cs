@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     ///          - changed MoveTowards in lane movement to Translate to prevent input queueing
     /// 15/06/22 - added downwards jump movement
     /// 17/06/22 - added comments
+    ///          - added failsafe in case jump force cannot reach jump height
+    ///          - serialized gravity to give designers more freedom
     ///
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -168,12 +170,13 @@ public class Movement : MonoBehaviour
         //Sliding
         if (isSliding)
         {
-            //
+            Debug.Log("Slide performed");
         }
 
 
     }
-
+    #region LaneSwitchFunctions
+    //Switches the lane state to the one the player just inputted
     public void GoLeft(InputAction.CallbackContext context)
     {
 
@@ -188,7 +191,6 @@ public class Movement : MonoBehaviour
         }
         Debug.Log(currentLane);
     }
-
     public void GoRight(InputAction.CallbackContext context)
     {
         
@@ -203,7 +205,7 @@ public class Movement : MonoBehaviour
         }
         Debug.Log(currentLane);
     }
-
+    #endregion
     public void Jump(InputAction.CallbackContext context)
     {
         if (!isJumping && !isFalling) 
