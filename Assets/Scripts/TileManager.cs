@@ -81,7 +81,7 @@ public class TileManager : MonoBehaviour
     }
 
 
-    public float movementSpeedGetterSetter
+    public float movementSpeedGetterSetter //getters and setters for movement speed
     {
         get 
         {
