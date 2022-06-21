@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 663092679}
   - component: {fileID: 663092678}
   - component: {fileID: 663092682}
+  - component: {fileID: 663092684}
   - component: {fileID: 663092683}
   m_Layer: 0
   m_Name: Player
@@ -381,6 +382,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &663092684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663092677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77371376de982e9458f7e0c3ead4ba61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +502,7 @@ GameObject:
   - component: {fileID: 735805703}
   m_Layer: 0
   m_Name: tileDeathPoint
-  m_TagString: Untagged
+  m_TagString: TileDeath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -828,6 +841,14 @@ PrefabInstance:
       propertyPath: targetZ
       value: 
       objectReference: {fileID: 735805702}
+    - target: {fileID: 2499764707721815826, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070361492562789754, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
+      propertyPath: m_TagString
+      value: spawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7070361493189327797, guid: 0b99e60a1a2a14b4a8cd08ef64a358a2, type: 3}
       propertyPath: m_RootOrder
       value: 3
