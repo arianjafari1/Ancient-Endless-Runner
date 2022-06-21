@@ -80,6 +80,23 @@ public class TileManager : MonoBehaviour
 
     }
 
+
+    public float movementSpeedGetterSetter
+    {
+        get 
+        {
+            return movementSpeed;
+        }
+        set
+        {
+            if (value < 0)
+                movementSpeed = 0;
+            else
+                movementSpeed = value;
+        }
+    }
+
+
     /// Code done by Arian- end
 
 
