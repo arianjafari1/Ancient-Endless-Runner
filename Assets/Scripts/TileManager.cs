@@ -5,9 +5,11 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     /// Code done by Arian- start
-    [SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
-    private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
-    private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
+    [SerializeField] private TileMovement tileMovement;
+
+    //[SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
+    //private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
+    //private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
     [SerializeField] private Transform tilePosition; //getting the position of tile
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
     private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
@@ -45,19 +47,19 @@ public class TileManager : MonoBehaviour
             //combining MoveTowards and Lerp to move the tiles towards the camera, MoveTowards for constant speed, and lerp for smooth movement:
             Vector3 a = tilePosition.transform.position; //assigning Vector3 the position of tilePosition
             Vector3 b = targetZ.position; //assigning Vector3 b the postion of targetZ
-            tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), movementSpeed); //using movetowards and lerp to move tile backwards at constant speed
+            tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), tileMovement.movementSpeedGetterSetter); //using movetowards and lerp to move tile backwards at constant speed
         }
 
-        if (movementSpeed > maxMovementSpeed + maxMovementSpeed * 20 / 100) //check if movement speed is higher than maximum speed + 20 %
+        if (tileMovement.movementSpeedGetterSetter > tileMovement.maxMovementSpeedGetter + tileMovement.maxMovementSpeedGetter * 20 / 100) //check if movement speed is higher than maximum speed + 20 %
         {
-            Debug.LogError("Movement speed should be lower than " + maxMovementSpeed); //custom error message in case movementSpeed goes over the maximum speed
+            Debug.LogError("Movement speed should be lower than " + tileMovement.maxMovementSpeedGetter); //custom error message in case movementSpeed goes over the maximum speed
             return; //returning nothing
         }
 
 
-        if (movementSpeed < maxMovementSpeed) //if the movement speed is lower than 0.5 then
+        if (tileMovement.movementSpeedGetterSetter < tileMovement.maxMovementSpeedGetter) //if the movement speed is lower than 0.5 then
         {
-            movementSpeed += speedIncreaseEverySecond; //increase speed by this amount
+            tileMovement.movementSpeedGetterSetter += tileMovement.speedIncreaseEverySecondGetterSetter; //increase speed by this amount
         }
         /// Code done by Arian- end
 
@@ -81,20 +83,20 @@ public class TileManager : MonoBehaviour
     }
 
 
-    public float movementSpeedGetterSetter //getters and setters for movement speed
-    {
-        get 
-        {
-            return movementSpeed;
-        }
-        set
-        {
-            if (value < 0)
-                movementSpeed = 0;
-            else
-                movementSpeed = value;
-        }
-    }
+    //public float movementSpeedGetterSetter //getters and setters for movement speed
+    //{
+    //    get 
+    //    {
+    //        return movementSpeed;
+    //    }
+    //    set
+    //    {
+    //        if (value < 0)
+    //            movementSpeed = 0;
+    //        else
+    //            movementSpeed = value;
+    //    }
+    //}
 
 
     /// Code done by Arian- end
