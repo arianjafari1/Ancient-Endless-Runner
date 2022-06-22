@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 663092678}
   - component: {fileID: 663092682}
   - component: {fileID: 663092684}
-  - component: {fileID: 663092683}
+  - component: {fileID: 663092685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -362,27 +362,8 @@ MonoBehaviour:
   gravity: -9.8
   jumpForce: 10
   maxJumpHeight: 4
-  animator: {fileID: 663092683}
---- !u!95 &663092683
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663092677}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 10b078f5f469824429864b27f8691ec3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  AccelerationModifier: 4
+  tileManager: {fileID: 0}
 --- !u!114 &663092684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +376,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77371376de982e9458f7e0c3ead4ba61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &663092685
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663092677}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 2c3f68370fe55e845a0ef83bfc9db1ac, type: 2}
+  - {fileID: 7400000, guid: 0efdeb1ab1d12e6419bf2cc77ab09e97, type: 2}
+  - {fileID: 7400000, guid: 22c2c0a237d24934ea9136a85b703482, type: 2}
+  - {fileID: 7400000, guid: ac5d3dfc66a21094b851ad1dbf5b7150, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
