@@ -45,7 +45,13 @@ public class Movement : MonoBehaviour
     [SerializeField] private float maxJumpHeight;
     private bool isJumping = false;
     private bool isFalling = false;
-    private bool isSliding = false;
+    private bool isTryingToSlide = false;
+    [Tooltip("Acceleration modifier for jump cancels")]
+    [SerializeField] private float AccelerationModifier;
+    
+
+    private Animation playerAnimation;
+    //[SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -90,6 +96,7 @@ public class Movement : MonoBehaviour
     {
         currentLane = Lanes.center;
         groundHeight = player.transform.position.y;
+        playerAnimation = gameObject.GetComponent<Animation>();
     }
 
     void Update()
@@ -131,6 +138,7 @@ public class Movement : MonoBehaviour
         //the jump, then switches to falling once it reaches the max height.
         if (isJumping)
         {
+            //animator.SetBool("isJumping", true);
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(Vector3.up * currentJumpVelocity * Time.fixedDeltaTime);
@@ -160,6 +168,7 @@ public class Movement : MonoBehaviour
             player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
             if (player.transform.position.y <= groundHeight)
             {
+                //animator.SetBool("isJumping", false);
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isFalling = false;
@@ -167,11 +176,20 @@ public class Movement : MonoBehaviour
             }
         }
 
-        //Sliding
-        if (isSliding)
+        //Cancelling jump/fall into a slide
+        if (isTryingToSlide)
         {
-            Debug.Log("Slide performed");
-            isSliding = false;
+            currentJumpVelocity -= gravity * Time.fixedDeltaTime * AccelerationModifier;
+            player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
+            if (player.transform.position.y <= groundHeight)
+            {
+                playerAnimation.Play("Slide");
+                player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
+                currentJumpVelocity = 0;
+                isTryingToSlide = false;
+                Debug.Log("Cancelled jump into slide");
+            }
+            
         }
 
 
@@ -211,6 +229,7 @@ public class Movement : MonoBehaviour
     {
         if (!isJumping && !isFalling) 
         {
+            playerAnimation.Play("Jump");
             currentJumpVelocity = jumpForce;
             isJumping = true;
         }
@@ -218,7 +237,17 @@ public class Movement : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext context)
     {
-        isSliding = true;
+        if (!isJumping && !isFalling)
+        {
+            playerAnimation.Play("Slide");
+            Debug.Log("Slid");
+        }
+        else
+        {
+            isJumping = false;
+            isFalling = false;
+            isTryingToSlide = true;
+        }
     }
 
 

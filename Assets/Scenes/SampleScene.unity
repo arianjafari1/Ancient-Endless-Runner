@@ -362,6 +362,7 @@ MonoBehaviour:
   gravity: -9.8
   jumpForce: 10
   maxJumpHeight: 4
+  animator: {fileID: 663092683}
 --- !u!95 &663092683
 Animator:
   serializedVersion: 4
@@ -372,7 +373,7 @@ Animator:
   m_GameObject: {fileID: 663092677}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 257bb723297b48f4092e7e11317ee47d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 10b078f5f469824429864b27f8691ec3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
