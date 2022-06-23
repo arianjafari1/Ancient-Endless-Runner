@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     /// <summary>
-    /// Code by Malachi
+    /// Code and dev notes by Malachi unless otherwise specified
     /// 
     /// 08/06/22 - added movement between lanes
     ///          - implemented new Unity Input System
@@ -17,6 +17,12 @@ public class Movement : MonoBehaviour
     /// 17/06/22 - added comments
     ///          - added failsafe in case jump force cannot reach jump height
     ///          - serialized gravity to give designers more freedom
+    /// 19/06/22 - created slide animation, attempted to implement
+    /// 20/06/22 - slide animation plays when it's supposed to initially (requires fix)
+    /// 21/06/22 - removed slide having a toggle which caused animation to only work once
+    /// 22/06/22 - swapped animator for an animation array
+    ///          - replaced bools with Animation.play() functions
+    ///          - initial attempt at staggering (requires slight rework of tilemanager class)
     ///
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -45,7 +51,15 @@ public class Movement : MonoBehaviour
     [SerializeField] private float maxJumpHeight;
     private bool isJumping = false;
     private bool isFalling = false;
-    private bool isSliding = false;
+    private bool isTryingToSlide = false;
+    [Tooltip("Acceleration modifier for jump cancels")]
+    [SerializeField] private float AccelerationModifier;
+
+
+    private Animation playerAnimation;
+    //[SerializeField] private Animator animator;
+
+    [SerializeField] TileManager tileManager;
 
     private void Awake()
     {
@@ -90,6 +104,7 @@ public class Movement : MonoBehaviour
     {
         currentLane = Lanes.center;
         groundHeight = player.transform.position.y;
+        playerAnimation = gameObject.GetComponent<Animation>();
     }
 
     void Update()
@@ -131,6 +146,7 @@ public class Movement : MonoBehaviour
         //the jump, then switches to falling once it reaches the max height.
         if (isJumping)
         {
+            //animator.SetBool("isJumping", true);
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(Vector3.up * currentJumpVelocity * Time.fixedDeltaTime);
@@ -168,10 +184,19 @@ public class Movement : MonoBehaviour
         }
 
         //Sliding
-        if (isSliding)
+        if (isTryingToSlide)
         {
-            Debug.Log("Slide performed");
-            isSliding = false;
+            currentJumpVelocity -= gravity * Time.fixedDeltaTime * AccelerationModifier;
+            player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
+            if (player.transform.position.y <= groundHeight)
+            {
+                playerAnimation.Play("Slide");
+                player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
+                currentJumpVelocity = 0;
+                isTryingToSlide = false;
+                Debug.Log("Cancelled jump into slide");
+            }
+
         }
 
 
@@ -211,6 +236,7 @@ public class Movement : MonoBehaviour
     {
         if (!isJumping && !isFalling) 
         {
+            playerAnimation.Play("Jump");
             currentJumpVelocity = jumpForce;
             isJumping = true;
         }
@@ -218,9 +244,28 @@ public class Movement : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext context)
     {
-        isSliding = true;
+        //plays the slide "animation", which essentially just shrinks and lowers the 
+        //collision box of the player.
+        //TODO: Will need to be matched up with the animation once that is imported
+
+        if (!isJumping && !isFalling)
+        {
+            playerAnimation.Play("Slide");
+            Debug.Log("Slid");
+        }
+        else
+        {
+            //triggers the jump cancel, allowing the player to quickly slide even if midair.
+            isJumping = false;
+            isFalling = false;
+            isTryingToSlide = true;
+        }
     }
 
+    public void Stagger()
+    {
+        playerAnimation.Play("Stagger");
+    }
 
 
 
