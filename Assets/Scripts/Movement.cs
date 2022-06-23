@@ -22,9 +22,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
         {
-            left = -4,
+            left = -3,
             center = 0,
-            right = 4
+            right = 3
         };
     [SerializeField] private GameObject player;
     private MovementInputActions movementInputActions;
@@ -171,6 +171,7 @@ public class Movement : MonoBehaviour
         if (isSliding)
         {
             Debug.Log("Slide performed");
+            isSliding = false;
         }
 
 
@@ -217,7 +218,7 @@ public class Movement : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext context)
     {
-        isSliding = false;
+        isSliding = true;
     }
 
 
