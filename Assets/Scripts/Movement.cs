@@ -265,6 +265,7 @@ public class Movement : MonoBehaviour
     public void Stagger()
     {
         playerAnimation.Play("Stagger");
+        Debug.Log("Staggered");
     }
 
 
