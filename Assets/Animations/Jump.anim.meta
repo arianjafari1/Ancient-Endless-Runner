@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: 0efdeb1ab1d12e6419bf2cc77ab09e97
 NativeFormatImporter:
   externalObjects: {}
+<<<<<<< HEAD
   mainObjectFileID: 0
+=======
+  mainObjectFileID: 7400000
+>>>>>>> parent of 9e178bf (Revert "things")
   userData: 
   assetBundleName: 
   assetBundleVariant: 
