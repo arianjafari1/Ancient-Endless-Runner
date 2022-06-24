@@ -370,9 +370,10 @@ MonoBehaviour:
   gravity: -9.8
   jumpForce: 10
   maxJumpHeight: 4
-  AccelerationModifier: 0
-  tileMovement: {fileID: 0}
-  staggerSpeedDecrease: 0
+  AccelerationModifier: 4
+  tileMovement: {fileID: 775761444}
+  staggerSpeedDecrease: 0.2
+  staggerDuration: 1
 --- !u!114 &663092684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,7 +604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 0.1
-  speedIncreaseEverySecond: 0.0001
+  maxMovementSpeed: 0.8
+  speedIncreaseEverySecond: 0.00005
 --- !u!4 &775761445
 Transform:
   m_ObjectHideFlags: 0

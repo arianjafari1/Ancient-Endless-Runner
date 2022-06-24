@@ -62,6 +62,15 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TheDebugButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdd5ff8a-8cbe-49af-8ecc-5bc710e9c2e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,17 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e7dfbdd-a33b-43f3-968d-252d9377539c"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""TheDebugButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -840,6 +860,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         m_Player_Right = m_Player.FindAction("Right", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
+        m_Player_TheDebugButton = m_Player.FindAction("TheDebugButton", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -915,6 +936,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     private readonly InputAction m_Player_Right;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Slide;
+    private readonly InputAction m_Player_TheDebugButton;
     public struct PlayerActions
     {
         private @MovementInputActions m_Wrapper;
@@ -923,6 +945,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         public InputAction @Right => m_Wrapper.m_Player_Right;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
+        public InputAction @TheDebugButton => m_Wrapper.m_Player_TheDebugButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +967,9 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                 @Slide.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
+                @TheDebugButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTheDebugButton;
+                @TheDebugButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTheDebugButton;
+                @TheDebugButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTheDebugButton;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -960,6 +986,9 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                 @Slide.started += instance.OnSlide;
                 @Slide.performed += instance.OnSlide;
                 @Slide.canceled += instance.OnSlide;
+                @TheDebugButton.started += instance.OnTheDebugButton;
+                @TheDebugButton.performed += instance.OnTheDebugButton;
+                @TheDebugButton.canceled += instance.OnTheDebugButton;
             }
         }
     }
@@ -1120,6 +1149,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         void OnRight(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
+        void OnTheDebugButton(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

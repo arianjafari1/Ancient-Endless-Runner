@@ -23,7 +23,10 @@ public class Movement : MonoBehaviour
     /// 22/06/22 - swapped animator for an animation array
     ///          - replaced bools with Animation.play() functions
     ///          - initial attempt at staggering (requires slight rework of tilemanager class)
-    ///
+    /// 24/06/22 - set up the debug button so i can test things (such as tripping/dieing) before 
+    ///          - their respective triggers have been created.
+    ///          - Staggering mechanic implemented.
+    ///          - Staggering function added to the debug button.
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -38,6 +41,7 @@ public class Movement : MonoBehaviour
     private InputAction right;
     private InputAction jump;
     private InputAction slide;
+    private InputAction debugButton;
 
     private Lanes currentLane;
 
@@ -57,10 +61,12 @@ public class Movement : MonoBehaviour
 
 
     private Animation playerAnimation;
-    //[SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
 
     [SerializeField] TileMovement tileMovement;
     [SerializeField] private float staggerSpeedDecrease;
+    [SerializeField] private float staggerDuration;
+    private float speedBeforeStagger;
 
     private void Awake()
     {
@@ -87,13 +93,24 @@ public class Movement : MonoBehaviour
         right.performed += GoRight;
         jump.performed += Jump;
         slide.performed += Slide;
+
+        //the debug button
+        //a mysterious entity that lets you test things that shouldnt
+        //be able to happen yet
+        debugButton = movementInputActions.Player.TheDebugButton;
+        debugButton.Enable();
+        debugButton.performed += DebugButtonPressed;
     }
+
+
+
     private void OnDisable()
     {
         left.Disable();
         right.Disable();
         jump.Disable();
         slide.Disable();
+        debugButton.Disable();
     }
 
 
@@ -184,7 +201,11 @@ public class Movement : MonoBehaviour
             }
         }
 
-        //Sliding
+        //Sliding while in the air
+        //If the player is midair when they slide, they need to become grounded first before
+        //it can play the animation (so it doesnt look weird).
+        //acceleration modifier means the player reaches the ground quicker than they
+        //regularly would if they were just falling from a jump.
         if (isTryingToSlide)
         {
             currentJumpVelocity -= gravity * Time.fixedDeltaTime * AccelerationModifier;
@@ -263,12 +284,37 @@ public class Movement : MonoBehaviour
         }
     }
 
+    //stores the speed at the time of the stagger then decreases it slightly
+    //TODO: also will need to be matched up to the animation
     public void Stagger()
     {
         playerAnimation.Play("Stagger");
         Debug.Log("Staggered");
+
+        speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
+        tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
+        Invoke("ReturnToSpeed", staggerDuration);
     }
 
+    //Once the stagger has finished, returns back to the speed it was at before
+    public void ReturnToSpeed()
+    {
+        tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
+        Debug.Log("Speed back up");
+    }
+    /// <summary>
+    /// This function will change constantly throughout development to test certain features
+    /// before their triggers have been implemented.
+    /// 
+    /// Functions tested:
+    /// 24/06/22 - Stagger
+    /// 
+    /// </summary>
 
+
+    private void DebugButtonPressed(InputAction.CallbackContext obj)
+    {
+        Stagger();
+    }
 
 }
