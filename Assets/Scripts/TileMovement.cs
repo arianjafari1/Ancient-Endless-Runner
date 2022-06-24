@@ -6,7 +6,7 @@ public class TileMovement : MonoBehaviour
 {
 
     [SerializeField] private float movementSpeed = 0.1f;
-    private float maxMovementSpeed = 0.8f; //need more test to see when the game breaks
+    [SerializeField] private float maxMovementSpeed = 0.8f; //need more test to see when the game breaks
     [SerializeField] private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
 
     public float movementSpeedGetterSetter //getters and setters for movement speed

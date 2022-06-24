@@ -20,6 +20,7 @@ public class TileManager : MonoBehaviour
 
 
     [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private GameObject[] tilePrefabs;
     //[SerializeField] private GameObject[] tilePrefabs; //array of tile prefabs
 
 
