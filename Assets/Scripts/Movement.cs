@@ -59,7 +59,8 @@ public class Movement : MonoBehaviour
     private Animation playerAnimation;
     //[SerializeField] private Animator animator;
 
-    [SerializeField] TileManager tileManager;
+    [SerializeField] TileMovement tileMovement;
+    [SerializeField] private float staggerSpeedDecrease;
 
     private void Awake()
     {
