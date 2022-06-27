@@ -4,10 +4,38 @@ using UnityEngine;
 
 public class TileMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
 
     [SerializeField] private float movementSpeed = 0.1f;
     [SerializeField] private float maxMovementSpeed = 0.8f; //need more test to see when the game breaks
     [SerializeField] private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
+
+
+    public GameObject TilePrefab //getters and setters for the tile prefab that we will instantiate in the Tile Manager Script
+    {
+        get
+        {
+            return tilePrefab;
+        }
+        set
+        {
+            tilePrefab = value;
+        }
+    }
+
+    public Transform TargetZ //getters and setters for the tile prefab that we will instantiate in the Tile Manager Script
+    {
+        get
+        {
+            return targetZ;
+        }
+        set
+        {
+            targetZ = value;
+        }
+    }
+
 
     public float movementSpeedGetterSetter //getters and setters for movement speed
     {
