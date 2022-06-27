@@ -45,7 +45,7 @@ public class TileManager : MonoBehaviour
             //combining MoveTowards and Lerp to move the tiles towards the camera, MoveTowards for constant speed, and lerp for smooth movement:
             Vector3 a = tilePosition.transform.position; //assigning Vector3 the position of tilePosition
             Vector3 b = tileMovement.TargetZ.position; //assigning Vector3 b the postion of targetZ
-            tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), tileMovement.movementSpeedGetterSetter); //using movetowards and lerp to move tile backwards at constant speed
+            tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), tileMovement.movementSpeedGetterSetter * Time.fixedDeltaTime); //using movetowards and lerp to move tile backwards at constant speed
         }
 
         if (tileMovement.movementSpeedGetterSetter > tileMovement.maxMovementSpeedGetter + tileMovement.maxMovementSpeedGetter * 20 / 100) //check if movement speed is higher than maximum speed + 20 %
@@ -57,7 +57,7 @@ public class TileManager : MonoBehaviour
 
         if (tileMovement.movementSpeedGetterSetter < tileMovement.maxMovementSpeedGetter) //if the movement speed is lower than 0.5 then
         {
-            tileMovement.movementSpeedGetterSetter += tileMovement.speedIncreaseEverySecondGetterSetter; //increase speed by this amount
+            tileMovement.movementSpeedGetterSetter += tileMovement.speedIncreaseEverySecondGetterSetter * Time.fixedDeltaTime; //increase speed by this amount
         }
         /// Code done by Arian- end
 
