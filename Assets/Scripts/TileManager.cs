@@ -7,6 +7,8 @@ public class TileManager : MonoBehaviour
     /// Code done by Arian- start
     private TileMovement tileMovement;
 
+    private int randomTile; //random Tile number
+
     //[SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
     //private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
     //private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
@@ -25,12 +27,12 @@ public class TileManager : MonoBehaviour
     /// Code done by Arian- end
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         /// Code done by Arian- start
         //tileLength = groundLength.transform.localScale.z; //assiging the tileLenght the Length of Ground child object of the tile on the z axis, it is more scalable than hardcoding it
         tileMovement = FindObjectOfType<TileMovement>(); //reference the object with code
-
+        randomTile = Random.Range(0, tileMovement.TilePrefabs.Length);
         /// Code done by Arian- end
 
     }
@@ -71,7 +73,7 @@ public class TileManager : MonoBehaviour
 
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
-            Instantiate(tileMovement.TilePrefab, tileSpawnStart.position, tileSpawnStart.rotation);
+            Instantiate(tileMovement.TilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation);
             Debug.Log("New Tile spawned");
 
         }
