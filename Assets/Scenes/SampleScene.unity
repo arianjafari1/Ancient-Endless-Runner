@@ -372,7 +372,7 @@ MonoBehaviour:
   maxJumpHeight: 4
   AccelerationModifier: 4
   tileMovement: {fileID: 775761444}
-  staggerSpeedDecrease: 2
+  staggerSpeedDecrease: 5
   staggerDuration: 1
   boulderMovement: {fileID: 1706549618}
 --- !u!114 &663092684
