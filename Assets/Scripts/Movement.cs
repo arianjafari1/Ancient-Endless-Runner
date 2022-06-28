@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 {
     /// <summary>
     /// Code and dev notes by Malachi unless otherwise specified
+    /// Script created 08/06/22 by Malachi
     /// 
     /// 08/06/22 - added movement between lanes
     ///          - implemented new Unity Input System
@@ -27,6 +28,8 @@ public class Movement : MonoBehaviour
     ///          - their respective triggers have been created.
     ///          - Staggering mechanic implemented.
     ///          - Staggering function added to the debug button.
+    /// 27/06/22 - switched values of left and right lanes to accomodate for flipped camera
+    /// 28/06/22 - added a bouldermovement object and switches stagger bool when the player trips
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -67,6 +70,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float staggerSpeedDecrease;
     [SerializeField] private float staggerDuration;
     private float speedBeforeStagger;
+    [SerializeField] private BoulderMovement boulderMovement;
 
     private void Awake()
     {
@@ -293,6 +297,7 @@ public class Movement : MonoBehaviour
 
         speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
         tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
+        boulderMovement.switchPlayerStaggering = true;
         Invoke("ReturnToSpeed", staggerDuration);
     }
 
@@ -300,6 +305,7 @@ public class Movement : MonoBehaviour
     public void ReturnToSpeed()
     {
         tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
+        boulderMovement.switchPlayerStaggering = false;
         Debug.Log("Speed back up");
     }
     /// <summary>
@@ -308,6 +314,7 @@ public class Movement : MonoBehaviour
     /// 
     /// Functions tested:
     /// 24/06/22 - Stagger
+    /// 28/06/22 - Stagger with boulder
     /// 
     /// </summary>
 
