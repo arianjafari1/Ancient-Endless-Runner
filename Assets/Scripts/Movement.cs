@@ -31,9 +31,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
         {
-            left = -3,
+            left = 3,
             center = 0,
-            right = 3
+            right = -3
         };
     [SerializeField] private GameObject player;
     private MovementInputActions movementInputActions;
