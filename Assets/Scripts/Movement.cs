@@ -25,11 +25,15 @@ public class Movement : MonoBehaviour
     ///          - replaced bools with Animation.play() functions
     ///          - initial attempt at staggering (requires slight rework of tilemanager class)
     /// 24/06/22 - set up the debug button so i can test things (such as tripping/dieing) before 
-    ///          - their respective triggers have been created.
+    ///            their respective triggers have been created.
     ///          - Staggering mechanic implemented.
     ///          - Staggering function added to the debug button.
     /// 27/06/22 - switched values of left and right lanes to accomodate for flipped camera
     /// 28/06/22 - added a bouldermovement object and switches stagger bool when the player trips
+    /// 29/06/22 - added a cancelInvoke option so the movement speed returning can be cancelled by other scripts
+    ///          - switched movement decrease on staggering to multiplying by a decimal rather than 
+    ///            subtracting a fixed amount
+    ///            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -296,7 +300,8 @@ public class Movement : MonoBehaviour
         Debug.Log("Staggered");
 
         speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
-        tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
+        //tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
+        tileMovement.movementSpeedGetterSetter *= staggerSpeedDecrease;
         boulderMovement.switchPlayerStaggering = true;
         Invoke("ReturnToSpeed", staggerDuration);
     }
@@ -307,6 +312,13 @@ public class Movement : MonoBehaviour
         tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
         boulderMovement.switchPlayerStaggering = false;
         Debug.Log("Speed back up");
+    }
+
+    //Added the ability to cancel the invoke to prevent the ground from returning to the
+    //state of moving if the player dies during the stagger phase (most likely due to the boulder)s
+    public void CancelSpeedReturn()
+    {
+        CancelInvoke();
     }
     /// <summary>
     /// This function will change constantly throughout development to test certain features
