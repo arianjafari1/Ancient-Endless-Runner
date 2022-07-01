@@ -8,7 +8,9 @@ public class TileManager : MonoBehaviour
     private TileMovement tileMovement;
 
     private int randomTile; //random Tile number
-
+    private Vector3 targetZ;
+   [SerializeField] bool tileRight;
+    
     //[SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
     //private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
     //private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
@@ -33,6 +35,15 @@ public class TileManager : MonoBehaviour
         //tileLength = groundLength.transform.localScale.z; //assiging the tileLenght the Length of Ground child object of the tile on the z axis, it is more scalable than hardcoding it
         tileMovement = FindObjectOfType<TileMovement>(); //reference the object with code
         randomTile = Random.Range(0, tileMovement.TilePrefabs.Length);
+
+        if (tileRight == false)
+        {
+            targetZ = tileMovement.TargetZ.position;
+        } else if (tileRight == true)
+        {
+            targetZ = tileMovement.TargetZright.position;
+        }
+
         /// Code done by Arian- end
 
     }
@@ -46,7 +57,7 @@ public class TileManager : MonoBehaviour
         {
             //combining MoveTowards and Lerp to move the tiles towards the camera, MoveTowards for constant speed, and lerp for smooth movement:
             Vector3 a = tilePosition.transform.position; //assigning Vector3 the position of tilePosition
-            Vector3 b = tileMovement.TargetZ.position; //assigning Vector3 b the postion of targetZ
+            Vector3 b = targetZ; //assigning Vector3 b the postion of targetZ
             tilePosition.transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a, b, t), tileMovement.movementSpeedGetterSetter * Time.fixedDeltaTime); //using movetowards and lerp to move tile backwards at constant speed
         }
 

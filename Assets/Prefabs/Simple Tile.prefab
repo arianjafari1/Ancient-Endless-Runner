@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 3048725248998977171}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 1.4, z: 12}
+  m_LocalScale: {x: 0.1, y: 1.4, z: 11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3048725249615652290}
@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 3048725250188431245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 1.4, z: 12}
+  m_LocalScale: {x: 0.1, y: 1.4, z: 11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3048725249615652290}
@@ -389,12 +389,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5ecd7ad6af5694aa16daf36a5c5eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.1
   tilePosition: {fileID: 3048725249615652290}
-  targetZ: {fileID: 0}
   tileSpawnStart: {fileID: 3048725250133121806}
   groundLength: {fileID: 3048725248871143056}
-  tilePrefab: {fileID: 3048725249615652289}
 --- !u!54 &5324197912290096261
 Rigidbody:
   m_ObjectHideFlags: 0

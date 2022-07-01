@@ -6,7 +6,8 @@ public class TileMovement : MonoBehaviour
 {
     //[SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles
-    [SerializeField] private Transform targetZ; // the target z position for where the tile should go to (behind the camera)
+    [SerializeField] private Transform targetZ; // the target z position for where the tile should go to
+    [SerializeField] private Transform targetZright; // the target z position for where the right tile should go to
 
     [SerializeField] private float movementSpeed = 2f;
     [SerializeField] private float maxMovementSpeed = 10f; //need more test to see when the game breaks
@@ -45,6 +46,18 @@ public class TileMovement : MonoBehaviour
         set
         {
             targetZ = value;
+        }
+    }
+
+    public Transform TargetZright //getters and setters for the tile prefab that we will instantiate in the Tile Manager Script
+    {
+        get
+        {
+            return targetZright;
+        }
+        set
+        {
+            targetZright = value;
         }
     }
 
