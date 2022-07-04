@@ -87,7 +87,7 @@ public class BoulderMovement : MonoBehaviour
     {
         //when the boulder touches the player, the player is flattened and the ball continues to roll.
         //also stops the ground movement, removes the speed increase, and increases the boulder movement speed;
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has been flattened");
             collision.gameObject.SetActive(false);
