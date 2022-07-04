@@ -10,6 +10,8 @@ TagManager:
   - obstacleToJump
   - obstacleToSlide
   - obstacleToStagger
+  - TileGround
+  - TileGroundEnvironment
   layers:
   - Default
   - TransparentFX
