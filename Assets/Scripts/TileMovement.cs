@@ -6,6 +6,8 @@ public class TileMovement : MonoBehaviour
 {
     //[SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles
+    [SerializeField] private GameObject[] mediumTilePrefabs; //array of tiles with tiles with obstacles, medium difficulty
+    [SerializeField] private GameObject[] hardTilePrefabs; //array of tiles with tiles with obstacles, hard difficulty
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to
     [SerializeField] private Transform targetZright; // the target z position for where the right tile should go to
 

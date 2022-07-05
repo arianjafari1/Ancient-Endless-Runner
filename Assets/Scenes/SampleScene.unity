@@ -748,6 +748,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs:
   - {fileID: 3356065952821109339, guid: eae4c2330318e59448438b36349954eb, type: 3}
+  mediumTilePrefabs:
+  - {fileID: 0}
+  hardTilePrefabs:
+  - {fileID: 0}
   targetZ: {fileID: 480935957}
   targetZright: {fileID: 735805702}
   movementSpeed: 7
