@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
     /// 29/06/22 - added a cancelInvoke option so the movement speed returning can be cancelled by other scripts
     ///          - switched movement decrease on staggering to multiplying by a decimal rather than 
     ///            subtracting a fixed amount
+    /// 05/07/22 - Changed "jump height" to be addition on top of jump height, instead of being "the jump reaches this height"
     ///            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -58,7 +59,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float jumpForce;
     private float currentJumpVelocity;
     private float groundHeight;
-    [Tooltip("How high the player's jump reaches")]
+    [Tooltip("How high the player jumps")]
     [SerializeField] private float maxJumpHeight;
     private bool isJumping = false;
     private bool isFalling = false;
@@ -75,6 +76,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float staggerDuration;
     private float speedBeforeStagger;
     [SerializeField] private BoulderMovement boulderMovement;
+    [SerializeField] private ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -176,9 +178,9 @@ public class Movement : MonoBehaviour
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(Vector3.up * currentJumpVelocity * Time.fixedDeltaTime);
-            if (player.transform.position.y >= maxJumpHeight)
+            if (player.transform.position.y >= groundHeight + maxJumpHeight)
             {
-                player.transform.position = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
+                player.transform.position = new Vector3(currentPos.x, groundHeight + maxJumpHeight, currentPos.z);
                 isJumping = false;
                 isFalling = true;
                 Debug.Log("Height reached");

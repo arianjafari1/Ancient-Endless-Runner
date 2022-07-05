@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private int coinsCollected = 0;
+    private int score = 0;
+    [SerializeField] int scoreIncrement;
+    [SerializeField] private int coinScoreIncrease;
+    [SerializeField] private TMP_Text coinsUI;
+    [SerializeField] private TMP_Text scoreUI;
+
+    private void Update()
     {
-        
+        coinsUI.text = "Coins Collected: " + coinsCollected.ToString();
+        scoreUI.text = "Score: " + score.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        score += scoreIncrement;
     }
+
+    public void CoinCollected()
+    {
+        coinsCollected++;
+        score += coinScoreIncrease;
+    }
+
 }

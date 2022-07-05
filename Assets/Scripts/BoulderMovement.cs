@@ -18,6 +18,7 @@ public class BoulderMovement : MonoBehaviour
     ///          - boulder now has a max position where it gets destroyed upon reaching
     ///          - boulder now has collision with the player, which hides the player object and then
     ///            removes speed and acceleration from the tiles, and continues to roll onwards
+    /// 05/07/22 - fixed redundant statement in start - was setting variable to start position instead of actually setting it.
     /// 
     /// </summary>
 
@@ -58,7 +59,7 @@ public class BoulderMovement : MonoBehaviour
 
     void Start()
     {
-        Vector3 startPos = new Vector3(0, 5, startZPos);
+        boulder.transform.position = new Vector3(0, 5, startZPos);
     }
 
     // Update is called once per frame
