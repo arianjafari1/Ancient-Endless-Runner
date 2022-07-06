@@ -7,6 +7,7 @@ public class TileManager : MonoBehaviour
     /// Code done by Arian- start
     private TileMovement tileMovement;
 
+    private GameObject[] tilePrefabs;
     private int randomTile; //random Tile number
     private Vector3 targetZ;
    [SerializeField] bool tileRight;
@@ -38,10 +39,12 @@ public class TileManager : MonoBehaviour
 
         if (tileRight == false)
         {
+            tilePrefabs = tileMovement.TilePrefabs;
             targetZ = tileMovement.TargetZ.position;
         } else if (tileRight == true)
         {
             targetZ = tileMovement.TargetZright.position;
+            tilePrefabs = tileMovement.EnvironmentTiles;
         }
 
         /// Code done by Arian- end
@@ -84,7 +87,7 @@ public class TileManager : MonoBehaviour
 
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
-            Instantiate(tileMovement.TilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation);
+            Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation);
             Debug.Log("New Tile spawned");
 
         }

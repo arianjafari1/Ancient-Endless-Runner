@@ -8,6 +8,7 @@ public class TileMovement : MonoBehaviour
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles
     [SerializeField] private GameObject[] mediumTilePrefabs; //array of tiles with tiles with obstacles, medium difficulty
     [SerializeField] private GameObject[] hardTilePrefabs; //array of tiles with tiles with obstacles, hard difficulty
+    [SerializeField] private GameObject[] environmentTilePrefabs; //array of Environment tiles
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to
     [SerializeField] private Transform targetZright; // the target z position for where the right tile should go to
 
@@ -24,6 +25,18 @@ public class TileMovement : MonoBehaviour
         set
         {
             tilePrefabs = value;
+        }
+    }
+
+    public GameObject[] EnvironmentTiles //getters and setters for the tile prefabs array that we will instantiate using random in the Tile Manager Script
+    {
+        get
+        {
+            return environmentTilePrefabs;
+        }
+        set
+        {
+            environmentTilePrefabs = value;
         }
     }
 
