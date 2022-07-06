@@ -13,6 +13,8 @@ TagManager:
   - TileGround
   - TileGroundEnvironment
   - GameManager
+  - CoinMagnet
+  - Coin
   layers:
   - Default
   - TransparentFX

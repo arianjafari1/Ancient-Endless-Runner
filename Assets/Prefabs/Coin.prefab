@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3016951618558541413}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1430ad63a6308342b42bd04c6358d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 0}
+  collectableType: 0
   collectableRotation: 2
   collectable: {fileID: 3016951618725530482}
 --- !u!54 &3016951618558541413
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3016951618725530484}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -16,13 +16,24 @@ public class Collectable : MonoBehaviour
     /// 
     /// </summary>
 
+    private enum CollectableType
+    {
+        Coin,
+        CoinMagnetPower,
+        FeatherJumpPower,
+        CheatDeathPower
+    }
+    [SerializeField] private CollectableType collectableType;
+
     private ScoreManager scoreManager;
     [SerializeField] private float collectableRotation;
     [SerializeField] private GameObject collectable;
+    private CoinMagnet coinMagnet;
 
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
+        coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<CoinMagnet>();
     }
     private void FixedUpdate()
     {
@@ -33,7 +44,17 @@ public class Collectable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            scoreManager.CoinCollected();
+            switch (collectableType)
+            {
+                case CollectableType.Coin:
+                    scoreManager.CoinCollected();
+                    break;
+                case CollectableType.CoinMagnetPower:
+                    coinMagnet.enabled = true;
+                    break;
+
+            }
+
             gameObject.SetActive(false);
         }
     }
