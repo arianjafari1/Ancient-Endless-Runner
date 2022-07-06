@@ -12,6 +12,7 @@ TagManager:
   - obstacleToStagger
   - TileGround
   - TileGroundEnvironment
+  - GameManager
   layers:
   - Default
   - TransparentFX

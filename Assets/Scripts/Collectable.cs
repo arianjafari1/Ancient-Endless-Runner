@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+    /// <summary>
+    /// Code and dev notes by Malachi unless otherwise specified
+    /// Script created 01/06/22 by Malachi
+    /// 
+    /// 01/07/22 - added collision with player which turns the object to false
+    /// 05/07/22 - set object to rotate
+    ///          - linked score manager to add score whenever a coin is collected
+    /// 06/07/22 - unserialized the score manager, as you cant link it in prefab. instead searches for the score
+    ///            manager based on the tag
+    /// 
+    /// </summary>
 
-    [SerializeField] private ScoreManager scoreManager;
+    private ScoreManager scoreManager;
     [SerializeField] private float collectableRotation;
     [SerializeField] private GameObject collectable;
 
+    private void Start()
+    {
+        scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
+    }
     private void FixedUpdate()
     {
         collectable.transform.Rotate(Vector3.forward, collectableRotation);
