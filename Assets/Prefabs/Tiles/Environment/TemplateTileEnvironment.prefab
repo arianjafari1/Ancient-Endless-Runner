@@ -104,7 +104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729423916103955645, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
       propertyPath: m_Size.z
-      value: 61.267624
+      value: 49.75312
       objectReference: {fileID: 0}
     - target: {fileID: 6729423916103955645, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
       propertyPath: m_Center.x
@@ -112,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6729423916103955645, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
       propertyPath: m_Center.z
-      value: -31.749409
+      value: -25.99216
       objectReference: {fileID: 0}
     - target: {fileID: 6729423916103955647, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
       propertyPath: tilePosition

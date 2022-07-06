@@ -35,7 +35,7 @@ public class TileManager : MonoBehaviour
         /// Code done by Arian- start
         //tileLength = groundLength.transform.localScale.z; //assiging the tileLenght the Length of Ground child object of the tile on the z axis, it is more scalable than hardcoding it
         tileMovement = FindObjectOfType<TileMovement>(); //reference the object with code
-        randomTile = Random.Range(0, tileMovement.TilePrefabs.Length);
+        
 
         if (tileRight == false)
         {
@@ -46,7 +46,7 @@ public class TileManager : MonoBehaviour
             targetZ = tileMovement.TargetZright.position;
             tilePrefabs = tileMovement.EnvironmentTiles;
         }
-
+        randomTile = Random.Range(0, tilePrefabs.Length);
         /// Code done by Arian- end
 
     }
