@@ -44,6 +44,25 @@ public class Movement : MonoBehaviour
             right = -3
         };
     [SerializeField] private GameObject player;
+    public enum PlayerStates
+    {
+        running = 2,
+        staggered = 1,
+        dead = 0
+    };
+    private PlayerStates currentPlayerState;
+    public PlayerStates getPlayerStates
+    {
+        get
+        {
+            return currentPlayerState;
+        }
+        set
+        {
+            currentPlayerState = value;
+        }
+    }
+
     private MovementInputActions movementInputActions;
     private InputAction left;
     private InputAction right;
@@ -72,7 +91,10 @@ public class Movement : MonoBehaviour
     //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
 
     [SerializeField] TileMovement tileMovement;
+    [Tooltip("Between 0-1, the reduction of speed while player staggers")]
     [SerializeField] private float staggerSpeedDecrease;
+    [Tooltip("Between 0-1 but above staggerSpeedDecrease, the secondary reduction of speed decrease. ")]
+    [SerializeField] private float secondStaggerSpeedDecrease;
     [SerializeField] private float staggerDuration;
     private float speedBeforeStagger;
     [SerializeField] private BoulderMovement boulderMovement;
@@ -131,6 +153,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         currentLane = Lanes.center;
+        currentPlayerState = PlayerStates.running;
         groundHeight = player.transform.position.y;
         playerAnimation = gameObject.GetComponent<Animation>();
     }
@@ -301,11 +324,25 @@ public class Movement : MonoBehaviour
         playerAnimation.Play("Stagger");
         Debug.Log("Staggered");
 
-        speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
-        //tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
-        tileMovement.movementSpeedGetterSetter *= staggerSpeedDecrease;
-        boulderMovement.switchPlayerStaggering = true;
-        Invoke("ReturnToSpeed", staggerDuration);
+        switch (currentPlayerState)
+        {
+            case PlayerStates.running:
+                speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
+                //tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
+                tileMovement.movementSpeedGetterSetter *= staggerSpeedDecrease;
+                boulderMovement.switchPlayerStaggering = true;
+                Invoke("ReturnToSpeed", staggerDuration);
+                currentPlayerState = PlayerStates.staggered;
+                break;
+            case PlayerStates.staggered:
+                CancelInvoke();
+                tileMovement.movementSpeedGetterSetter *= secondStaggerSpeedDecrease;
+                Invoke("ReturnToSpeed", staggerDuration);
+
+                break;
+        }
+
+        
     }
 
     //Once the stagger has finished, returns back to the speed it was at before
@@ -313,6 +350,7 @@ public class Movement : MonoBehaviour
     {
         tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
         boulderMovement.switchPlayerStaggering = false;
+        currentPlayerState = PlayerStates.running;
         Debug.Log("Speed back up");
     }
 
@@ -322,8 +360,15 @@ public class Movement : MonoBehaviour
     {
         CancelInvoke();
     }
+
+    public void PlayAnimation(string animationName)
+    {
+        playerAnimation.Play(animationName);
+    }
+    
+
     /// <summary>
-    /// This function will change constantly throughout development to test certain features
+    /// This function will change throughout development to test certain features
     /// before their triggers have been implemented.
     /// 
     /// Functions tested:
@@ -331,8 +376,6 @@ public class Movement : MonoBehaviour
     /// 28/06/22 - Stagger with boulder
     /// 
     /// </summary>
-
-
     private void DebugButtonPressed(InputAction.CallbackContext obj)
     {
         Stagger();

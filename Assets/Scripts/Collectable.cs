@@ -13,6 +13,8 @@ public class Collectable : MonoBehaviour
     ///          - linked score manager to add score whenever a coin is collected
     /// 06/07/22 - unserialized the score manager, as you cant link it in prefab. instead searches for the score
     ///            manager based on the tag
+    /// 12/07/22 - changed coinMagnet object type to SphereCollider instead of the CoinMagnet script, as this allows
+    ///            any coins which had already entered the collider to be affected by the magnet.
     /// 
     /// </summary>
 
@@ -28,12 +30,12 @@ public class Collectable : MonoBehaviour
     private ScoreManager scoreManager;
     [SerializeField] private float collectableRotation;
     [SerializeField] private GameObject collectable;
-    private CoinMagnet coinMagnet;
+    private SphereCollider coinMagnet;
 
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
-        coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<CoinMagnet>();
+        coinMagnet = GameObject.FindWithTag("CoinMagnet").GetComponent<SphereCollider>();
     }
     private void FixedUpdate()
     {
