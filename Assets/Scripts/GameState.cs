@@ -30,10 +30,7 @@ public class GameState : MonoBehaviour
         }
         set
         {
-            if (value < 0)
-                globalTime = 0;
-            else
-                globalTime = value;
+            globalTime = value;
         }
     }
 

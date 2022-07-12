@@ -15,6 +15,20 @@ public class TileMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 2f;
     [SerializeField] private float maxMovementSpeed = 10f; //need more test to see when the game breaks
     [SerializeField] private float speedIncreaseEverySecond = 0.001f; //speed increase every second
+    
+    public enum Difficulty //creating an enum for the difficulty of the game
+    {
+        veryEasy, //100% easy Tiles
+        easy, //80% easy Tiles, 20% medium Tiles
+        easyMedium, // 60% easy Tiles, 40% Medium Tiles
+        mediumEasy, // 60% medium Tiles, 40% Easy Tiles
+        mediumHard, // 40% medium Tiles, 20% Hard Tiles, 40% easy Tiles
+        hardMedium, // 40% medium Tiles, 25% hard Tiles, 35% easy Tiles
+        hard //45% medium Tiles, 30% hard Tiles, 25% easy Tiles
+    }
+
+    private Difficulty difficulty; //declaring enum type as private
+
 
     public GameObject[] TilePrefabs //getters and setters for the tile prefabs array that we will instantiate using random in the Tile Manager Script
     {
@@ -40,17 +54,6 @@ public class TileMovement : MonoBehaviour
         }
     }
 
-    //public GameObject TilePrefab //getters and setters for the tile prefab that we will instantiate in the Tile Manager Script
-    //{
-    //    get
-    //    {
-    //        return tilePrefab;
-    //    }
-    //    set
-    //    {
-    //        tilePrefab = value;
-    //    }
-    //}
 
     public Transform TargetZ //getters and setters for the tile prefab that we will instantiate in the Tile Manager Script
     {
@@ -115,5 +118,19 @@ public class TileMovement : MonoBehaviour
                 speedIncreaseEverySecond = value;
         }
     }
+
+    public Difficulty currentDifficultyTile //getters and setters for the enum type to be used in TileManager to determine difficulty of Tiles
+    {
+        get
+        {
+            return difficulty;
+        }
+        set
+        {
+            difficulty = value;
+        }
+    }
+
+
 
 }
