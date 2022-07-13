@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645261440}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84965557107b4c4fb495469703e338c, type: 3}
   m_Name: 
@@ -1045,7 +1045,7 @@ SphereCollider:
   m_GameObject: {fileID: 645261440}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 3356065952821109339, guid: eae4c2330318e59448438b36349954eb, type: 3}
   - {fileID: 3356065952821109339, guid: 8e85c3f954b67ba42bcd29761b22fef1, type: 3}
-  - {fileID: 3356065952821109339, guid: 8e85c3f954b67ba42bcd29761b22fef1, type: 3}
+  - {fileID: 3356065952821109339, guid: 5397bc5bfb26ef94596ea1752b0b9ead, type: 3}
   mediumTilePrefabs:
   - {fileID: 0}
   hardTilePrefabs:

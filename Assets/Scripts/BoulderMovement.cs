@@ -20,10 +20,13 @@ public class BoulderMovement : MonoBehaviour
     ///            removes speed and acceleration from the tiles, and continues to roll onwards
     /// 05/07/22 - fixed redundant statement in start - was setting variable to start position instead of actually setting the physical start position.
     /// 13/07/22 - replaced player staggering variable with the newly added player state enum from the player movement script.
+    /// 
     ///          - Added flatten animation when the boulder rolls over the player
     ///          - refactored the increased movement speed of the boulder after player death into the switch statement instead of
     ///            flat out increasing it, as the boulder could sometimes trigger the oncollisionenter multiple times which would
     ///            exponentially increase the speed and cause the boulder to shoot off like a rocket.
+    ///          - created SetDeathState function to set the required variables needed for when the player dies to control boulder/tile
+    ///            movement, without needing to use the exact same code in the other obstacle death type.
     /// 
     /// </summary>
 
@@ -114,7 +117,6 @@ public class BoulderMovement : MonoBehaviour
     {
         tileMovement.movementSpeedGetterSetter = 0;
         tileMovement.speedIncreaseEverySecondGetterSetter = 0;
-        //forwardsMovement *= 5;
         playerMovement.CancelSpeedReturn();
         playerMovement.getPlayerState = Movement.PlayerStates.dead;
     }

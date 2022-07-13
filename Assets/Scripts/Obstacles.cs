@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /// <summary>
+    /// Code and dev notes by Arian unless otherwise specified
+    /// Script created 21/06/22 by Arian
+    /// 
+    /// 21/06/22 - added collision detection with different functions for
+    /// 13/07/22 - [MALACHI] linked player stagger to collision
+    ///          - [MALACHI] added pit tag
+    /// 
+    /// </summary>
+    /// 
+    private Movement playerMovement;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        playerMovement = GetComponentInParent<Movement>();
     }
-
 
     /// Code done by Arian- start
     private void OnTriggerEnter(Collider collisionInfo) //check for collision infor
@@ -37,7 +41,7 @@ public class Obstacles : MonoBehaviour
 
 
             Debug.Log("You should have jumped, you are staggered");
-
+            playerMovement.Stagger();
 
 
         }
@@ -52,6 +56,15 @@ public class Obstacles : MonoBehaviour
 
         }
 
+        if (collisionInfo.gameObject.CompareTag("pitObstacle"))
+        {
+
+
+            Debug.Log("Fallen into pit");
+
+
+
+        }
 
         /// Code done by Arian- end
 
