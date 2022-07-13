@@ -19,7 +19,7 @@ public class GameState : MonoBehaviour
     {
         timer += Time.deltaTime; //using delta time to count time in float
         globalTime = (int)(timer % 60); //turning the timer to integer
-        Debug.Log(globalTime);
+        //Debug.Log(globalTime);
     }
 
     public int GlobalTime //getters and setters for globalTime

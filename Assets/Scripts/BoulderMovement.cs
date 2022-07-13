@@ -18,7 +18,12 @@ public class BoulderMovement : MonoBehaviour
     ///          - boulder now has a max position where it gets destroyed upon reaching
     ///          - boulder now has collision with the player, which hides the player object and then
     ///            removes speed and acceleration from the tiles, and continues to roll onwards
-    /// 05/07/22 - fixed redundant statement in start - was setting variable to start position instead of actually setting it.
+    /// 05/07/22 - fixed redundant statement in start - was setting variable to start position instead of actually setting the physical start position.
+    /// 13/07/22 - replaced player staggering variable with the newly added player state enum from the player movement script.
+    ///          - Added flatten animation when the boulder rolls over the player
+    ///          - refactored the increased movement speed of the boulder after player death into the switch statement instead of
+    ///            flat out increasing it, as the boulder could sometimes trigger the oncollisionenter multiple times which would
+    ///            exponentially increase the speed and cause the boulder to shoot off like a rocket.
     /// 
     /// </summary>
 
@@ -65,21 +70,24 @@ public class BoulderMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        switch(isPlayerStaggering)
+        switch(playerMovement.getPlayerState)
         {
-            case true:
-                if (boulder.transform.position.z >= maxZPos)
-                {
-                    Destroy(boulder);
-                }
+            case Movement.PlayerStates.staggered:
                 boulder.transform.Translate(Vector3.forward * forwardsMovement);
                 break;
-            case false:
+            case Movement.PlayerStates.dead:
+                boulder.transform.Translate(5 * forwardsMovement * Vector3.forward);
+                break;
+            case Movement.PlayerStates.running:
                 if (boulder.transform.position.z >= minZPos)
                 {
                     boulder.transform.Translate(Vector3.back * backwardsMovement);
                 }
                 break;
+        }
+        if (boulder.transform.position.z >= maxZPos)
+        {
+            Destroy(boulder);
         }
     }
 
@@ -91,13 +99,24 @@ public class BoulderMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has been flattened");
-            collision.gameObject.SetActive(false);
-            tileMovement.movementSpeedGetterSetter = 0;
-            tileMovement.speedIncreaseEverySecondGetterSetter = 0;
-            forwardsMovement *= 5;
-            playerMovement.CancelSpeedReturn();
-            isPlayerStaggering = true;
+            
+            //tileMovement.movementSpeedGetterSetter = 0;
+            //tileMovement.speedIncreaseEverySecondGetterSetter = 0;
+            ////forwardsMovement *= 5;
+            //playerMovement.CancelSpeedReturn();
+            //playerMovement.getPlayerState = Movement.PlayerStates.dead;
+            playerMovement.PlayAnimation("Flatten");
+            SetDeathState();
         }
+    }
+
+    public void SetDeathState()
+    {
+        tileMovement.movementSpeedGetterSetter = 0;
+        tileMovement.speedIncreaseEverySecondGetterSetter = 0;
+        //forwardsMovement *= 5;
+        playerMovement.CancelSpeedReturn();
+        playerMovement.getPlayerState = Movement.PlayerStates.dead;
     }
 
 }

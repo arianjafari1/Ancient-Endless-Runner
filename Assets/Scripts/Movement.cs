@@ -34,6 +34,12 @@ public class Movement : MonoBehaviour
     ///          - switched movement decrease on staggering to multiplying by a decimal rather than 
     ///            subtracting a fixed amount
     /// 05/07/22 - Changed "jump height" to be addition on top of jump height, instead of being "the jump reaches this height"
+    /// 12/07/22 - Created PlayerStates enum to aid other scripts with functions which would change functionality based
+    ///            on if the player was running, staggering or dead
+    ///          - Created PlayAnimation function so animations can be played by other scripts
+    ///          - 
+    ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
+    ///          
     ///            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -51,7 +57,7 @@ public class Movement : MonoBehaviour
         dead = 0
     };
     private PlayerStates currentPlayerState;
-    public PlayerStates getPlayerStates
+    public PlayerStates getPlayerState
     {
         get
         {
@@ -93,7 +99,7 @@ public class Movement : MonoBehaviour
     [SerializeField] TileMovement tileMovement;
     [Tooltip("Between 0-1, the reduction of speed while player staggers")]
     [SerializeField] private float staggerSpeedDecrease;
-    [Tooltip("Between 0-1 but above staggerSpeedDecrease, the secondary reduction of speed decrease. ")]
+    [Tooltip("Between 0-1 but above staggerSpeedDecrease, the secondary reduction of speed decrease. Set to 1 if you dont want further decrease from initial")]
     [SerializeField] private float secondStaggerSpeedDecrease;
     [SerializeField] private float staggerDuration;
     private float speedBeforeStagger;
@@ -158,10 +164,7 @@ public class Movement : MonoBehaviour
         playerAnimation = gameObject.GetComponent<Animation>();
     }
 
-    void Update()
-    {
 
-    }
 
     /// <summary>
     /// FixedUpdate is used to make sure that movement is smooth and consistant, even on lower or 
@@ -183,12 +186,12 @@ public class Movement : MonoBehaviour
             if (player.transform.position.x > targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x - horizontalSpeed / 100, currentPos.y, currentPos.z);
-                player.transform.Translate(Vector3.left * horizontalSpeed * Time.fixedDeltaTime);
+                player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.left);
             }
             else if (player.transform.position.x < targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x + horizontalSpeed / 100, currentPos.y, currentPos.z);
-                player.transform.Translate(Vector3.right * horizontalSpeed * Time.fixedDeltaTime);
+                player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.right);
             }
         }
 
@@ -200,7 +203,7 @@ public class Movement : MonoBehaviour
             //animator.SetBool("isJumping", true);
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
-            player.transform.Translate(Vector3.up * currentJumpVelocity * Time.fixedDeltaTime);
+            player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.up);
             if (player.transform.position.y >= groundHeight + maxJumpHeight)
             {
                 player.transform.position = new Vector3(currentPos.x, groundHeight + maxJumpHeight, currentPos.z);
@@ -224,7 +227,7 @@ public class Movement : MonoBehaviour
         {
             currentJumpVelocity -= gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, groundHeight, currentPos.z);
-            player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
+            player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
@@ -242,7 +245,7 @@ public class Movement : MonoBehaviour
         if (isTryingToSlide)
         {
             currentJumpVelocity -= gravity * Time.fixedDeltaTime * AccelerationModifier;
-            player.transform.Translate(Vector3.down * currentJumpVelocity * Time.fixedDeltaTime);
+            player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
                 playerAnimation.Play("Slide");
@@ -330,14 +333,13 @@ public class Movement : MonoBehaviour
                 speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
                 //tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
                 tileMovement.movementSpeedGetterSetter *= staggerSpeedDecrease;
-                boulderMovement.switchPlayerStaggering = true;
-                Invoke("ReturnToSpeed", staggerDuration);
+                Invoke(nameof(ReturnToSpeed), staggerDuration);
                 currentPlayerState = PlayerStates.staggered;
                 break;
             case PlayerStates.staggered:
                 CancelInvoke();
                 tileMovement.movementSpeedGetterSetter *= secondStaggerSpeedDecrease;
-                Invoke("ReturnToSpeed", staggerDuration);
+                Invoke(nameof(ReturnToSpeed), staggerDuration);
 
                 break;
         }
@@ -349,7 +351,6 @@ public class Movement : MonoBehaviour
     public void ReturnToSpeed()
     {
         tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
-        boulderMovement.switchPlayerStaggering = false;
         currentPlayerState = PlayerStates.running;
         Debug.Log("Speed back up");
     }
