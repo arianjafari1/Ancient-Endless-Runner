@@ -31,7 +31,7 @@ public class Obstacles : MonoBehaviour
 
 
             Debug.Log("You should have jumped, you are dead");
-
+            playerMovement.Stagger();
 
 
         }
@@ -52,7 +52,7 @@ public class Obstacles : MonoBehaviour
 
             Debug.Log("You should have slid, you are dead");
 
-
+            playerMovement.Stagger();
 
         }
 

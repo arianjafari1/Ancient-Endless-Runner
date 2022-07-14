@@ -15,6 +15,7 @@ TagManager:
   - GameManager
   - CoinMagnet
   - Coin
+  - pitObstacle
   layers:
   - Default
   - TransparentFX

@@ -9,11 +9,18 @@ public class GameOver : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    private ScoreManager scoreManager;
 
-    private void showGameOverScreen(int score)
+
+    private void Start()
+    {
+        scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
+        scoreText.text = "Score: " + scoreManager.getScore.ToString();
+    }
+    public void ShowGameOverScreen()//int score)
     {
         gameObject.SetActive(true); // set the gameover screen to active
-        scoreText.text = "Score: " + score.ToString(); //set the score
+        //scoreText.text = "Score: " + score.ToString(); //set the score
 
     }
 
@@ -29,10 +36,10 @@ public class GameOver : MonoBehaviour
 
 
 
-    public void ShowGameOverScreen(int inputScore) //getter for private function
-    {
-        showGameOverScreen(inputScore);
-    }
+    //public void ShowGameOverScreen(int inputScore) //getter for private function
+    //{
+    //    showGameOverScreen(inputScore);
+    //}
 
     public void RestartButton() //getter for private function
     {

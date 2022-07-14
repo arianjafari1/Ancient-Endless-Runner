@@ -10,7 +10,7 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameOver.ShowGameOverScreen(23);
+        GameOver.ShowGameOverScreen();
     }
 
     // Update is called once per frame

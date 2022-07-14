@@ -37,9 +37,8 @@ public class Movement : MonoBehaviour
     /// 12/07/22 - Created PlayerStates enum to aid other scripts with functions which would change functionality based
     ///            on if the player was running, staggering or dead
     ///          - Created PlayAnimation function so animations can be played by other scripts
-    ///          - 
     ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
-    ///          
+    /// 13/07/22 - added player input disable for after player death (the flat player could still move left/right/jump/slide)
     ///            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -52,9 +51,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject player;
     public enum PlayerStates
     {
-        running = 2,
-        staggered = 1,
-        dead = 0
+        running,
+        staggered,
+        dead
     };
     private PlayerStates currentPlayerState;
     public PlayerStates getPlayerState
@@ -360,6 +359,7 @@ public class Movement : MonoBehaviour
     public void CancelSpeedReturn()
     {
         CancelInvoke();
+        
     }
 
     public void PlayAnimation(string animationName)
@@ -367,19 +367,26 @@ public class Movement : MonoBehaviour
         playerAnimation.Play(animationName);
     }
     
+    public void DisablePlayerInput()
+    {
+        movementInputActions.Player.Disable();
+    }
+
 
     /// <summary>
     /// This function will change throughout development to test certain features
     /// before their triggers have been implemented.
     /// 
-    /// Functions tested:
     /// 24/06/22 - Stagger
     /// 28/06/22 - Stagger with boulder
+    /// 13/07/22 - disabling input
+    ///          - back to stagger (disable works)
     /// 
     /// </summary>
     private void DebugButtonPressed(InputAction.CallbackContext obj)
     {
         Stagger();
+        //movementInputActions.Player.Disable();
     }
 
 }
