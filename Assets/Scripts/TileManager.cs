@@ -6,25 +6,18 @@ public class TileManager : MonoBehaviour
 {
     /// Code done by Arian- start
     private TileMovement tileMovement;
+    private GameState gameState;
 
     private GameObject[] tilePrefabs;
     private int randomTile; //random Tile number
     private Vector3 targetZ;
-   [SerializeField] bool tileRight;
+    [SerializeField] bool tileRight;
     
-    //[SerializeField] private float movementSpeed = 0f; //declare variable float for movement speed of the tile to be edited in Unity editor
-    //private float maxMovementSpeed = 0.5f; //need more test to see when the game breaks
-    //private float speedIncreaseEverySecond = 0.0001f; //speed increase every second
     [SerializeField] private Transform tilePosition; //getting the position of tile
     private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
 
     [SerializeField] private Transform tileSpawnStart;
     [SerializeField] private Transform groundLength; //ground child object of tile
-    //private float tileLength = 0f; //assign tileLength to 0, then changing it later in the start function
-
-
-
-    //[SerializeField] private GameObject[] tilePrefabs; //array of tile prefabs
 
 
     /// Code done by Arian- end
@@ -33,20 +26,13 @@ public class TileManager : MonoBehaviour
     private void Awake()
     {
         /// Code done by Arian- start
-        //tileLength = groundLength.transform.localScale.z; //assiging the tileLenght the Length of Ground child object of the tile on the z axis, it is more scalable than hardcoding it
         tileMovement = FindObjectOfType<TileMovement>(); //reference the object with code
-        
+        gameState = FindObjectOfType<GameState>(); //reference the object with code
 
-        if (tileRight == false)
-        {
-            tilePrefabs = tileMovement.TilePrefabs;
-            targetZ = tileMovement.TargetZ.position;
-        } else if (tileRight == true)
-        {
-            targetZ = tileMovement.TargetZright.position;
-            tilePrefabs = tileMovement.EnvironmentTiles;
-        }
-        randomTile = Random.Range(0, tilePrefabs.Length);
+        tilesAndDifficulty(); //calling the function that takes care of the tiles based on the current difficulty of the game
+
+        randomTile = Random.Range(0, tilePrefabs.Length); // take a range from 0 to the tile prefab length to determine which tile to spawn from the array randomly
+        
         /// Code done by Arian- end
 
     }
@@ -87,7 +73,7 @@ public class TileManager : MonoBehaviour
 
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
-            Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation);
+            Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation); // use random tile to instantiate a new tile, at the tile spawn point
             Debug.Log("New Tile spawned");
 
         }
@@ -97,22 +83,112 @@ public class TileManager : MonoBehaviour
     }
 
 
-    //public float movementSpeedGetterSetter //getters and setters for movement speed
-    //{
-    //    get 
-    //    {
-    //        return movementSpeed;
-    //    }
-    //    set
-    //    {
-    //        if (value < 0)
-    //            movementSpeed = 0;
-    //        else
-    //            movementSpeed = value;
-    //    }
-    //}
+    private void tilesAndDifficulty()
+    {
+        //last number in int Random.Range is exclusive
+        int percentageChance = Random.Range(1, 11); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
+                                                    // switch statement to determine which tile should be spawned
 
+        switch (tileRight) //switch statement takes the expression of bool tileRight to check whether the envirnment tiles or the right tiles are active
+        {
+            case false: //in case the envirnment tiles are inactive, then excute this
+                targetZ = tileMovement.TargetZ.position; // moveTowards and lerp will drag the tiles in the middle in a straight line to targetZ
 
+                if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance <= 8) //check for the game state difficulty
+                                                                                                                //then for the percentage change 
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs; //then based on that select which Tile prefab array should there be a tile taken from
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance > 8)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+
+                if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance <= 6)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 6)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+
+                if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance <= 6)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 6)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+
+                if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance <= 4)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 4 && percentageChance < 7)
+                {
+                    tilePrefabs = tileMovement.HardTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 6)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+
+                if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance <= 4)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance > 4 && percentageChance < 8)
+                {
+                    tilePrefabs = tileMovement.HardTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance > 7)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+
+                if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance <= 5)
+                {
+                    tilePrefabs = tileMovement.MediumTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance > 5 && percentageChance < 9)
+                {
+                    tilePrefabs = tileMovement.HardTilePrefabs;
+                    
+                }
+                else if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance > 8)
+                {
+                    tilePrefabs = tileMovement.EasyTilePrefabs;
+                    
+                }
+
+                break;
+
+            case true:
+                targetZ = tileMovement.TargetZright.position; // moveTowards and lerp will drag the tiles in the on the left and right in a straight line to a new targetZ
+                tilePrefabs = tileMovement.EnvironmentTiles; // and the tilePrefab array that tiles spawn from, is going to be the array for the envirnment tiles
+                break;
+        }
+    }
     /// Code done by Arian- end
 
 
