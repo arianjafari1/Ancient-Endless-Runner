@@ -91,6 +91,18 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public float Timer //getters and setters for timer float (exact time)
+    {
+        get
+        {
+            return timer;
+        }
+        set
+        {
+            timer = value;
+        }
+    }
+
     public Difficulty currentDifficultyTile //getters and setters for the enum type to be used in TileManager to determine difficulty of Tiles
     {
         get
