@@ -11,6 +11,7 @@ public class Obstacles : MonoBehaviour
     /// 21/06/22 - added collision detection with different functions for
     /// 13/07/22 - [MALACHI] linked player stagger to collision
     ///          - [MALACHI] added pit tag
+    /// 15/07/22 - [MALACHI] added death trigger on pit tagged obstacles, and linked pit fall animation
     /// 
     /// </summary>
     /// 
@@ -61,7 +62,8 @@ public class Obstacles : MonoBehaviour
 
 
             Debug.Log("Fallen into pit");
-
+            playerMovement.SetDeathState();
+            playerMovement.PlayAnimation("FallInPit");
 
 
         }

@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
     ///          - Created PlayAnimation function so animations can be played by other scripts
     ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
     /// 13/07/22 - added player input disable for after player death (the flat player could still move left/right/jump/slide)
+    /// 15/07/22 - moved setDeathState to the player instead of the boulder
     ///            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -96,6 +97,7 @@ public class Movement : MonoBehaviour
     //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
 
     [SerializeField] TileMovement tileMovement;
+    [SerializeField] private GameOver gameOverScreen;
     [Tooltip("Between 0-1, the reduction of speed while player staggers")]
     [SerializeField] private float staggerSpeedDecrease;
     [Tooltip("Between 0-1 but above staggerSpeedDecrease, the secondary reduction of speed decrease. Set to 1 if you dont want further decrease from initial")]
@@ -342,8 +344,16 @@ public class Movement : MonoBehaviour
 
                 break;
         }
+    }
 
-        
+    public void SetDeathState()
+    {
+        tileMovement.movementSpeedGetterSetter = 0;
+        tileMovement.speedIncreaseEverySecondGetterSetter = 0;
+        CancelSpeedReturn();
+        currentPlayerState = PlayerStates.dead;
+        DisablePlayerInput();
+        gameOverScreen.ShowGameOverScreen();
     }
 
     //Once the stagger has finished, returns back to the speed it was at before

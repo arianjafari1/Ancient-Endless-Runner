@@ -28,6 +28,8 @@ public class BoulderMovement : MonoBehaviour
     ///          - created SetDeathState function to set the required variables needed for when the player dies to control boulder/tile
     ///            movement, without needing to use the exact same code in the other obstacle death type.
     ///          - added Game over screen to death function
+    /// 15/07/22 - moved setDeathState to the player instead of the boulder
+    /// 
     /// 
     /// </summary>
 
@@ -35,7 +37,6 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private GameObject boulder;
     [SerializeField] private Movement playerMovement;
     [SerializeField] private TileMovement tileMovement;
-    [SerializeField] private GameOver gameOverScreen;
     [Tooltip("The position at which the boulder starts - wants to be not too far back, but not so close it kills you after the first trip")]
     [SerializeField] private float startZPos;
     [Tooltip("The furthest back the boulder can go - make sure it is still visible on the camera as it needs to be intimidating")]
@@ -113,18 +114,18 @@ public class BoulderMovement : MonoBehaviour
             //playerMovement.CancelSpeedReturn();
             //playerMovement.getPlayerState = Movement.PlayerStates.dead;
             playerMovement.PlayAnimation("Flatten");
-            SetDeathState();
+            playerMovement.SetDeathState();
         }
     }
 
-    public void SetDeathState()
-    {
-        tileMovement.movementSpeedGetterSetter = 0;
-        tileMovement.speedIncreaseEverySecondGetterSetter = 0;
-        playerMovement.CancelSpeedReturn();
-        playerMovement.getPlayerState = Movement.PlayerStates.dead;
-        playerMovement.DisablePlayerInput();
-        gameOverScreen.ShowGameOverScreen();
-    }
+    //public void SetDeathState()
+    //{
+    //    tileMovement.movementSpeedGetterSetter = 0;
+    //    tileMovement.speedIncreaseEverySecondGetterSetter = 0;
+    //    playerMovement.CancelSpeedReturn();
+    //    playerMovement.getPlayerState = Movement.PlayerStates.dead;
+    //    playerMovement.DisablePlayerInput();
+    //    gameOverScreen.ShowGameOverScreen();
+    //}
 
 }
