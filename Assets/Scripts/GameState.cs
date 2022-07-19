@@ -41,9 +41,9 @@ public class GameState : MonoBehaviour
     
     private void FixedUpdate()
     {
-        timer += Time.deltaTime; //using delta time to count time in float
+        timer += Time.fixedDeltaTime; //using delta time to count time in float
         globalTime = (int)(timer); //turning the timer to integer
-        //Debug.Log(globalTime);
+        //Debug.Log(timer);
         changedDifficulty(); //calling function to change difficulty
     }
 
