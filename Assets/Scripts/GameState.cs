@@ -62,8 +62,8 @@ public class GameState : MonoBehaviour
         switch (currentGameState)
         {
             case gameState.gameOver:
-                tileMovement.movementSpeedGetterSetter = 0 * Time.fixedDeltaTime;
-                tileMovement.speedIncreaseEverySecondGetterSetter = 0 * Time.fixedDeltaTime;
+                tileMovement.movementSpeedGetterSetter = 0;
+                tileMovement.speedIncreaseEverySecondGetterSetter = 0;
                 break;
 
             case gameState.isPlaying:
