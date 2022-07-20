@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
     ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
     /// 13/07/22 - added player input disable for after player death (the flat player could still move left/right/jump/slide)
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
-    ///            
+    /// [Arian] 20/07/2022 - moved tile speed being set to 0 when the player dies to GameState            
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -348,8 +348,6 @@ public class Movement : MonoBehaviour
 
     public void SetDeathState()
     {
-        tileMovement.movementSpeedGetterSetter = 0;
-        tileMovement.speedIncreaseEverySecondGetterSetter = 0;
         CancelSpeedReturn();
         currentPlayerState = PlayerStates.dead;
         DisablePlayerInput();

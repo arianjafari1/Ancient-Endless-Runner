@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    /// Code done by Arian- Start
     private float timer; // this is the float timer
     private int globalTime; //this is the actual global time which I will have a getter and setter for
-
+    private TileMovement tileMovement; //tile movement script referance
 
     public enum Difficulty //creating an enum for the difficulty of the game
     {
@@ -19,7 +20,16 @@ public class GameState : MonoBehaviour
         hard //50% medium Tiles, 30% hard Tiles, 20% easy Tiles
     }
 
-    private Difficulty difficulty; //declaring enum type as private
+    public enum gameState //creating an enum for the current state of the game
+    {
+        beginningCutScene, //is the beginning CutScene playing
+        isPlaying, //player is currently playing
+        gameOver, //the player is dead
+        isPaused //the game is paused
+    }
+
+    private gameState currentGameState; //declaring enum type as private for changing the state of the game
+    private Difficulty difficulty; //declaring enum type as private for changing difficulty
 
     ///start- times at which difficulties change with long descriptive names for the designer to be able to change in the editor
     [SerializeField] private int easyDifficultyTime; //time at which difficulty changes to 80% easy Tiles, 20% medium Tiles
@@ -31,20 +41,36 @@ public class GameState : MonoBehaviour
     ///end
 
 
-    // Start is called before the first frame update
     private void Awake()
     {
-        difficulty = Difficulty.veryEasy;
+        tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>(); //assigining tile movement script to tileMovement
+        difficulty = Difficulty.veryEasy; //default difficulty when game starts is set to very easy
+        currentGameState = gameState.isPlaying; //the game state when the game starts is game is playing
         //Debug.Log(currentDifficultyTile);
     }
 
     
     private void FixedUpdate()
     {
-        timer += Time.fixedDeltaTime; //using delta time to count time in float
-        globalTime = (int)(timer); //turning the timer to integer
-        //Debug.Log(timer);
+        changeGameState();
+        //Debug.Log(currentGameState);
         changedDifficulty(); //calling function to change difficulty
+    }
+
+    private void changeGameState() //use this to change the game states and make changes to the
+    {
+        switch (currentGameState)
+        {
+            case gameState.gameOver:
+                tileMovement.movementSpeedGetterSetter = 0 * Time.fixedDeltaTime;
+                tileMovement.speedIncreaseEverySecondGetterSetter = 0 * Time.fixedDeltaTime;
+                break;
+
+            case gameState.isPlaying:
+                timer += Time.fixedDeltaTime; //using delta time to count time in float
+                globalTime = (int)(timer); //turning the timer to integer
+                break;
+        }
     }
 
     private void changedDifficulty() //function to change to change difficulty based on time
@@ -103,6 +129,18 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public gameState CurrentGameState //getters and setters for the enum type to be used in various scripts to determine the current state of the game
+    {
+        get
+        {
+            return currentGameState;
+        }
+        set
+        {
+            currentGameState = value;
+        }
+    }
+
     public Difficulty currentDifficultyTile //getters and setters for the enum type to be used in TileManager to determine difficulty of Tiles
     {
         get
@@ -114,5 +152,5 @@ public class GameState : MonoBehaviour
             difficulty = value;
         }
     }
-
+/// Code done by Arian- end
 }

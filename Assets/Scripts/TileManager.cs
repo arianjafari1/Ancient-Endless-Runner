@@ -26,8 +26,8 @@ public class TileManager : MonoBehaviour
     private void Awake()
     {
         /// Code done by Arian- start
-        tileMovement = FindObjectOfType<TileMovement>(); //reference the object with code
-        gameState = FindObjectOfType<GameState>(); //reference the object with code
+        tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>(); //reference the object with code
+        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>(); //reference the object with code
 
         tilesAndDifficulty(); //calling the function that takes care of the tiles based on the current difficulty of the game
 
