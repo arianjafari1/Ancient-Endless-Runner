@@ -1554,10 +1554,13 @@ MonoBehaviour:
   - {fileID: 3356065952821109339, guid: 8e85c3f954b67ba42bcd29761b22fef1, type: 3}
   - {fileID: 3356065952821109339, guid: 5397bc5bfb26ef94596ea1752b0b9ead, type: 3}
   - {fileID: 3356065952821109339, guid: 913328b23ee53714ea9910fb290d7c3a, type: 3}
+  - {fileID: 3356065952821109339, guid: d0df7903c4286f745b46d4e653caf711, type: 3}
   mediumTilePrefabs:
   - {fileID: 3356065952821109339, guid: 667cd60018bbfff4ab2b42a8287ac28c, type: 3}
+  - {fileID: 3356065952821109339, guid: d0df7903c4286f745b46d4e653caf711, type: 3}
   hardTilePrefabs:
   - {fileID: 3356065952821109339, guid: 16bae4349eb91684ba5aeeaa6bb89ca1, type: 3}
+  - {fileID: 3356065952821109339, guid: d0df7903c4286f745b46d4e653caf711, type: 3}
   environmentTilePrefabs:
   - {fileID: 2417726300383375753, guid: 3e0137860ba368d4c9c1be0353e085ec, type: 3}
   targetZ: {fileID: 480935957}
