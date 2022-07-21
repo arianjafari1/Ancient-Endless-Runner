@@ -15,6 +15,7 @@ public class Collectable : MonoBehaviour
     ///            manager based on the tag
     /// 12/07/22 - changed coinMagnet object type to SphereCollider instead of the CoinMagnet script, as this allows
     ///            any coins which had already entered the collider to be affected by the magnet.
+    /// 21/07/22 - added method to stop powerup after x seconds;
     /// 
     /// </summary>
 
@@ -29,6 +30,7 @@ public class Collectable : MonoBehaviour
 
     private ScoreManager scoreManager;
     [SerializeField] private float collectableRotation;
+    [SerializeField] private float powerUpDuration;
     [SerializeField] private GameObject collectable;
     private SphereCollider coinMagnet;
 
@@ -53,11 +55,17 @@ public class Collectable : MonoBehaviour
                     break;
                 case CollectableType.CoinMagnetPower:
                     coinMagnet.enabled = true;
+                    Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
 
             }
 
             gameObject.SetActive(false);
         }
+    }
+
+    public void EndPowerUp()
+    {
+        coinMagnet.enabled = false;
     }
 }
