@@ -16,18 +16,18 @@ public class GameOver : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     private ScoreManager scoreManager;
-    private GameState gameState;
+    //private GameState gameState;
 
     private void Awake()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
-        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
+        //gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         scoreText.text = "Score: " + scoreManager.getScore.ToString();
     }
     public void ShowGameOverScreen()//int score)
     {
         gameObject.SetActive(true); // set the gameover screen to active
-        gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
+        //gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
         //scoreText.text = "Score: " + score.ToString(); //set the score
 
     }
