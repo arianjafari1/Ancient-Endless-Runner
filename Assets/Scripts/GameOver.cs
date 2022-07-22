@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
 
+    /// <summary>
+    /// 14/07/22 - [MALACHI] added score manager to display the actual score
+    ///          - [MALACHI] made score update automatically rather than having it as a parameter in the function
+    /// 22/07/22 - [MALACHI] moved changing gamestate to gameover when player dies and not when the gameover screen appears
+    /// </summary>
+
     [SerializeField] private TextMeshProUGUI scoreText;
     private ScoreManager scoreManager;
     private GameState gameState;

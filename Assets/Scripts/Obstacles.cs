@@ -43,6 +43,7 @@ public class Obstacles : MonoBehaviour
 
             Debug.Log("You should have jumped, you are staggered");
             playerMovement.Stagger();
+            collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
 
 
         }
