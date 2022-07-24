@@ -29,12 +29,14 @@ public class BoulderMovement : MonoBehaviour
     ///            movement, without needing to use the exact same code in the other obstacle death type.
     ///          - added Game over screen to death function
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
+    /// 22/07/22 - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
     /// 
     /// 
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
     [SerializeField] private GameObject boulder;
+    [SerializeField] private GameOver gameOverScreen;
     [SerializeField] private Movement playerMovement;
     [SerializeField] private TileMovement tileMovement;
     [Tooltip("The position at which the boulder starts - wants to be not too far back, but not so close it kills you after the first trip")]
@@ -97,6 +99,8 @@ public class BoulderMovement : MonoBehaviour
         }
         if (boulder.transform.position.z >= maxZPos)
         {
+
+            gameOverScreen.ShowGameOverScreen();
             Destroy(boulder);
         }
         originPos = new Vector3(-wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);

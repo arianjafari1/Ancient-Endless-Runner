@@ -42,6 +42,10 @@ public class Movement : MonoBehaviour
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
     /// [Arian] 20/07/2022 - moved tile speed being set to 0 when the player dies to GameState  
     /// Oakley 23/07/22 - Added some animations          
+    /// 20/07/22 - [ARIAN] moved tile speed being set to 0 when the player dies to GameState
+    /// 22/07/22 - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
+    ///          - added gamestate to player rather than linking it to gameover screen
+    /// 
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -51,6 +55,7 @@ public class Movement : MonoBehaviour
             right = -3
         };
     [SerializeField] private GameObject player;
+    private GameState gameState;
     public enum PlayerStates
     {
         running,
@@ -99,7 +104,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject playerModel; //Added by Oakley to reference the player model
 
     [SerializeField] TileMovement tileMovement;
-    [SerializeField] private GameOver gameOverScreen;
     [Tooltip("Between 0-1, the reduction of speed while player staggers")]
     [SerializeField] private float staggerSpeedDecrease;
     [Tooltip("Between 0-1 but above staggerSpeedDecrease, the secondary reduction of speed decrease. Set to 1 if you dont want further decrease from initial")]
@@ -165,6 +169,8 @@ public class Movement : MonoBehaviour
         currentPlayerState = PlayerStates.running;
         groundHeight = player.transform.position.y;
         playerAnimation = playerModel.GetComponent<Animator>(); //Changing for Animator
+        //playerAnimation = gameObject.GetComponent<Animation>();
+        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
     }
 
 
@@ -357,7 +363,7 @@ public class Movement : MonoBehaviour
         CancelSpeedReturn();
         currentPlayerState = PlayerStates.dead;
         DisablePlayerInput();
-        gameOverScreen.ShowGameOverScreen();
+        gameState.CurrentGameState = GameState.gameState.gameOver;
     }
 
     //Once the stagger has finished, returns back to the speed it was at before

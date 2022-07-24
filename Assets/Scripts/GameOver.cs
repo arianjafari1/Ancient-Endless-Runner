@@ -8,20 +8,26 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
 
+    /// <summary>
+    /// 14/07/22 - [MALACHI] added score manager to display the actual score
+    ///          - [MALACHI] made score update automatically rather than having it as a parameter in the function
+    /// 22/07/22 - [MALACHI] moved changing gamestate to gameover when player dies and not when the gameover screen appears
+    /// </summary>
+
     [SerializeField] private TextMeshProUGUI scoreText;
     private ScoreManager scoreManager;
-    private GameState gameState;
+    //private GameState gameState;
 
     private void Awake()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
-        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
+        //gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         scoreText.text = "Score: " + scoreManager.getScore.ToString();
     }
     public void ShowGameOverScreen()//int score)
     {
         gameObject.SetActive(true); // set the gameover screen to active
-        gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
+        //gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
         //scoreText.text = "Score: " + score.ToString(); //set the score
 
     }
