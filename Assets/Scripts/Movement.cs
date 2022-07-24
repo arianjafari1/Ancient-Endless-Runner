@@ -40,7 +40,8 @@ public class Movement : MonoBehaviour
     ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
     /// 13/07/22 - added player input disable for after player death (the flat player could still move left/right/jump/slide)
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
-    /// [Arian] 20/07/2022 - moved tile speed being set to 0 when the player dies to GameState            
+    /// [Arian] 20/07/2022 - moved tile speed being set to 0 when the player dies to GameState  
+    /// Oakley 23/07/22 - Added some animations          
     /// </summary>
     [SerializeField] private float horizontalSpeed;
     private enum Lanes
@@ -93,8 +94,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private float AccelerationModifier;
 
 
-    private Animation playerAnimation;
+    private Animator playerAnimation;
     //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
+    [SerializeField] private GameObject playerModel; //Added by Oakley to reference the player model
 
     [SerializeField] TileMovement tileMovement;
     [SerializeField] private GameOver gameOverScreen;
@@ -162,7 +164,7 @@ public class Movement : MonoBehaviour
         currentLane = Lanes.center;
         currentPlayerState = PlayerStates.running;
         groundHeight = player.transform.position.y;
-        playerAnimation = gameObject.GetComponent<Animation>();
+        playerAnimation = playerModel.GetComponent<Animator>(); //Changing for Animator
     }
 
 
@@ -188,11 +190,13 @@ public class Movement : MonoBehaviour
             {
                 //Vector3 targetPos = new Vector3(currentPos.x - horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.left);
+                playerAnimation.SetTrigger("LeftTurn");
             }
             else if (player.transform.position.x < targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x + horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.right);
+                playerAnimation.SetTrigger("RightTurn");
             }
         }
 
@@ -249,7 +253,8 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
-                playerAnimation.Play("Slide");
+                //playerAnimation.Play("Slide");
+                playerAnimation.SetTrigger("Slide");
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isTryingToSlide = false;
@@ -295,7 +300,8 @@ public class Movement : MonoBehaviour
     {
         if (!isJumping && !isFalling) 
         {
-            playerAnimation.Play("Jump");
+            //playerAnimation.Play("Jump");
+            playerAnimation.SetTrigger("Jump");
             currentJumpVelocity = jumpForce;
             isJumping = true;
         }
@@ -309,7 +315,7 @@ public class Movement : MonoBehaviour
 
         if (!isJumping && !isFalling)
         {
-            playerAnimation.Play("Slide");
+            playerAnimation.SetTrigger("Slide");
             Debug.Log("Slid");
         }
         else

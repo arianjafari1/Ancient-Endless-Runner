@@ -47,6 +47,10 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private float backwardsMovement;
     [Tooltip("Speed at which the boulder moves forward as the player is staggering")]
     [SerializeField] private float forwardsMovement;
+    [SerializeField] private float wiggleAmount; //Movement amount side to side
+    [SerializeField] private float wiggleSpeed; //Speed for side to side movement
+    private Vector3 originPos;
+    private Vector3 targetPos;
 
     
     //private bool isPlayerStaggering;
@@ -74,8 +78,6 @@ public class BoulderMovement : MonoBehaviour
     {
         boulder.transform.position = new Vector3(0, 5, startZPos);
     }
-
-
     void FixedUpdate()
     {
         switch(playerMovement.getPlayerState)
@@ -97,6 +99,10 @@ public class BoulderMovement : MonoBehaviour
         {
             Destroy(boulder);
         }
+        originPos = new Vector3(-wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);
+        targetPos = new Vector3(wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);
+        boulder.transform.position = Vector3.Lerp(originPos, targetPos, (Mathf.Sin(Time.time * wiggleSpeed) +1.0f) / 2.0f);
+
     }
 
     

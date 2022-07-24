@@ -14,11 +14,16 @@ public class BoulderRotate : MonoBehaviour
     /// 28/06/22 - boulder rotates right instead of forwards with a default rotation on the other axis at 90 degrees
     ///          - was causing problems with moving the boulder when the other way
     /// 
+    /// 22/07/22 - Oakley came in and messed with your script!
     /// </summary>
-    [SerializeField] private float rotationAmount;
+    [SerializeField] private float forwardRotationAmount;
     [SerializeField] private GameObject boulder;
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
     private void FixedUpdate()
     {
-        boulder.transform.Rotate(Vector3.right, rotationAmount);
+        boulder.transform.Rotate(Vector3.right, forwardRotationAmount);
     }
 }
