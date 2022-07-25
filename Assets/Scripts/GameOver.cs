@@ -15,7 +15,7 @@ public class GameOver : MonoBehaviour
     ///            -[Arian] added ShowGameOverScreen function for setting game over screen to active, and adding score text on it, this function should be called in other scripts
     /// 14/07/22 - [MALACHI] added score manager to display the actual score
     ///          - [MALACHI] made score update automatically rather than having it as a parameter in the function
-    /// 20/07/2022 -[Arian] change game stated in the ShowGameOverScreen function     
+    /// 20/07/2022 -[Arian] change gameState from GameState Script to gameOver in the ShowGameOverScreen function 
     /// 22/07/22 - [MALACHI] moved changing gamestate to gameover when player dies and not when the gameover screen appears
     /// </summary>
 
