@@ -126,6 +126,16 @@ public class BoulderMovement : MonoBehaviour
             playerMovement.PlayAnimation("Flatten");
             playerMovement.SetDeathState();
         }
+
+        
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("obstacleToStagger") || collision.gameObject.CompareTag("obstacleToJump") || collision.gameObject.CompareTag("obstacleToSlide"))
+        {
+            collision.gameObject.GetComponent<DestructableObject>().DestroyObstacle();
+        }
     }
 
     //public void SetDeathState()

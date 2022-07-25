@@ -99,7 +99,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float AccelerationModifier;
 
 
-    private Animator playerAnimation;
+    private Animation playerAnimation;
+    private Animator movementAnimations;
     //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
     [SerializeField] private GameObject playerModel; //Added by Oakley to reference the player model
 
@@ -168,8 +169,8 @@ public class Movement : MonoBehaviour
         currentLane = Lanes.center;
         currentPlayerState = PlayerStates.running;
         groundHeight = player.transform.position.y;
-        playerAnimation = playerModel.GetComponent<Animator>(); //Changing for Animator
-        //playerAnimation = gameObject.GetComponent<Animation>();
+        playerAnimation = gameObject.GetComponent<Animation>(); //Changing for Animator
+        movementAnimations = playerModel.GetComponent<Animator>();
         gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
     }
 
@@ -196,13 +197,13 @@ public class Movement : MonoBehaviour
             {
                 //Vector3 targetPos = new Vector3(currentPos.x - horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.left);
-                playerAnimation.SetTrigger("LeftTurn");
+                movementAnimations.SetTrigger("LeftTurn");
             }
             else if (player.transform.position.x < targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x + horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.right);
-                playerAnimation.SetTrigger("RightTurn");
+                movementAnimations.SetTrigger("RightTurn");
             }
         }
 
@@ -259,8 +260,8 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
-                //playerAnimation.Play("Slide");
-                playerAnimation.SetTrigger("Slide");
+                playerAnimation.Play("Slide");
+                movementAnimations.SetTrigger("Slide");
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isTryingToSlide = false;
@@ -306,8 +307,8 @@ public class Movement : MonoBehaviour
     {
         if (!isJumping && !isFalling) 
         {
-            //playerAnimation.Play("Jump");
-            playerAnimation.SetTrigger("Jump");
+            playerAnimation.Play("Jump");
+            movementAnimations.SetTrigger("Jump");
             currentJumpVelocity = jumpForce;
             isJumping = true;
         }
@@ -321,7 +322,8 @@ public class Movement : MonoBehaviour
 
         if (!isJumping && !isFalling)
         {
-            playerAnimation.SetTrigger("Slide");
+            playerAnimation.Play("Slide");
+            movementAnimations.SetTrigger("Slide");
             Debug.Log("Slid");
         }
         else
@@ -361,6 +363,7 @@ public class Movement : MonoBehaviour
     public void SetDeathState()
     {
         CancelSpeedReturn();
+        movementAnimations.SetTrigger("Flatten");
         currentPlayerState = PlayerStates.dead;
         DisablePlayerInput();
         gameState.CurrentGameState = GameState.gameState.gameOver;

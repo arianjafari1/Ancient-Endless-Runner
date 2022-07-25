@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465791, g: 0.4964133, b: 0.57481784, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10524,7 +10524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 276.7913, y: 63.063}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642910223
@@ -10855,7 +10855,6 @@ MonoBehaviour:
   AccelerationModifier: 4
   playerModel: {fileID: 634233000}
   tileMovement: {fileID: 775761444}
-  gameOverScreen: {fileID: 469610954}
   staggerSpeedDecrease: 0.6
   secondStaggerSpeedDecrease: 1
   staggerDuration: 1
@@ -11360,7 +11359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 276.7913, y: 63.063}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881502666
@@ -16347,14 +16346,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0.9990483, z: -0.043619405, w: 0}
-  m_LocalPosition: {x: 0, y: 4.37, z: 22.49}
+  m_LocalRotation: {x: -0, y: 0.99471545, z: -0.10267037, w: 0}
+  m_LocalPosition: {x: 0, y: 6.63, z: 27.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.786, y: 180, z: 0}
 --- !u!45 &963194229
 Skybox:
   m_ObjectHideFlags: 0
@@ -16816,11 +16815,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boulder: {fileID: 1564524095}
+  gameOverScreen: {fileID: 469610954}
   playerMovement: {fileID: 663092682}
   tileMovement: {fileID: 775761444}
   startZPos: -15
   minZPos: -30
-  maxZPos: 30
+  maxZPos: 50
   backwardsMovement: 0.005
   forwardsMovement: 0.1
   wiggleAmount: 0.8
