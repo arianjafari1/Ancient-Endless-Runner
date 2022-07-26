@@ -29,6 +29,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] private CollectableType collectableType;
 
     private ScoreManager scoreManager;
+    private Movement playerMovement;
     [SerializeField] private float collectableRotation;
     [SerializeField] private float powerUpDuration;
     [SerializeField] private GameObject collectable;
@@ -38,6 +39,7 @@ public class Collectable : MonoBehaviour
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
         coinMagnet = GameObject.FindWithTag("CoinMagnet").GetComponent<SphereCollider>();
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<Movement>();
     }
     private void FixedUpdate()
     {
@@ -57,6 +59,12 @@ public class Collectable : MonoBehaviour
                     coinMagnet.enabled = true;
                     Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
+                case CollectableType.FeatherJumpPower:
+                    playerMovement.ChangeJumpPower(true);
+                    Invoke(nameof(EndPowerUp), powerUpDuration);
+                    break;
+                case CollectableType.CheatDeathPower:
+                    break;
 
             }
 
@@ -67,5 +75,6 @@ public class Collectable : MonoBehaviour
     public void EndPowerUp()
     {
         coinMagnet.enabled = false;
+        playerMovement.ChangeJumpPower(false);
     }
 }

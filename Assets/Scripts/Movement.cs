@@ -40,11 +40,14 @@ public class Movement : MonoBehaviour
     ///          - Removed switchPlayerStagger variables linked to boulder movement and replaced with PlayerState
     /// 13/07/22 - added player input disable for after player death (the flat player could still move left/right/jump/slide)
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
-    /// [Arian] 20/07/2022 - moved tile speed being set to 0 when the player dies to GameState  
-    /// Oakley 23/07/22 - Added some animations          
     /// 20/07/22 - [ARIAN] moved tile speed being set to 0 when the player dies to GameState
     /// 22/07/22 - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
     ///          - added gamestate to player rather than linking it to gameover screen
+    /// 
+    /// 23/07/22 - [OAKLEY] Added some animations          
+    /// 23/07/22 - reinstated overwritten code causing animations to not play properly (slide, flatten lost functionality)
+    /// 26/07/22 - added variables for powered up jump
+    ///          - added function to switch between normal and powered jump
     /// 
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -85,13 +88,21 @@ public class Movement : MonoBehaviour
     private Lanes currentLane;
 
     [Tooltip("Changes rate of acceleration (must be negative)")]
-    [SerializeField]private float gravity = -9.8f;
-    [Tooltip("How quickly the player jumps")]
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float gravity = -9.8f;
     private float currentJumpVelocity;
     private float groundHeight;
+    private float currentJumpForce;
+    private float currentMaxJumpHeight;
+
+    [Tooltip("How quickly the player jumps")]
+    [SerializeField] private float jumpForce;
     [Tooltip("How high the player jumps")]
     [SerializeField] private float maxJumpHeight;
+    [Tooltip("Force of the powered up jump")]
+    [SerializeField] private float poweredJumpForce;
+    [Tooltip("Height of the powered up jump")]
+    [SerializeField] private float poweredJumpHeight;
+
     private bool isJumping = false;
     private bool isFalling = false;
     private bool isTryingToSlide = false;
@@ -168,6 +179,8 @@ public class Movement : MonoBehaviour
     {
         currentLane = Lanes.center;
         currentPlayerState = PlayerStates.running;
+        currentJumpForce = jumpForce;
+        currentMaxJumpHeight = maxJumpHeight;
         groundHeight = player.transform.position.y;
         playerAnimation = gameObject.GetComponent<Animation>(); //Changing for Animator
         movementAnimations = playerModel.GetComponent<Animator>();
@@ -216,9 +229,9 @@ public class Movement : MonoBehaviour
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.up);
-            if (player.transform.position.y >= groundHeight + maxJumpHeight)
+            if (player.transform.position.y >= groundHeight + currentMaxJumpHeight)
             {
-                player.transform.position = new Vector3(currentPos.x, groundHeight + maxJumpHeight, currentPos.z);
+                player.transform.position = new Vector3(currentPos.x, groundHeight + currentMaxJumpHeight, currentPos.z);
                 isJumping = false;
                 isFalling = true;
                 Debug.Log("Height reached");
@@ -305,13 +318,14 @@ public class Movement : MonoBehaviour
     #endregion
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!isJumping && !isFalling) 
+        if (isJumping || isFalling) 
         {
-            playerAnimation.Play("Jump");
-            movementAnimations.SetTrigger("Jump");
-            currentJumpVelocity = jumpForce;
-            isJumping = true;
+            return;
         }
+        playerAnimation.Play("Jump");
+        movementAnimations.SetTrigger("Jump");
+        currentJumpVelocity = currentJumpForce;
+        isJumping = true;
     }
 
     public void Slide(InputAction.CallbackContext context)
@@ -360,6 +374,20 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void ChangeJumpPower(bool isPowered)
+    {
+        if (isPowered)
+        {
+            currentMaxJumpHeight = poweredJumpHeight;
+            currentJumpForce = poweredJumpForce;
+        }
+        else
+        {
+            currentMaxJumpHeight = maxJumpHeight;
+            currentJumpForce = jumpForce;
+        }
+    }
+
     public void SetDeathState()
     {
         CancelSpeedReturn();
@@ -390,6 +418,10 @@ public class Movement : MonoBehaviour
         playerAnimation.Play(animationName);
     }
     
+    public void EnablePlayerInput()
+    {
+        movementInputActions.Player.Enable();
+    }
     public void DisablePlayerInput()
     {
         movementInputActions.Player.Disable();

@@ -29,8 +29,8 @@ public class BoulderMovement : MonoBehaviour
     ///            movement, without needing to use the exact same code in the other obstacle death type.
     ///          - added Game over screen to death function
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
-    /// 22/07/22 - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
-    /// 
+    ///          - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
+    /// 22/07/22 - [OAKLEY] added wavy left-right movement to boulder
     /// 
     /// </summary>
 
@@ -103,6 +103,7 @@ public class BoulderMovement : MonoBehaviour
             gameOverScreen.ShowGameOverScreen();
             Destroy(boulder);
         }
+        //makes boulder move left and right slowly
         originPos = new Vector3(-wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);
         targetPos = new Vector3(wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);
         boulder.transform.position = Vector3.Lerp(originPos, targetPos, (Mathf.Sin(Time.time * wiggleSpeed) +1.0f) / 2.0f);
