@@ -5,6 +5,20 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     /// Code done by Arian- Start
+
+    /// <summary>
+    /// 12/07/2022 -[Arian] created GameState Script
+    ///            -[Arian] added a timer float variable which I assiged to timer + Time.deltaTime in the fixed update
+    ///            -[Arian]added a globalTime integer variable and assigned it to (int) (timer % 60) in the fixedUpdate to get an int for the time
+    /// 14/07/2022 -[Arian] Moved the  Difficulty enum to GameState
+    ///            -[Arian] set the default difficulty to veryEasy in Awake
+    ///            -[Arian] added a function that is called in fixed update to change the difficulty progressively higher and higher at certain time intervals
+    ///            -[Arian] added variables for the time at which difficulty changes, and made them visible in the editor
+    /// 19/07/2022 -[Arian] changed the timer to += Time.fixedDeltaTime to make it framerate independent
+    ///            -[Arian] changed globalTime to (int)(timer)
+    /// 20/07/2022 -[Arian] added an overall gameState, with things such as beginningCutScene, isPlaying, gameOver, isPaused
+    /// </summary>
+
     private float timer; // this is the float timer
     private int globalTime; //this is the actual global time which I will have a getter and setter for
     private TileMovement tileMovement; //tile movement script referance

@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5ecd7ad6af5694aa16daf36a5c5eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileRight: 1
+  tileEnvironment: 1
   tilePosition: {fileID: 0}
   tileSpawnStart: {fileID: 4526066881986779957}
   groundLength: {fileID: 4526066880757307051}

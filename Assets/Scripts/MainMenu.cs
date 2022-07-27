@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     ///Code done by Arian- start
-    
+
+    /// <summary>
+    /// 29/06/2022 -[Arian] created MainMenu script
+    ///            -[Arian] added functions for the Start Button, exit button
+    /// </summary>
+
     private void startGame()
     {
         SceneManager.LoadScene("SampleScene");

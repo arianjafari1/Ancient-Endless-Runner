@@ -6,6 +6,20 @@ public class TileMovement : MonoBehaviour
 {
     //Code done by Arian - Start
 
+    /// <summary>
+    /// 22/06/2022 -[Arian] created TileMovement script
+    ///            -[Arian] moved the movementSpeed, maxSpeed, speedIncrease to this script from TileManager script, to make them independent from the Tile objects
+    ///            -[Arian] added getters and setters to the variables I just moved here, so they can be used in the TileManager
+    /// 27/06/2022 -[Arian] moved the tilePrefabs GameObject to TileMovement from TileManager, and Serialized it, also added getter and setter for it so it can be used in TileManager
+    /// 28/06/2022 -[Arian] made the tilePrefabs GameObject to an array of GameObjects and used it in TileManager
+    /// 01/07/2022 -[Arian] move targetZ from TileManager to here, and created targetZright as well, to have to point for both environment and middle tiles to have individul lerp points
+    /// 05/07/2022 -[Arian] Added a medium and a hard difficulty tile prefabs, which will change between them based on a future difficulty state that I will create in another script
+    /// 06/07/2022 -[Arian] Added an array of GameObject type for the environment tiles, environmentTilePrefabs
+    /// 12/07/2022 -[Arian] Created a Difficulty type variable using an enum for different difficulty states
+    /// 14/07/2022 -[Arian] Moved the  Difficulty enum to GameState
+    /// </summary>
+
+
     //[SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles
     [SerializeField] private GameObject[] mediumTilePrefabs; //array of tiles with tiles with obstacles, medium difficulty
