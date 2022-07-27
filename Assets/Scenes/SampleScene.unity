@@ -10883,7 +10883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77371376de982e9458f7e0c3ead4ba61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 2101966404}
 --- !u!111 &663092685
 Animation:
   m_ObjectHideFlags: 0
@@ -11011,6 +11010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
+  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -11095,6 +11095,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &705507996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &735805699
 GameObject:
   m_ObjectHideFlags: 0
@@ -17332,17 +17352,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc0355939ef75774f9a5093fd76f81b6, type: 3}
---- !u!114 &2101966404 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
-  m_PrefabInstance: {fileID: 2667134351173413194}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c86d9118a5c15f4bb3198a1ca9e061e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2667134351173413194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17397,6 +17406,30 @@ PrefabInstance:
     - target: {fileID: 2667134351621725961, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[2].clipSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f10aa8db2f6c304788809e295610fc4, type: 3}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[2].loopSound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[2].nameSound
+      value: Boulder_Movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[2].pitchSound
+      value: 0.086
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[2].volumeSound
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}

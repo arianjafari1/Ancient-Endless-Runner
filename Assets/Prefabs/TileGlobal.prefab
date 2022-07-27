@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5ecd7ad6af5694aa16daf36a5c5eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileRight: 0
+  tileEnvironment: 0
   tilePosition: {fileID: 5436791841588199812}
   tileSpawnStart: {fileID: 5436791840411189064}
   groundLength: {fileID: 5436791841363800790}
@@ -257,7 +257,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 97494979403f7a344bb087cc7bc87a09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

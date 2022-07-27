@@ -31,7 +31,7 @@ public class BoulderMovement : MonoBehaviour
     /// 15/07/22 - moved setDeathState to the player instead of the boulder
     ///          - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
     /// 22/07/22 - [OAKLEY] added wavy left-right movement to boulder
-    /// 
+    /// 27/07/22 - [OAKLEY] added audio manager and boulder sound effect
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
@@ -53,6 +53,7 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private float wiggleSpeed; //Speed for side to side movement
     private Vector3 originPos;
     private Vector3 targetPos;
+    private AudioManager audioManager; 
 
     
     //private bool isPlayerStaggering;
@@ -79,6 +80,8 @@ public class BoulderMovement : MonoBehaviour
     void Start()
     {
         boulder.transform.position = new Vector3(0, 5, startZPos);
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager.PlaySound("Boulder_Movement");
     }
     void FixedUpdate()
     {
