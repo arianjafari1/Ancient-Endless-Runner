@@ -103,6 +103,19 @@ public class Movement : MonoBehaviour
     [Tooltip("Height of the powered up jump")]
     [SerializeField] private float poweredJumpHeight;
 
+    private bool shieldActive = false;
+    public bool IsShieldActive
+    {
+        get
+        {
+            return shieldActive;
+        }
+        set
+        {
+            shieldActive = value;
+        }
+    }
+
     private bool isJumping = false;
     private bool isFalling = false;
     private bool isTryingToSlide = false;

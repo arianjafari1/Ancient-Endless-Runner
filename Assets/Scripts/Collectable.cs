@@ -16,6 +16,8 @@ public class Collectable : MonoBehaviour
     /// 12/07/22 - changed coinMagnet object type to SphereCollider instead of the CoinMagnet script, as this allows
     ///            any coins which had already entered the collider to be affected by the magnet.
     /// 21/07/22 - added method to stop powerup after x seconds;
+    /// 26/07/22 - added feather jump powerup
+    /// 27/07/22 - added shield powerup
     /// 
     /// </summary>
 
@@ -64,6 +66,8 @@ public class Collectable : MonoBehaviour
                     Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
                 case CollectableType.CheatDeathPower:
+                    playerMovement.IsShieldActive = true;
+                    Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
 
             }
@@ -76,5 +80,6 @@ public class Collectable : MonoBehaviour
     {
         coinMagnet.enabled = false;
         playerMovement.ChangeJumpPower(false);
+        playerMovement.IsShieldActive = false;
     }
 }
