@@ -12,6 +12,7 @@ public class Obstacles : MonoBehaviour
     /// 13/07/22 - [MALACHI] linked player stagger to collision
     ///          - [MALACHI] added pit tag
     /// 15/07/22 - [MALACHI] added death trigger on pit tagged obstacles, and linked pit fall animation
+    /// 27/07/22 - added audio manager
     /// 
     /// </summary>
     /// 
