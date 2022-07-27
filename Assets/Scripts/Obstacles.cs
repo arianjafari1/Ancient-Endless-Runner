@@ -16,10 +16,13 @@ public class Obstacles : MonoBehaviour
     /// </summary>
     /// 
     private Movement playerMovement;
+    private AudioManager audioManager;
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //refer to the script in the empty object
         playerMovement = GetComponentInParent<Movement>();
+
     }
 
     /// Code done by Arian- start
@@ -33,7 +36,7 @@ public class Obstacles : MonoBehaviour
 
             Debug.Log("You should have jumped, you are dead");
             playerMovement.Stagger();
-
+            audioManager.PlaySound("HitEnemySound");
 
         }
 
@@ -44,7 +47,7 @@ public class Obstacles : MonoBehaviour
             Debug.Log("You should have jumped, you are staggered");
             playerMovement.Stagger();
             collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
-
+            audioManager.PlaySound("HitEnemySound");
 
         }
 
@@ -55,7 +58,7 @@ public class Obstacles : MonoBehaviour
             Debug.Log("You should have slid, you are dead");
 
             playerMovement.Stagger();
-
+            audioManager.PlaySound("HitEnemySound");
         }
 
         if (collisionInfo.gameObject.CompareTag("pitObstacle"))
