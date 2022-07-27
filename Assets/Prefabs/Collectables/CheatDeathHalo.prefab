@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableType: 3
   collectableRotation: 2
+  rotationDirection: 2
   powerUpDuration: 5
   collectable: {fileID: 3581098637808326585}
 --- !u!54 &1518045280854136112
@@ -191,6 +192,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5fd37682405396a4fa419c5d2e18e48e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d7c85028a4be5d41b573f5941f05a87, type: 2}
     - target: {fileID: 919132149155446097, guid: 5fd37682405396a4fa419c5d2e18e48e, type: 3}
       propertyPath: m_Name
       value: GMP_halo_01 (1)

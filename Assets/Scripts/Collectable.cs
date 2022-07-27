@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
     /// 21/07/22 - added method to stop powerup after x seconds;
     /// 26/07/22 - added feather jump powerup
     /// 27/07/22 - added shield powerup
+    ///          - powerup now rotates in the correct orientation
     /// 
     /// </summary>
 
@@ -33,6 +34,13 @@ public class Collectable : MonoBehaviour
     private ScoreManager scoreManager;
     private Movement playerMovement;
     [SerializeField] private float collectableRotation;
+    private enum RotationDirection
+    {
+        up,
+        side,
+        forward
+    }
+    [SerializeField] private RotationDirection rotationDirection;
     [SerializeField] private float powerUpDuration;
     [SerializeField] private GameObject collectable;
     private SphereCollider coinMagnet;
@@ -45,7 +53,18 @@ public class Collectable : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        collectable.transform.Rotate(Vector3.forward, collectableRotation);
+        switch (rotationDirection)
+        {
+            case RotationDirection.up:
+                collectable.transform.Rotate(Vector3.up, collectableRotation);
+                break;
+            case RotationDirection.forward:
+                collectable.transform.Rotate(Vector3.forward, collectableRotation);
+                break;
+            case RotationDirection.side:
+                collectable.transform.Rotate(Vector3.left, collectableRotation);
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

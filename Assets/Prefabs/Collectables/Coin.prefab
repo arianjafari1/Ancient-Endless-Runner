@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableType: 0
   collectableRotation: 2
+  rotationDirection: 2
   powerUpDuration: 5
   collectable: {fileID: 3016951618725530482}
 --- !u!54 &3016951618558541413

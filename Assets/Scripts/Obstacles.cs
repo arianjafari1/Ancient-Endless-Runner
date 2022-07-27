@@ -13,6 +13,7 @@ public class Obstacles : MonoBehaviour
     ///          - [MALACHI] added pit tag
     /// 15/07/22 - [MALACHI] added death trigger on pit tagged obstacles, and linked pit fall animation
     /// 27/07/22 - added audio manager
+    ///          - [MALACHI] added checks for shield powerup
     /// 
     /// </summary>
     /// 
@@ -26,47 +27,59 @@ public class Obstacles : MonoBehaviour
 
     }
 
-    /// Code done by Arian- start
     private void OnTriggerEnter(Collider collisionInfo) //check for collision infor
     {
 
 
         if (collisionInfo.gameObject.CompareTag("obstacleToJump"))
         {
+            if (!playerMovement.IsShieldActive)
+            {
+                playerMovement.Stagger();
+                audioManager.PlaySound("HitEnemySound");
+                return;
+            }
 
-
-            Debug.Log("You should have jumped, you are dead");
-            playerMovement.Stagger();
-            audioManager.PlaySound("HitEnemySound");
+            Debug.Log("Shield active");
+            collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
+            
 
         }
 
+        //these obstacles break even if the player staggers on them as they are fragile
         if (collisionInfo.gameObject.CompareTag("obstacleToStagger"))
         {
-
-
-            Debug.Log("You should have jumped, you are staggered");
-            playerMovement.Stagger();
             collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
             audioManager.PlaySound("HitEnemySound");
 
-        }
-
-        if (collisionInfo.gameObject.CompareTag("obstacleToSlide"))
-        {
-
-
-            Debug.Log("You should have slid, you are dead");
+            if (playerMovement.IsShieldActive)
+            {
+                Debug.Log("Shield active");
+                return;
+            }
 
             playerMovement.Stagger();
-            audioManager.PlaySound("HitEnemySound");
+
+
+        }
+
+        if (collisionInfo.gameObject.CompareTag("obstacleToJump"))
+        {
+            if (!playerMovement.IsShieldActive)
+            {
+                playerMovement.Stagger();
+                audioManager.PlaySound("HitEnemySound");
+                return;
+            }
+            Debug.Log("Shield active");
+            collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
+
+
         }
 
         if (collisionInfo.gameObject.CompareTag("pitObstacle"))
         {
 
-
-            Debug.Log("Fallen into pit");
             playerMovement.SetDeathState();
             playerMovement.PlayAnimation("FallInPit");
 

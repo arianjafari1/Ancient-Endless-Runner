@@ -15,7 +15,7 @@ public class TileDestroyer : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("Tile")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
             Destroy(collisionInfo.gameObject); //destroy the tile
-            Debug.Log("Tile at the back has been destroyed.");
+            //Debug.Log("Tile at the back has been destroyed.");
 
         }
 
