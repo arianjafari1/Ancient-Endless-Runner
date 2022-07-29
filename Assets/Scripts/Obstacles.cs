@@ -63,7 +63,7 @@ public class Obstacles : MonoBehaviour
 
         }
 
-        if (collisionInfo.gameObject.CompareTag("obstacleToJump"))
+        if (collisionInfo.gameObject.CompareTag("obstacleToSlide"))
         {
             if (!playerMovement.IsShieldActive)
             {

@@ -19,6 +19,8 @@ public class Collectable : MonoBehaviour
     /// 26/07/22 - added feather jump powerup
     /// 27/07/22 - added shield powerup
     ///          - powerup now rotates in the correct orientation
+    ///          - rotation differs between collectables, so added a rotation direction enum so each collectable can be 
+    ///            set individually
     /// 
     /// </summary>
 

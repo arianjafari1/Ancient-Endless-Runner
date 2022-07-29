@@ -223,14 +223,23 @@ public class Movement : MonoBehaviour
             {
                 //Vector3 targetPos = new Vector3(currentPos.x - horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.left);
-                movementAnimations.SetTrigger("LeftTurn");
+                movementAnimations.SetBool("TurnLeft", false);
+                movementAnimations.SetBool("TurnRight", true);
+                
             }
             else if (player.transform.position.x < targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x + horizontalSpeed / 100, currentPos.y, currentPos.z);
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.right);
-                movementAnimations.SetTrigger("RightTurn");
+                movementAnimations.SetBool("TurnRight", false);
+                movementAnimations.SetBool("TurnLeft", true);
             }
+
+        }
+        else
+        {
+            movementAnimations.SetBool("TurnLeft", false);
+            movementAnimations.SetBool("TurnRight", false);
         }
 
         //Jumping
@@ -254,6 +263,7 @@ public class Movement : MonoBehaviour
             //gives the designer a warning in the console if jump force is too weak
             if (player.transform.position.y < groundHeight)
             {
+                movementAnimations.SetBool("Jump", false);
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 isJumping = false;
                 Debug.LogWarning("JUMP FORCE NOT STRONG ENOUGH TO REACH REQUIRED HEIGHT, FIX PLEASE");
@@ -268,6 +278,7 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
+                movementAnimations.SetBool("Jump", false);
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isFalling = false;
@@ -286,8 +297,11 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
+                movementAnimations.SetBool("Jump", false);
                 playerAnimation.Play("Slide");
-                movementAnimations.SetTrigger("Slide");
+                movementAnimations.SetBool("Slide", true);
+                Invoke("EndSlideAnimation", 1.1f);
+
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isTryingToSlide = false;
@@ -336,7 +350,7 @@ public class Movement : MonoBehaviour
             return;
         }
         playerAnimation.Play("Jump");
-        movementAnimations.SetTrigger("Jump");
+        movementAnimations.SetBool("Jump", true);
         currentJumpVelocity = currentJumpForce;
         isJumping = true;
     }
@@ -345,12 +359,12 @@ public class Movement : MonoBehaviour
     {
         //plays the slide "animation", which essentially just shrinks and lowers the 
         //collision box of the player.
-        //TODO: Will need to be matched up with the animation once that is imported
 
         if (!isJumping && !isFalling)
         {
             playerAnimation.Play("Slide");
-            movementAnimations.SetTrigger("Slide");
+            movementAnimations.SetBool("Slide", true);
+            Invoke("EndSlideAnimation", 1.1f);
             Debug.Log("Slid");
         }
         else
@@ -363,7 +377,6 @@ public class Movement : MonoBehaviour
     }
 
     //stores the speed at the time of the stagger then decreases it slightly
-    //TODO: also will need to be matched up to the animation
     public void Stagger()
     {
         playerAnimation.Play("Stagger");
@@ -438,6 +451,11 @@ public class Movement : MonoBehaviour
     public void DisablePlayerInput()
     {
         movementInputActions.Player.Disable();
+    }
+
+    private void EndSlideAnimation()
+    {
+        movementAnimations.SetBool("Slide", false);
     }
 
 

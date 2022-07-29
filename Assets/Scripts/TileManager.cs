@@ -106,7 +106,7 @@ public class TileManager : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
             Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation); // use random tile to instantiate a new tile, at the tile spawn point
-            Debug.Log("New Tile spawned");
+            //Debug.Log("New Tile spawned");
 
         }
 
