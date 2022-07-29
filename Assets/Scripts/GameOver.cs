@@ -20,14 +20,16 @@ public class GameOver : MonoBehaviour
     /// </summary>
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI timeAliveText;
     private ScoreManager scoreManager;
-    //private GameState gameState;
+    private GameState gameState;
 
     private void Awake()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
-        //gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
+        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         scoreText.text = "Score: " + scoreManager.getScore.ToString();
+        timeAliveText.text = "Time alive: " + gameState.GlobalTime.ToString() + " sec";
     }
     public void ShowGameOverScreen()//int score)
     {
