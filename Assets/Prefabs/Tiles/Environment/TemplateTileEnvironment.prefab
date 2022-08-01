@@ -180,8 +180,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileGlobalEnvironment (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6729423916103955647, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
+      propertyPath: tileSpawnStartEnvironment
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6729423916103955645, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
+    - {fileID: 6729423916103955647, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5d16c5d321f2f9741a3f6f829a2b3ad3, type: 3}
 --- !u!4 &8491124742437081613 stripped
 Transform:

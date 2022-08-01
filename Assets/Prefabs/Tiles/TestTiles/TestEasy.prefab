@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 182786133078742204}
   m_Layer: 0
   m_Name: TestEasy
-  m_TagString: Tile
+  m_TagString: TileMiddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,6 +57,10 @@ PrefabInstance:
     - target: {fileID: 1437012251659558835, guid: 2f2e05846ae3fb64bb09dc9dd476e1b1, type: 3}
       propertyPath: m_Name
       value: GrassObstacleToStagger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437012251659558835, guid: 2f2e05846ae3fb64bb09dc9dd476e1b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1437012251659558838, guid: 2f2e05846ae3fb64bb09dc9dd476e1b1, type: 3}
       propertyPath: m_RootOrder

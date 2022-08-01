@@ -54,6 +54,7 @@ public class TileManager : MonoBehaviour
     private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
 
     [SerializeField] private Transform tileSpawnStart;
+    [SerializeField] private Transform tileSpawnStartEnvironment;
     [SerializeField] private Transform groundLength; //ground child object of tile
 
     private int percentageChance; //I will assign this to get a number between 1 and 10 and based on that determines the chance, so we can use it down in the
@@ -76,6 +77,8 @@ public class TileManager : MonoBehaviour
 
     }
 
+    
+
 
     private void FixedUpdate()
     {
@@ -96,7 +99,7 @@ public class TileManager : MonoBehaviour
         }
 
 
-        if (tileMovement.movementSpeedGetterSetter < tileMovement.maxMovementSpeedGetter) //if the movement speed is lower than 0.5 then
+        if (tileMovement.movementSpeedGetterSetter < tileMovement.maxMovementSpeedGetter) //if the movement speed is lower than maxSpeed
         {
             tileMovement.movementSpeedGetterSetter += tileMovement.speedIncreaseEverySecondGetterSetter * Time.fixedDeltaTime; //increase speed by this amount
         }
@@ -112,7 +115,26 @@ public class TileManager : MonoBehaviour
 
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
         {
-            Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation); // use random tile to instantiate a new tile, at the tile spawn point
+            if (tileEnvironment)
+            {
+                Instantiate(tilePrefabs[randomTile], tileSpawnStartEnvironment.position, tileSpawnStartEnvironment.rotation); // use random tile to instantiate a new tile, at the tile spawn point
+                Debug.Log("TileEnvironment needs spawning");
+            }
+            
+
+            GameObject easyTiles = tileMovement.getPooledTiles();
+
+            if (easyTiles != null)
+            {
+                //GameObject tilePrefab = tilePrefabs[randomTile];
+                easyTiles.transform.position = tileSpawnStart.position;
+                easyTiles.SetActive(true);
+
+                Debug.Log("hulu");
+                
+
+            }
+            
             //Debug.Log("New Tile spawned");
 
         }
@@ -132,18 +154,18 @@ public class TileManager : MonoBehaviour
         {
             case false: //in case the envirnment tiles are inactive, then excute this
                 targetZ = tileMovement.TargetZ.position; // moveTowards and lerp will drag the tiles in the middle in a straight line to targetZ
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+                //switch (gameState.currentDifficultyTile) //switch statement that takes game state currentDifficulty
+                //{
+                //    case GameState.Difficulty.hard: //checks if highest difficulty has been reached so that it doesn't do a lot more unnecessary checks
+                //        checkTheHardDifficulty(); //method/function for when the highest difficulty is reached so that no additional unnecessary chesks
+                //                                  //are being performed
+                //        break;
+                //    default:
+                //        checkTheDifficulty(); //method/function used to determine which tiles should spawn with a bunch of checks until reaching highest difficulty
+                //        break;
+                //}
 
-                switch (gameState.currentDifficultyTile) //switch statement that takes game state currentDifficulty
-                {
-                    case GameState.Difficulty.hard: //checks if highest difficulty has been reached so that it doesn't do a lot more unnecessary checks
-                        checkTheHardDifficulty(); //method/function for when the highest difficulty is reached so that no additional unnecessary chesks
-                                                  //are being performed
-                        break;
-                    default:
-                        checkTheDifficulty(); //method/function used to determine which tiles should spawn with a bunch of checks until reaching highest difficulty
-                        break;
-                }
-               
                 break;
 
             case true:

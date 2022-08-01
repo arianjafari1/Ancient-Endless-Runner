@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class TileMovement : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class TileMovement : MonoBehaviour
     /// 14/07/2022 -[Arian] Moved the  Difficulty enum to GameState
     /// </summary>
 
+    public static ObjectPool<GameObject> instance;
+    private List<GameObject> pooledObjects = new List<GameObject>();
+    private int amountToPool;
 
     //[SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles
@@ -28,12 +32,41 @@ public class TileMovement : MonoBehaviour
     [SerializeField] private Transform targetZ; // the target z position for where the tile should go to
     [SerializeField] private Transform targetZright; // the target z position for where the right tile should go to
 
+
     [SerializeField] private float movementSpeed = 2f;
     [SerializeField] private float maxMovementSpeed = 10f; //need more test to see when the game breaks
     [SerializeField] private float speedIncreaseEverySecond = 0.001f; //speed increase every second
-    
 
 
+    private void Awake()
+    {
+
+        foreach (GameObject tiles in tilePrefabs)
+        {
+            GameObject tile = Instantiate(tiles, targetZ.position, targetZ.rotation);
+            tile.SetActive(false);
+            pooledObjects.Add(tile);
+        }
+        amountToPool = pooledObjects.Count;
+    }
+
+    public GameObject getPooledTiles()
+    {
+        for (int i = 0; i < amountToPool; i++)
+        {
+            if (!pooledObjects[i].activeInHierarchy)
+            {
+                return this.pooledObjects[i];
+            }
+            
+        }
+        return null;
+    }
+
+    private void Start()
+    {
+
+    }
 
     public GameObject[] EasyTilePrefabs //getters and setters for the tile prefabs array that we will instantiate using random in the Tile Manager Script
     {
