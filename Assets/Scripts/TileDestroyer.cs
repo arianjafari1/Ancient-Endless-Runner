@@ -23,6 +23,13 @@ public class TileDestroyer : MonoBehaviour
         {
             /*Destroy(collisionInfo.gameObject);*/ //destroy the tile
             //Debug.Log("Tile at the back has been destroyed.");
+            Transform[] inactiveChildren = collisionInfo.transform.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < inactiveChildren.Length; i++)
+            {
+                inactiveChildren[i].gameObject.SetActive(true);
+                
+            }
+
             collisionInfo.gameObject.SetActive(false);
         }
     }

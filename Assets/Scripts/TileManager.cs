@@ -130,6 +130,15 @@ public class TileManager : MonoBehaviour
                 easyTiles.transform.position = tileSpawnStart.position;
                 easyTiles.SetActive(true);
 
+                Transform[] inactiveChildren = easyTiles.transform.GetComponentsInChildren<Transform>(true);
+                for (int i = 0; i < inactiveChildren.Length; i++)
+                {
+                    inactiveChildren[i].gameObject.SetActive(true);
+
+                }
+
+
+
                 Debug.Log("hulu");
                 
 
