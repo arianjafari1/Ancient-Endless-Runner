@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4526066881986779957}
   m_Layer: 0
-  m_Name: tileSpawnPointEnvironment
+  m_Name: tileSpawnPoint
   m_TagString: spawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,9 +363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileEnvironment: 1
-  tilePosition: {fileID: 4526066881082385913}
-  tileSpawnStart: {fileID: 0}
-  tileSpawnStartEnvironment: {fileID: 4526066881986779957}
+  tilePosition: {fileID: 0}
+  tileSpawnStart: {fileID: 4526066881986779957}
   groundLength: {fileID: 4526066880757307051}
 --- !u!65 &6729423916103955645
 BoxCollider:

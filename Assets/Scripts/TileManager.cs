@@ -40,6 +40,12 @@ public class TileManager : MonoBehaviour
     ///            -[Arian] moved the percentageChance declaration out of its function so it's accessible anywhere in this script
     ///            -[Arian] added switch statement in the method tilesAndDifficulty for when tileEnvironment is false to check whether the highest difficulty has been reached
     ///            , if the highest difficulty has been reached it doesn't do the the addition unnecessary checks for the lower difficulties
+    ///01/08/2022  -[Arian] changed the instantiation for the Tiles in the Middle to the Object Pooling that I have done in the TileMovement
+    ///            in the if statement that checks collision 'if (collisionInfo.gameObject.CompareTag("Player")) '
+    ///            -[Arian] object Pooling for the Tiles in the Middle is fully working, though for now it's only pooling from the EasyTiles array
+    ///02/08/2022  -[Arian] the magnet coin system made by my teammate breaks as it didn't take into account that I would implement object pooling for the tile system later, so
+    ///            at the request of the producers/designers, I have reversed back to the older less efficient system that it's proven to work, though I will
+    ///            leave the code for the object pooling in the TileDestroyer, TileMovement and TileManager scripts as comments so they can still be looked at for marking
     /// </summary>
 
     private TileMovement tileMovement;
@@ -54,7 +60,6 @@ public class TileManager : MonoBehaviour
     private float t = 0.1f; //target point used for lerp in the fixed update to move the tile backwards
 
     [SerializeField] private Transform tileSpawnStart;
-    [SerializeField] private Transform tileSpawnStartEnvironment;
     [SerializeField] private Transform groundLength; //ground child object of tile
 
     private int percentageChance; //I will assign this to get a number between 1 and 10 and based on that determines the chance, so we can use it down in the
@@ -113,38 +118,29 @@ public class TileManager : MonoBehaviour
     {
 
 
-        if (collisionInfo.gameObject.CompareTag("Player")) //if collision info comapre with the tile death point tag, then execute the code undeneath
+        if (collisionInfo.gameObject.CompareTag("Player")) //if collision info compares with the tile death point tag, then execute the code undeneath
         {
-            if (tileEnvironment)
-            {
-                Instantiate(tilePrefabs[randomTile], tileSpawnStartEnvironment.position, tileSpawnStartEnvironment.rotation); // use random tile to instantiate a new tile, at the tile spawn point
+                Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation); // use random tile to instantiate a new tile, at the tile spawn point
                 Debug.Log("TileEnvironment needs spawning");
-            }
             
+            /// Commented out Object Pooling Starts
+            //GameObject easyTiles = tileMovement.getPooledTiles();
 
-            GameObject easyTiles = tileMovement.getPooledTiles();
+            //if (easyTiles != null)
+            //{
+            //    //GameObject tilePrefab = tilePrefabs[randomTile];
+            //    easyTiles.transform.position = tileSpawnStart.position;
+            //    easyTiles.SetActive(true);
 
-            if (easyTiles != null)
-            {
-                //GameObject tilePrefab = tilePrefabs[randomTile];
-                easyTiles.transform.position = tileSpawnStart.position;
-                easyTiles.SetActive(true);
+            //    Transform[] inactiveChildren = easyTiles.transform.GetComponentsInChildren<Transform>(true);
+            //    for (int i = 0; i < inactiveChildren.Length; i++)
+            //    {
+            //        inactiveChildren[i].gameObject.SetActive(true);
 
-                Transform[] inactiveChildren = easyTiles.transform.GetComponentsInChildren<Transform>(true);
-                for (int i = 0; i < inactiveChildren.Length; i++)
-                {
-                    inactiveChildren[i].gameObject.SetActive(true);
+            //    }
+            //}
+            /// Commented out Object Pooling Ends
 
-                }
-
-
-
-                Debug.Log("hulu");
-                
-
-            }
-            
-            //Debug.Log("New Tile spawned");
 
         }
 
@@ -163,17 +159,16 @@ public class TileManager : MonoBehaviour
         {
             case false: //in case the envirnment tiles are inactive, then excute this
                 targetZ = tileMovement.TargetZ.position; // moveTowards and lerp will drag the tiles in the middle in a straight line to targetZ
-                tilePrefabs = tileMovement.EasyTilePrefabs;
-                //switch (gameState.currentDifficultyTile) //switch statement that takes game state currentDifficulty
-                //{
-                //    case GameState.Difficulty.hard: //checks if highest difficulty has been reached so that it doesn't do a lot more unnecessary checks
-                //        checkTheHardDifficulty(); //method/function for when the highest difficulty is reached so that no additional unnecessary chesks
-                //                                  //are being performed
-                //        break;
-                //    default:
-                //        checkTheDifficulty(); //method/function used to determine which tiles should spawn with a bunch of checks until reaching highest difficulty
-                //        break;
-                //}
+                switch (gameState.currentDifficultyTile) //switch statement that takes game state currentDifficulty
+                {
+                    case GameState.Difficulty.hard: //checks if highest difficulty has been reached so that it doesn't do a lot more unnecessary checks
+                        checkTheHardDifficulty(); //method/function for when the highest difficulty is reached so that no additional unnecessary chesks
+                                                  //are being performed
+                        break;
+                    default:
+                        checkTheDifficulty(); //method/function used to determine which tiles should spawn with a bunch of checks until reaching highest difficulty
+                        break;
+                }
 
                 break;
 
@@ -185,7 +180,7 @@ public class TileManager : MonoBehaviour
     }
 
 
-    private void checkTheDifficulty() //function to be claeed in tilesAndDifficulty function to make it look cleaner
+    private void checkTheDifficulty() //function to be called in tilesAndDifficulty function to make it look cleaner
     {                                 //function used to determine which difficulty tiles it should pull from based on chance and difficulty
                                       //only used until we get to highest difficulty
 

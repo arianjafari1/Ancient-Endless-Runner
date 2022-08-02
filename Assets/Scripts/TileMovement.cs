@@ -18,6 +18,13 @@ public class TileMovement : MonoBehaviour
     /// 06/07/2022 -[Arian] Added an array of GameObject type for the environment tiles, environmentTilePrefabs
     /// 12/07/2022 -[Arian] Created a Difficulty type variable using an enum for different difficulty states
     /// 14/07/2022 -[Arian] Moved the  Difficulty enum to GameState
+    /// 01/08/2022 -[Arian] to implement Object Pooling for Tiles, I have created a foreach loop in Awake that loops through the elements of the tilePrefabs array,
+    ///            instantiates the elements of the array, sets them to inactive, and adds them to the pooledObjects list
+    ///            -[Arian] then I made a getter function where it loops throug the pooledObjects list and returns the pooled object if it's not active
+    ///            this getter function will be used in TileManager script to "spawn" new tiles
+    ///02/08/2022  -[Arian] the magnet coin system made by my teammate breaks as it didn't take into account that I would implement object pooling for the tile system later, so
+    ///            at the request of the producers/designers, I have reversed back to the older less efficient system that it's proven to work, though I will
+    ///            leave the code for the object pooling in the TileDestroyer, TileMovement and TileManager scripts as comments so they can still be looked at for marking
     /// </summary>
 
     public static ObjectPool<GameObject> instance;
@@ -38,37 +45,36 @@ public class TileMovement : MonoBehaviour
     [SerializeField] private float speedIncreaseEverySecond = 0.001f; //speed increase every second
 
 
-    private void Awake()
-    {
+    /// Commented out Object Pooling Starts
 
-        foreach (GameObject tiles in tilePrefabs)
-        {
-            GameObject tile = Instantiate(tiles, targetZ.position, targetZ.rotation);
-            tile.SetActive(false);
-            pooledObjects.Add(tile);
-        }
-        amountToPool = pooledObjects.Count;
-    }
+    //private void Awake()
+    //{
 
-    public GameObject getPooledTiles()
-    {
-        for (int i = 0; i < amountToPool; i++)
-        {
-            if (!pooledObjects[i].activeInHierarchy)
-            {
+    //    foreach (GameObject tiles in tilePrefabs)
+    //    {
+    //        GameObject tile = Instantiate(tiles, targetZ.position, targetZ.rotation);
+    //        tile.SetActive(false);
+    //        pooledObjects.Add(tile);
+    //    }
+    //    amountToPool = pooledObjects.Count;
+    //}
 
-                return this.pooledObjects[i];
+    //public GameObject getPooledTiles()
+    //{
+    //    for (int i = 0; i < amountToPool; i++)
+    //    {
+    //        if (!pooledObjects[i].activeInHierarchy)
+    //        {
 
-            }
-            
-        }
-        return null;
-    }
+    //            return this.pooledObjects[i];
 
-    private void Start()
-    {
+    //        }
 
-    }
+    //    }
+    //    return null;
+    //}
+    /// Commented out Object Pooling Ends
+
 
     public GameObject[] EasyTilePrefabs //getters and setters for the tile prefabs array that we will instantiate using random in the Tile Manager Script
     {
