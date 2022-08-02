@@ -15,6 +15,7 @@ public class CoinMagnet : MonoBehaviour
     ///          - added enabled check in triggerenter, as the function was being called while the script was disabled
     /// 08/07/22 - reversed order the list is iterated to remove destroyed objects
     ///          - tied coin speed to speed of tiles (coins wouldnt reach player at higher speeds)
+    /// 02/08/22 - removed coins from list when inactive, as they would remain in array when tile was respawned from pool
     /// 
     /// </summary>
     /// 
@@ -52,7 +53,7 @@ public class CoinMagnet : MonoBehaviour
         //}
         for (int i = coinsInRange.Count - 1; i >= 0; i--)
         {
-            if (coinsInRange[i] != null)
+            if (coinsInRange[i] != null && coinsInRange[i].gameObject.activeSelf == true)
             {
                 coinsInRange[i].transform.position = Vector3.MoveTowards(coinsInRange[i].transform.position, Vector3.Lerp(coinsInRange[i].transform.position, playerPosition.position, 0.3f), tileMovement.movementSpeedGetterSetter * 1.5f * Time.fixedDeltaTime);
                 

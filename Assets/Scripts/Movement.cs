@@ -48,6 +48,13 @@ public class Movement : MonoBehaviour
     /// 23/07/22 - reinstated overwritten code causing animations to not play properly (slide, flatten lost functionality)
     /// 26/07/22 - added variables for powered up jump
     ///          - added function to switch between normal and powered jump
+    /// 27/07/22 - added invincible player state to be used by obstacle class
+    /// 29/07/22 - added more animation states, switched several to bools instead of triggers to fix them up
+    /// 01/08/22 - removed turning animations and replaced them with physical model animations as it was causing issues with
+    ///            other animations not triggering when they should
+    ///          - added several more animations
+    /// 02/08/22 - added look behind mechanic, which can randomly trigger if the boulder is close enough
+    ///          - changed it so you can no longer jump/slide while stumbling
     /// 
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -127,6 +134,18 @@ public class Movement : MonoBehaviour
     private Animator movementAnimations;
     //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
     [SerializeField] private GameObject playerModel; //Added by Oakley to reference the player model
+    private bool boulderIsClose = false;
+    public bool IsBoulderClose
+    {
+        get
+        {
+            return boulderIsClose;
+        }
+        set
+        {
+            boulderIsClose = value;
+        }
+    }
 
     [SerializeField] TileMovement tileMovement;
     [Tooltip("Between 0-1, the reduction of speed while player staggers")]
@@ -222,24 +241,29 @@ public class Movement : MonoBehaviour
             if (player.transform.position.x > targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x - horizontalSpeed / 100, currentPos.y, currentPos.z);
+                playerModel.transform.SetPositionAndRotation(playerModel.transform.position, Quaternion.Euler(Vector3.down * 30));
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.left);
-                movementAnimations.SetBool("TurnLeft", false);
-                movementAnimations.SetBool("TurnRight", true);
                 
+                //movementAnimations.SetBool("TurnLeft", false);
+                //movementAnimations.SetBool("TurnRight", true);
+
             }
             else if (player.transform.position.x < targetLane)
             {
                 //Vector3 targetPos = new Vector3(currentPos.x + horizontalSpeed / 100, currentPos.y, currentPos.z);
+                playerModel.transform.SetPositionAndRotation(playerModel.transform.position, Quaternion.Euler(Vector3.up * 30));
                 player.transform.Translate(horizontalSpeed * Time.fixedDeltaTime * Vector3.right);
-                movementAnimations.SetBool("TurnRight", false);
-                movementAnimations.SetBool("TurnLeft", true);
+                
+                //movementAnimations.SetBool("TurnRight", false);
+                //movementAnimations.SetBool("TurnLeft", true);
             }
 
         }
         else
         {
-            movementAnimations.SetBool("TurnLeft", false);
-            movementAnimations.SetBool("TurnRight", false);
+            playerModel.transform.SetPositionAndRotation(playerModel.transform.position, Quaternion.Euler(Vector3.zero));
+            //movementAnimations.SetBool("TurnLeft", false);
+            //movementAnimations.SetBool("TurnRight", false);
         }
 
         //Jumping
@@ -251,9 +275,10 @@ public class Movement : MonoBehaviour
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.up);
-            if (player.transform.position.y >= groundHeight + currentMaxJumpHeight)
+            if (player.transform.position.y >= groundHeight + currentMaxJumpHeight || currentPlayerState == PlayerStates.staggered)
             {
-                player.transform.position = new Vector3(currentPos.x, groundHeight + currentMaxJumpHeight, currentPos.z);
+                movementAnimations.SetBool("Falling", true);
+                movementAnimations.SetBool("Jump", false);
                 isJumping = false;
                 isFalling = true;
                 Debug.Log("Height reached");
@@ -278,7 +303,7 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
-                movementAnimations.SetBool("Jump", false);
+                movementAnimations.SetBool("Falling", false);
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isFalling = false;
@@ -293,14 +318,16 @@ public class Movement : MonoBehaviour
         //regularly would if they were just falling from a jump.
         if (isTryingToSlide)
         {
+            movementAnimations.SetBool("Falling", true);
             currentJumpVelocity -= gravity * Time.fixedDeltaTime * AccelerationModifier;
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
                 movementAnimations.SetBool("Jump", false);
+                movementAnimations.SetBool("Falling", false);
                 playerAnimation.Play("Slide");
-                movementAnimations.SetBool("Slide", true);
-                Invoke("EndSlideAnimation", 1.1f);
+                movementAnimations.SetTrigger("Slide");
+                //Invoke("EndSlideAnimation", 1.1f);
 
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
@@ -310,6 +337,19 @@ public class Movement : MonoBehaviour
 
         }
 
+        //if (currentPlayerState == PlayerStates.staggered)
+        //{
+        //    movementAnimations.SetBool("Stagger", true);
+        //}
+        //else
+        //{
+        //    movementAnimations.SetBool("Stagger", false);
+        //}
+
+        if (boulderIsClose)
+        {
+            movementAnimations.SetTrigger("LookBehind");
+        }
 
     }
     #region LaneSwitchFunctions
@@ -345,7 +385,7 @@ public class Movement : MonoBehaviour
     #endregion
     public void Jump(InputAction.CallbackContext context)
     {
-        if (isJumping || isFalling) 
+        if (isJumping || isFalling || isTryingToSlide || currentPlayerState == PlayerStates.staggered) 
         {
             return;
         }
@@ -360,20 +400,25 @@ public class Movement : MonoBehaviour
         //plays the slide "animation", which essentially just shrinks and lowers the 
         //collision box of the player.
 
-        if (!isJumping && !isFalling)
+        if (!isJumping && !isFalling && currentPlayerState != PlayerStates.staggered)
         {
             playerAnimation.Play("Slide");
-            movementAnimations.SetBool("Slide", true);
-            Invoke("EndSlideAnimation", 1.1f);
+            movementAnimations.SetTrigger("Slide");
+            //Invoke("EndSlideAnimation", 1.1f);
             Debug.Log("Slid");
+            return;
         }
-        else
+
+        else if (currentPlayerState == PlayerStates.staggered)
         {
-            //triggers the jump cancel, allowing the player to quickly slide even if midair.
-            isJumping = false;
-            isFalling = false;
-            isTryingToSlide = true;
+            return;
         }
+        
+        //triggers the jump cancel, allowing the player to quickly slide even if midair.
+        isJumping = false;
+        isFalling = false;
+        isTryingToSlide = true;
+        
     }
 
     //stores the speed at the time of the stagger then decreases it slightly
@@ -381,6 +426,7 @@ public class Movement : MonoBehaviour
     {
         playerAnimation.Play("Stagger");
         Debug.Log("Staggered");
+        movementAnimations.SetTrigger("Stumble");
 
         switch (currentPlayerState)
         {
@@ -443,6 +489,8 @@ public class Movement : MonoBehaviour
     {
         playerAnimation.Play(animationName);
     }
+
+
     
     public void EnablePlayerInput()
     {
@@ -453,10 +501,11 @@ public class Movement : MonoBehaviour
         movementInputActions.Player.Disable();
     }
 
-    private void EndSlideAnimation()
-    {
-        movementAnimations.SetBool("Slide", false);
-    }
+    //private void EndSlideAnimation()
+    //{
+    //    Debug.Log("Ended sliding");
+    //    movementAnimations.SetBool("Slide", false);
+    //}
 
 
     /// <summary>
