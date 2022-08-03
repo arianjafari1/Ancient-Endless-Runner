@@ -22,6 +22,7 @@ public class GameState : MonoBehaviour
     private float timer; // this is the float timer
     private int globalTime; //this is the actual global time which I will have a getter and setter for
     private TileMovement tileMovement; //tile movement script referance
+    private AudioManager audioManager;
 
     public enum Difficulty //creating an enum for the difficulty of the game
     {
@@ -60,6 +61,7 @@ public class GameState : MonoBehaviour
         tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>(); //assigining tile movement script to tileMovement
         difficulty = Difficulty.veryEasy; //default difficulty when game starts is set to very easy
         currentGameState = gameState.isPlaying; //the game state when the game starts is game is playing
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //refer to the script in the empty object
         //Debug.Log(currentDifficultyTile);
     }
 

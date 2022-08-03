@@ -73,6 +73,21 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void StopSound(int audioSourceNumberInArray)
+    {
+
+
+        for (int i = 0; i < sounds.Length; i++) //looping through a list of sounds and add an audio source for each
+        {
+            //Debug.Log(sounds[i].SourceSound.clip);
+            AudioSource soundToStop = sounds[audioSourceNumberInArray].SourceSound;
+
+            soundToStop.Stop();
+        }
+
+
+    }
+
 
 
     /// Code done by Arian- end
