@@ -60,12 +60,14 @@ public class Movement : MonoBehaviour
     /// 
     /// </summary>
     [SerializeField] private float horizontalSpeed;
-    private enum Lanes
-        {
-            left = 3,
-            center = 0,
-            right = -3
-        };
+    public enum Lanes
+    {
+        left = 3,
+        center = 0,
+        right = -3
+    };
+
+
     [SerializeField] private GameObject player;
     private GameState gameState;
     public enum PlayerStates
@@ -95,6 +97,13 @@ public class Movement : MonoBehaviour
     private InputAction debugButton;
 
     private Lanes currentLane;
+    public Lanes getLane
+    {
+        get
+        {
+            return currentLane;
+        }
+    }
 
     [Tooltip("Changes rate of acceleration (must be negative)")]
     [SerializeField] private float gravity = -9.8f;

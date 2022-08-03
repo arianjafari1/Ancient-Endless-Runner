@@ -81,7 +81,19 @@ public class Obstacles : MonoBehaviour
         {
 
             playerMovement.SetDeathState();
-            playerMovement.PlayAnimation("FallInPit");
+            switch (playerMovement.getLane)
+            {
+                case Movement.Lanes.left:
+                    playerMovement.PlayAnimation("FallInLeftPit");
+                    break;
+                case Movement.Lanes.center:
+                    playerMovement.PlayAnimation("FallInCenterPit");
+                    break;
+                case Movement.Lanes.right:
+                    playerMovement.PlayAnimation("FallInRightPit");
+                    break;
+            }
+            
 
 
         }
