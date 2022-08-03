@@ -11556,6 +11556,7 @@ MonoBehaviour:
   - {fileID: 829206517}
   tutorialTiles:
   - {fileID: 1198812489}
+  playerMovement: {fileID: 663092682}
 --- !u!114 &775761450
 MonoBehaviour:
   m_ObjectHideFlags: 0

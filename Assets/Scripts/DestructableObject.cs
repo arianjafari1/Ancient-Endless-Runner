@@ -16,15 +16,18 @@ public class DestructableObject : MonoBehaviour
     /// 
 
 
-    [SerializeField] GameObject IntactObstacle;
-    [SerializeField] GameObject destroyedObstacle;
+    [SerializeField] GameObject[] IntactObstacles;
+    [SerializeField] GameObject[] destroyedObstacle;
     [SerializeField] ParticleSystem dustParticles;
 
 
     public void DestroyObstacle()
     {
         dustParticles.Play();
-        IntactObstacle.GetComponent<MeshRenderer>().enabled = false;
+        foreach(GameObject obstacle in IntactObstacles)
+        {
+            obstacle.SetActive(false);
+        }
         //IntactObstacle.gameObject.SetActive(false);
     }
 
