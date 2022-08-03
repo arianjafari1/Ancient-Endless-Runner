@@ -55,6 +55,8 @@ public class Movement : MonoBehaviour
     ///          - added several more animations
     /// 02/08/22 - added look behind mechanic, which can randomly trigger if the boulder is close enough
     ///          - changed it so you can no longer jump/slide while stumbling
+    /// 03/08/22 - added a bool for isSliding, which is set to true in the "slide" animation (the one that shrinks the 
+    ///            player hitbox) so that the player cannot queue another slide while already sliding
     /// 
     /// </summary>
     [SerializeField] private float horizontalSpeed;
@@ -126,6 +128,7 @@ public class Movement : MonoBehaviour
     private bool isJumping = false;
     private bool isFalling = false;
     private bool isTryingToSlide = false;
+    [SerializeField] private bool isSliding = false;
     [Tooltip("Acceleration modifier for jump cancels")]
     [SerializeField] private float AccelerationModifier;
 
@@ -399,8 +402,13 @@ public class Movement : MonoBehaviour
     {
         //plays the slide "animation", which essentially just shrinks and lowers the 
         //collision box of the player.
+        if (currentPlayerState == PlayerStates.staggered || isTryingToSlide || isSliding)
+        {
+            Debug.Log("no slidey slidey for you :(");
+            return;
+        }
 
-        if (!isJumping && !isFalling && currentPlayerState != PlayerStates.staggered)
+        else if (!isJumping && !isFalling)
         {
             playerAnimation.Play("Slide");
             movementAnimations.SetTrigger("Slide");
@@ -409,10 +417,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        else if (currentPlayerState == PlayerStates.staggered)
-        {
-            return;
-        }
+        
         
         //triggers the jump cancel, allowing the player to quickly slide even if midair.
         isJumping = false;
