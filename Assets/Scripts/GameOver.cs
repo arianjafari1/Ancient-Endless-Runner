@@ -21,6 +21,7 @@ public class GameOver : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timeAliveText;
+    [SerializeField] private TextMeshProUGUI coinsCollectedText;
     private ScoreManager scoreManager;
     private GameState gameState;
 
@@ -30,6 +31,7 @@ public class GameOver : MonoBehaviour
         gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         scoreText.text = "Score: " + scoreManager.getScore.ToString();
         timeAliveText.text = "Time alive: " + gameState.GlobalTime.ToString() + " sec";
+        coinsCollectedText.text = "Coins collected: " + scoreManager.getCoins.ToString();
     }
     public void ShowGameOverScreen()//int score)
     {

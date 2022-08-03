@@ -159,6 +159,7 @@ public class TileManager : MonoBehaviour
         {
             case false: //in case the envirnment tiles are inactive, then excute this
                 targetZ = tileMovement.TargetZ.position; // moveTowards and lerp will drag the tiles in the middle in a straight line to targetZ
+                
                 switch (gameState.currentDifficultyTile) //switch statement that takes game state currentDifficulty
                 {
                     case GameState.Difficulty.hard: //checks if highest difficulty has been reached so that it doesn't do a lot more unnecessary checks
@@ -177,6 +178,7 @@ public class TileManager : MonoBehaviour
                 tilePrefabs = tileMovement.EnvironmentTiles; // and the tilePrefab array that tiles spawn from, is going to be the array for the envirnment tiles
                 break;
         }
+
     }
 
 
