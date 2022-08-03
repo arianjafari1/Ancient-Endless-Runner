@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class BoulderMovement : MonoBehaviour
     ///          - moved showing gameover screen to when boulder goes off screen so player gets to see the death animation properly
     /// 22/07/22 - [OAKLEY] added wavy left-right movement to boulder
     /// 27/07/22 - [OAKLEY] added audio manager and boulder sound effect
+    /// 02/08/22 - serialised the speed increase of the boulder on player death
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
@@ -49,6 +51,9 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private float backwardsMovement;
     [Tooltip("Speed at which the boulder moves forward as the player is staggering")]
     [SerializeField] private float forwardsMovement;
+    [Tooltip("The speed at which the boulder increases and goes offscreen after the player dies")]
+    [SerializeField] private float deathSpeedMultiplier;
+
     [SerializeField] private float wiggleAmount; //Movement amount side to side
     [SerializeField] private float wiggleSpeed; //Speed for side to side movement
     private Vector3 originPos;
@@ -91,7 +96,7 @@ public class BoulderMovement : MonoBehaviour
                 boulder.transform.Translate(Vector3.forward * forwardsMovement);
                 break;
             case Movement.PlayerStates.dead:
-                boulder.transform.Translate(5 * forwardsMovement * Vector3.forward);
+                boulder.transform.Translate(deathSpeedMultiplier * forwardsMovement * Vector3.forward);
                 break;
             case Movement.PlayerStates.running:
                 if (boulder.transform.position.z >= minZPos)
@@ -106,6 +111,19 @@ public class BoulderMovement : MonoBehaviour
             gameOverScreen.ShowGameOverScreen();
             Destroy(boulder);
         }
+
+        if (boulder.transform.position.z >= -10)
+        {
+            int random = UnityEngine.Random.Range(0, 400);
+            playerMovement.IsBoulderClose = false;
+            if (random == 0)
+            {
+                playerMovement.IsBoulderClose = true;
+            }
+
+        }
+
+
         //makes boulder move left and right slowly
         originPos = new Vector3(-wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);
         targetPos = new Vector3(wiggleAmount, boulder.transform.position.y, boulder.transform.position.z);

@@ -19,6 +19,13 @@ public class ScoreManager : MonoBehaviour
 
     private int coinsCollected = 0;
     private int score = 0;
+    public int getCoins
+    {
+        get
+        {
+            return coinsCollected;
+        }
+    }
     public int getScore
     {
         get
