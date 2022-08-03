@@ -15129,6 +15129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1541560881}
   timeAliveText: {fileID: 552474893}
+  coinsCollectedText: {fileID: 0}
 --- !u!114 &469610955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15812,6 +15813,7 @@ MonoBehaviour:
   maxJumpHeight: 4
   poweredJumpForce: 28
   poweredJumpHeight: 8
+  isSliding: 0
   AccelerationModifier: 4
   playerModel: {fileID: 634233000}
   tileMovement: {fileID: 775761444}
@@ -16343,7 +16345,7 @@ MonoBehaviour:
   curveShallowness: 0.1
   curveMaxHeight: 0.1
   curveLeftAmount: 0.1
-  useWarp: 0
+  useWarp: 1
 --- !u!1001 &791753253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21989,6 +21991,7 @@ MonoBehaviour:
   maxZPos: 50
   backwardsMovement: 0.005
   forwardsMovement: 0.1
+  deathSpeedMultiplier: 5
   wiggleAmount: 0.8
   wiggleSpeed: 1
 --- !u!114 &1516622362
