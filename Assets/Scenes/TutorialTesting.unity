@@ -10329,6 +10329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1541560881}
   timeAliveText: {fileID: 552474893}
+  coinsCollectedText: {fileID: 0}
 --- !u!114 &469610955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11054,6 +11055,8 @@ Animation:
   - {fileID: 7400000, guid: 22c2c0a237d24934ea9136a85b703482, type: 2}
   - {fileID: 7400000, guid: 75bfd882cfcb9424a9ce1dba7287f396, type: 2}
   - {fileID: 7400000, guid: bf874e3460a5bad48a3948e975b670d8, type: 2}
+  - {fileID: 7400000, guid: d8dd2d8f0dca3434ea107cef31e5677d, type: 2}
+  - {fileID: 7400000, guid: 8fc4d05a0d6db244a9da23f70395c7f6, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
