@@ -16460,6 +16460,7 @@ GameObject:
   - component: {fileID: 775761444}
   - component: {fileID: 775761447}
   - component: {fileID: 775761449}
+  - component: {fileID: 775761450}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -16560,6 +16561,18 @@ MonoBehaviour:
   curveMaxHeight: 0.1
   curveLeftAmount: 0.1
   useWarp: 0
+--- !u!114 &775761450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775761443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d879216cf6ce94a8a1f1f1b10069c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &791753253
 PrefabInstance:
   m_ObjectHideFlags: 0
