@@ -62,11 +62,14 @@ public class PauseMenu : MonoBehaviour
     private void restartButton()
     {
         SceneManager.LoadScene("SampleScene");
+        Time.timeScale = 1;
     }
 
     private void menuButton() //takes you to the main menu
     {
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
+
     }
 
 
