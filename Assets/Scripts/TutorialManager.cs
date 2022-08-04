@@ -6,6 +6,7 @@ public class TutorialManager : MonoBehaviour
 {
     public enum TutorialStages
     {
+        BeginTutorial,
         TeachJump,
         TeachSlide,
         TeachSwipe,
@@ -30,10 +31,35 @@ public class TutorialManager : MonoBehaviour
             {
                 tile.SetActive(true);
             }
-            playerMovement.DisablePlayerInput();
+            //playerMovement.DisablePlayerInput();
         }
 
     }
+
+    public void TriggerTutorialStep(TutorialStages tutorialStage)
+    {
+        switch (tutorialStage)
+        {
+            case TutorialStages.BeginTutorial:
+                break;
+            case TutorialStages.TeachJump:
+                break;
+            case TutorialStages.TeachSlide:
+                break;
+            case TutorialStages.TeachSwipe:
+                break;
+            case TutorialStages.TeachMagnet:
+                break;
+            case TutorialStages.TeachSuperJump:
+                break;
+            case TutorialStages.TeachShield:
+                break;
+            case TutorialStages.EndOfTutorial:
+                CompleteTutorial();
+                break;
+        }
+    }
+
 
     public void CompleteTutorial()
     {

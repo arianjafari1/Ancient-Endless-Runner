@@ -734,6 +734,33 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""46de90b5-f979-4096-91be-8866e8da6d9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""a244ab4d-4973-401f-98f5-a4d070eb6835"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""8cac4fc6-7e74-4633-9927-cf6f4dcbc885"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -767,6 +794,72 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dfd9281-0604-4b01-9b1c-cc772dde8fc0"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""010ffc41-7e25-42c8-9bc6-c51cda37e932"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8eaff77-f551-49a7-afae-6a6fef17fd89"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f87161f-0f38-40bd-8b2f-7afd087620e2"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1f7df7c-1c63-455b-a30e-01d3e95778d7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fe36f67-24f7-4983-911d-9c292aadbb29"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -859,6 +952,9 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         // Tutorial
         m_Tutorial = asset.FindActionMap("Tutorial", throwIfNotFound: true);
         m_Tutorial_Jump = m_Tutorial.FindAction("Jump", throwIfNotFound: true);
+        m_Tutorial_Slide = m_Tutorial.FindAction("Slide", throwIfNotFound: true);
+        m_Tutorial_Left = m_Tutorial.FindAction("Left", throwIfNotFound: true);
+        m_Tutorial_Right = m_Tutorial.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1097,11 +1193,17 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     private readonly InputActionMap m_Tutorial;
     private ITutorialActions m_TutorialActionsCallbackInterface;
     private readonly InputAction m_Tutorial_Jump;
+    private readonly InputAction m_Tutorial_Slide;
+    private readonly InputAction m_Tutorial_Left;
+    private readonly InputAction m_Tutorial_Right;
     public struct TutorialActions
     {
         private @MovementInputActions m_Wrapper;
         public TutorialActions(@MovementInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Tutorial_Jump;
+        public InputAction @Slide => m_Wrapper.m_Tutorial_Slide;
+        public InputAction @Left => m_Wrapper.m_Tutorial_Left;
+        public InputAction @Right => m_Wrapper.m_Tutorial_Right;
         public InputActionMap Get() { return m_Wrapper.m_Tutorial; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1114,6 +1216,15 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                 @Jump.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
+                @Slide.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnSlide;
+                @Slide.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnSlide;
+                @Slide.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnSlide;
+                @Left.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnLeft;
+                @Left.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnLeft;
+                @Left.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnLeft;
+                @Right.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnRight;
+                @Right.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnRight;
+                @Right.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnRight;
             }
             m_Wrapper.m_TutorialActionsCallbackInterface = instance;
             if (instance != null)
@@ -1121,6 +1232,15 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Slide.started += instance.OnSlide;
+                @Slide.performed += instance.OnSlide;
+                @Slide.canceled += instance.OnSlide;
+                @Left.started += instance.OnLeft;
+                @Left.performed += instance.OnLeft;
+                @Left.canceled += instance.OnLeft;
+                @Right.started += instance.OnRight;
+                @Right.performed += instance.OnRight;
+                @Right.canceled += instance.OnRight;
             }
         }
     }
@@ -1195,5 +1315,8 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     public interface ITutorialActions
     {
         void OnJump(InputAction.CallbackContext context);
+        void OnSlide(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }
