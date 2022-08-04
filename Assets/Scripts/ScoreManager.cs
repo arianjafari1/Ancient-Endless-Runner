@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        coinsUI.text = "Coins Collected: " + coinsCollected.ToString();
+        coinsUI.text = "x" + coinsCollected.ToString();
         scoreUI.text = "Score: " + score.ToString();
 
         switch (playerMovement.getPlayerState)

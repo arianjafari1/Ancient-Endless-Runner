@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameState : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameState : MonoBehaviour
     private float timer; // this is the float timer
     private int globalTime; //this is the actual global time which I will have a getter and setter for
     private TileMovement tileMovement; //tile movement script referance
+    [SerializeField] private TMP_Text timerUI;
 
     public enum Difficulty //creating an enum for the difficulty of the game
     {
@@ -83,6 +85,7 @@ public class GameState : MonoBehaviour
             case gameState.isPlaying:
                 timer += Time.fixedDeltaTime; //using delta time to count time in float
                 globalTime = (int)(timer); //turning the timer to integer
+                timerUI.text = globalTime.ToString();
                 break;
         }
     }
