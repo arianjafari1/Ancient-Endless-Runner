@@ -73,19 +73,16 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void StopSound(int audioSourceNumberInArray)
+    public void StopSound(int audioSourceNumberInArray) //function to stop sound
     {
-
-
-        for (int i = 0; i < sounds.Length; i++) //looping through a list of sounds and add an audio source for each
+        for (int i = 0; i < sounds.Length; i++) //looping through a list of sounds to look for audio sources while the game is playing
         {
             //Debug.Log(sounds[i].SourceSound.clip);
-            AudioSource soundToStop = sounds[audioSourceNumberInArray].SourceSound;
+            AudioSource soundToStop = sounds[audioSourceNumberInArray].SourceSound; // the audio source that you want, based on parameter 
+                                                                                    //that you input, will be added to this AudioSource variable
 
-            soundToStop.Stop();
+            soundToStop.Stop(); //take the AudioSource variable and stop the sound
         }
-
-
     }
 
 
