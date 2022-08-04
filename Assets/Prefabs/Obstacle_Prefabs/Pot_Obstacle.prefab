@@ -53,8 +53,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.3916144, y: 1.4972548, z: 2.8373032}
-  m_Center: {x: -0.12960798, y: 1.187674, z: 0.23791122}
+  m_Size: {x: 2.1652184, y: 1.3653955, z: 2.8373032}
+  m_Center: {x: -0.07944727, y: 1.1217444, z: 0.23791122}
 --- !u!54 &904895624090341175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83,8 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c05c6704242c743a0ff4d01c49a804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntactObstacle: {fileID: 3040668917249007622}
-  destroyedObstacle: {fileID: 8756167873914297409}
+  IntactObstacles: []
+  destroyedObstacle:
+  - {fileID: 0}
   dustParticles: {fileID: 2524056891551072147}
 --- !u!199 &1558233780728538137
 ParticleSystemRenderer:
@@ -5094,11 +5095,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
---- !u!1 &3040668917249007622 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 270668371211418519, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
-  m_PrefabInstance: {fileID: 3022824878845696913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3348851057893768314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a80d06548141d2d45894366ff52f85b2, type: 3}

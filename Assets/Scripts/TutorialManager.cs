@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class TutorialManager : MonoBehaviour
     private InputAction teachSlide;
     private InputAction teachLeft;
     private InputAction teachRight;
+
+    [SerializeField] private TMP_Text advanceText;
+    [SerializeField] private TMP_Text JumpText;
+    [SerializeField] private TMP_Text SlideText;
+    [SerializeField] private TMP_Text LeftText;
+    [SerializeField] private TMP_Text RightText;
+
     private void Awake()
     {
         inputActions = new MovementInputActions();
@@ -86,22 +94,27 @@ public class TutorialManager : MonoBehaviour
                 Debug.Log("Start tuto");
                 Time.timeScale = 0;
                 inputActions.Tutorial.Advance.Enable();
+                advanceText.gameObject.SetActive(true);
                 break;
             case TutorialStages.TeachJump:
                 Time.timeScale = 0;
                 inputActions.Tutorial.Jump.Enable();
+                JumpText.gameObject.SetActive(true);
                 break;
             case TutorialStages.TeachSlide:
                 Time.timeScale = 0;
                 inputActions.Tutorial.Slide.Enable();
+                SlideText.gameObject.SetActive(true);
                 break;
             case TutorialStages.TeachSwipeLeft:
                 Time.timeScale = 0;
                 inputActions.Tutorial.Left.Enable();
+                LeftText.gameObject.SetActive(true);
                 break;
             case TutorialStages.TeachSwipeRight:
                 Time.timeScale = 0;
                 inputActions.Tutorial.Right.Enable();
+                RightText.gameObject.SetActive(true);
                 break;
             case TutorialStages.EndOfTutorial:
                 CompleteTutorial();
@@ -111,11 +124,13 @@ public class TutorialManager : MonoBehaviour
 
     private void AdvanceTutorial_performed(InputAction.CallbackContext obj)
     {
+        advanceText.gameObject.SetActive(false);
         inputActions.Disable();
         AdvanceTutorial();
     }
     private void TeachJump_performed(InputAction.CallbackContext obj)
     {
+        JumpText.gameObject.SetActive(false);
         playerMovement.Jump(obj);
         inputActions.Disable();
         AdvanceTutorial();
@@ -123,12 +138,14 @@ public class TutorialManager : MonoBehaviour
 
     private void TeachSlide_performed(InputAction.CallbackContext obj)
     {
+        SlideText.gameObject.SetActive(false);
         playerMovement.Slide(obj);
         inputActions.Disable();
         AdvanceTutorial();
     }
     private void TeachLeft_performed(InputAction.CallbackContext obj)
     {
+        LeftText.gameObject.SetActive(false);
         playerMovement.GoLeft(obj);
         inputActions.Disable();
         AdvanceTutorial();
@@ -136,6 +153,7 @@ public class TutorialManager : MonoBehaviour
 
     private void TeachRight_performed(InputAction.CallbackContext obj)
     {
+        RightText.gameObject.SetActive(false);
         playerMovement.GoRight(obj);
         inputActions.Disable();
         AdvanceTutorial();
