@@ -160,6 +160,12 @@ public class BoulderMovement : MonoBehaviour
         }
     }
 
+
+    private void OnDestroy()
+    {
+        audioManager.StopSound(2);
+    }
+
     //public void SetDeathState()
     //{
     //    tileMovement.movementSpeedGetterSetter = 0;
