@@ -705,6 +705,15 @@
             "id": "35b9dade-68e8-4286-86ef-c4631ba5169e",
             "actions": [
                 {
+                    "name": "Advance",
+                    "type": "Button",
+                    "id": "7f8580e4-fed5-4b6e-84ab-ed49825d4e58",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "cc04fb8c-3dbd-4f17-a1b7-9997ee90ec84",
@@ -838,6 +847,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02cd6727-cb68-44b6-b933-79d194f34209",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Advance",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

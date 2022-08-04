@@ -12,9 +12,17 @@ public class MainMenu : MonoBehaviour
     ///            -[Arian] added functions for the Start Button, exit button
     /// </summary>
 
+    private GameState gameState;
+
+    private void Awake()
+    {
+        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>(); //reference the object with script
+    }
+
     private void startGame()
     {
         SceneManager.LoadScene("SampleScene");
+        gameState.CurrentGameState = GameState.gameState.isPlaying;
     }
 
     private void exitButton()

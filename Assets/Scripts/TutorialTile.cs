@@ -7,6 +7,11 @@ public class TutorialTile : MonoBehaviour
     private TutorialManager tutorialManager;
     [SerializeField] private TutorialManager.TutorialStages tutorialStage;
 
+    private void Awake()
+    {
+        tutorialManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TutorialManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

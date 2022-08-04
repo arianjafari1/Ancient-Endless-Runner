@@ -727,6 +727,15 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
             ""id"": ""35b9dade-68e8-4286-86ef-c4631ba5169e"",
             ""actions"": [
                 {
+                    ""name"": ""Advance"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f8580e4-fed5-4b6e-84ab-ed49825d4e58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""cc04fb8c-3dbd-4f17-a1b7-9997ee90ec84"",
@@ -862,6 +871,17 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02cd6727-cb68-44b6-b933-79d194f34209"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Advance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -951,6 +971,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // Tutorial
         m_Tutorial = asset.FindActionMap("Tutorial", throwIfNotFound: true);
+        m_Tutorial_Advance = m_Tutorial.FindAction("Advance", throwIfNotFound: true);
         m_Tutorial_Jump = m_Tutorial.FindAction("Jump", throwIfNotFound: true);
         m_Tutorial_Slide = m_Tutorial.FindAction("Slide", throwIfNotFound: true);
         m_Tutorial_Left = m_Tutorial.FindAction("Left", throwIfNotFound: true);
@@ -1192,6 +1213,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     // Tutorial
     private readonly InputActionMap m_Tutorial;
     private ITutorialActions m_TutorialActionsCallbackInterface;
+    private readonly InputAction m_Tutorial_Advance;
     private readonly InputAction m_Tutorial_Jump;
     private readonly InputAction m_Tutorial_Slide;
     private readonly InputAction m_Tutorial_Left;
@@ -1200,6 +1222,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     {
         private @MovementInputActions m_Wrapper;
         public TutorialActions(@MovementInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Advance => m_Wrapper.m_Tutorial_Advance;
         public InputAction @Jump => m_Wrapper.m_Tutorial_Jump;
         public InputAction @Slide => m_Wrapper.m_Tutorial_Slide;
         public InputAction @Left => m_Wrapper.m_Tutorial_Left;
@@ -1213,6 +1236,9 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
         {
             if (m_Wrapper.m_TutorialActionsCallbackInterface != null)
             {
+                @Advance.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnAdvance;
+                @Advance.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnAdvance;
+                @Advance.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnAdvance;
                 @Jump.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnJump;
@@ -1229,6 +1255,9 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
             m_Wrapper.m_TutorialActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Advance.started += instance.OnAdvance;
+                @Advance.performed += instance.OnAdvance;
+                @Advance.canceled += instance.OnAdvance;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -1314,6 +1343,7 @@ public partial class @MovementInputActions : IInputActionCollection2, IDisposabl
     }
     public interface ITutorialActions
     {
+        void OnAdvance(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);

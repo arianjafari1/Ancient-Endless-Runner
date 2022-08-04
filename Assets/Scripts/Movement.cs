@@ -57,8 +57,10 @@ public class Movement : MonoBehaviour
     ///          - changed it so you can no longer jump/slide while stumbling
     /// 03/08/22 - added a bool for isSliding, which is set to true in the "slide" animation (the one that shrinks the 
     ///            player hitbox) so that the player cannot queue another slide while already sliding
-    /// 
+    /// 04/08/2022 -[Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
     /// </summary>
+    private PauseMenu pauseMenu; //reference to PauseMenu script
+    
     [SerializeField] private float horizontalSpeed;
     public enum Lanes
     {
@@ -94,6 +96,7 @@ public class Movement : MonoBehaviour
     private InputAction right;
     private InputAction jump;
     private InputAction slide;
+    private InputAction pauseButton;
     private InputAction debugButton;
 
     private Lanes currentLane;
@@ -172,8 +175,8 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         movementInputActions = new MovementInputActions();
-        
-        
+        pauseMenu = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PauseMenu>();
+
     }
     /// <summary>
     /// These variables are used with the new Unity Input System, and add functions
@@ -186,14 +189,17 @@ public class Movement : MonoBehaviour
         right = movementInputActions.Player.Right;
         jump = movementInputActions.Player.Jump;
         slide = movementInputActions.Player.Slide;
+        pauseButton = movementInputActions.Player.PauseGame;
         left.Enable();
         right.Enable();
         jump.Enable();
         slide.Enable();
+        pauseButton.Enable();
         left.performed += GoLeft;
         right.performed += GoRight;
         jump.performed += Jump;
         slide.performed += Slide;
+        pauseButton.performed += PauseButton;
 
         //the debug button
         //a mysterious entity that lets you test things that shouldnt
@@ -211,6 +217,7 @@ public class Movement : MonoBehaviour
         right.Disable();
         jump.Disable();
         slide.Disable();
+        pauseButton.Disable();
         debugButton.Disable();
     }
 
@@ -504,8 +511,12 @@ public class Movement : MonoBehaviour
         playerAnimation.Play(animationName);
     }
 
+    private void PauseButton(InputAction.CallbackContext obj)
+    {
+        //Arian put code here
+        pauseMenu.ShowPauseMenuScreen();
+    }
 
-    
     public void EnablePlayerInput()
     {
         movementInputActions.Player.Enable();
