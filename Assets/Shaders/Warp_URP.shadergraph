@@ -44,6 +44,9 @@
         },
         {
             "m_Id": "4030cf26932b4253879072853f864194"
+        },
+        {
+            "m_Id": "1bde28114e214a1c86db134fc6c14a9e"
         }
     ],
     "m_Keywords": [],
@@ -197,6 +200,9 @@
         },
         {
             "m_Id": "0bb02af42262490c85c62eaa8550ea6f"
+        },
+        {
+            "m_Id": "cb038308efa94dfb868dac1114905f49"
         }
     ],
     "m_GroupDatas": [],
@@ -1198,7 +1204,7 @@
         "location"
     ],
     "m_Precision": 1,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_PreviewMode": 2,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -1423,6 +1429,28 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
+    "m_ObjectId": "1bde28114e214a1c86db134fc6c14a9e",
+    "m_Guid": {
+        "m_GuidSerialized": "dc0bda04-47f9-42f3-b57b-a20e7ce15e4f"
+    },
+    "m_Name": "Emission",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Emission",
+    "m_DefaultReferenceName": "_Emission",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Texture2DInputMaterialSlot",
     "m_ObjectId": "1c03cfd469c04cb9942b51cb94091616",
     "m_Id": 1,
@@ -1569,8 +1597,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1008.0,
-            "y": 522.0,
+            "x": -1008.0000610351563,
+            "y": 534.0,
             "width": 183.0,
             "height": 251.0
         }
@@ -2895,10 +2923,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1895.9998779296875,
-            "y": -268.0,
+            "x": -1931.0,
+            "y": -268.00006103515627,
             "width": 206.0,
-            "height": 131.0
+            "height": 131.00006103515626
         }
     },
     "m_Slots": [
@@ -3726,7 +3754,7 @@
         "else"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -4191,6 +4219,9 @@
         },
         {
             "m_Id": "4030cf26932b4253879072853f864194"
+        },
+        {
+            "m_Id": "1bde28114e214a1c86db134fc6c14a9e"
         }
     ]
 }
@@ -4722,6 +4753,20 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
+    "m_ObjectId": "b913547d26324214b2096f91fbc32b26",
+    "m_Id": 0,
+    "m_DisplayName": "Emission",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": false,
+    "m_DefaultValue": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.AddNode",
     "m_ObjectId": "ba0c3d6d88e84d24ad16fdc8f82cecde",
     "m_Group": {
@@ -4948,6 +4993,41 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "cb038308efa94dfb868dac1114905f49",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -402.0000305175781,
+            "y": 706.0,
+            "width": 123.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "b913547d26324214b2096f91fbc32b26"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "1bde28114e214a1c86db134fc6c14a9e"
+    }
 }
 
 {

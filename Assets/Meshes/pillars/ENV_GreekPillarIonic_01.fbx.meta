@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ionic1
-    second: {fileID: 2100000, guid: 97494979403f7a344bb087cc7bc87a09, type: 2}
+    second: {fileID: 2100000, guid: c6e9e4e837d550449aabd81b35e2e496, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert9
-    second: {fileID: 2100000, guid: 97494979403f7a344bb087cc7bc87a09, type: 2}
+    second: {fileID: 2100000, guid: c6e9e4e837d550449aabd81b35e2e496, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

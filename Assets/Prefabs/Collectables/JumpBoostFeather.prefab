@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableType: 2
   collectableRotation: 2
+  rotationDirection: 0
   powerUpDuration: 5
   collectable: {fileID: 4169481331918110073}
 --- !u!54 &1518045280854136112
@@ -193,7 +194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e499b2b9674107e4fb6a6ff21d08d5f4, type: 2}
+  - {fileID: 2100000, guid: e847861c007561b42b8c39ac2b2daa78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -309,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e499b2b9674107e4fb6a6ff21d08d5f4, type: 2}
+  - {fileID: 2100000, guid: b0686312675491b439f4c0666ee5e5e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
