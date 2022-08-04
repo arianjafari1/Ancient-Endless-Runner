@@ -27,9 +27,13 @@ public class TileMovement : MonoBehaviour
     ///            leave the code for the object pooling in the TileDestroyer, TileMovement and TileManager scripts as comments so they can still be looked at for marking
     /// </summary>
 
-    public static ObjectPool<GameObject> instance;
-    private List<GameObject> pooledObjects = new List<GameObject>();
-    private int amountToPool;
+
+    /// Commented out Object Pooling Starts
+    //public static ObjectPool<GameObject> instance;
+    //private List<GameObject> pooledObjects = new List<GameObject>();
+    //private int amountToPool;
+    /// Commented out Object Pooling Ends
+
 
     //[SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] tilePrefabs; //array of tiles with tiles with obstacles

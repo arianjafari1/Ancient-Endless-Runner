@@ -18,11 +18,13 @@ public class GameState : MonoBehaviour
     /// 19/07/2022 -[Arian] changed the timer to += Time.fixedDeltaTime to make it framerate independent
     ///            -[Arian] changed globalTime to (int)(timer)
     /// 20/07/2022 -[Arian] added an overall gameState, with things such as beginningCutScene, isPlaying, gameOver, isPaused
+    /// 04/08/2022 -[Arian] referenced the PauseMenu script so I can call its PauseGame function to pause the game when game state is at isPaused
     /// </summary>
 
     private float timer; // this is the float timer
     private int globalTime; //this is the actual global time which I will have a getter and setter for
-    private TileMovement tileMovement; //tile movement script referance
+    private TileMovement tileMovement; //tile movement script reference
+    private PauseMenu pauseMenu; //pauseMenu script reference
     [SerializeField] private TMP_Text timerUI;
 
     public enum Difficulty //creating an enum for the difficulty of the game
@@ -60,6 +62,7 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>(); //assigining tile movement script to tileMovement
+        pauseMenu = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PauseMenu>();
         difficulty = Difficulty.veryEasy; //default difficulty when game starts is set to very easy
         currentGameState = gameState.isPlaying; //the game state when the game starts is game is playing
         //Debug.Log(currentDifficultyTile);
@@ -86,6 +89,9 @@ public class GameState : MonoBehaviour
                 timer += Time.fixedDeltaTime; //using delta time to count time in float
                 globalTime = (int)(timer); //turning the timer to integer
                 timerUI.text = globalTime.ToString();
+                break;
+            case gameState.isPaused:
+                pauseMenu.PauseGame();
                 break;
         }
     }
