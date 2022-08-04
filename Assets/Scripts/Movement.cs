@@ -94,6 +94,7 @@ public class Movement : MonoBehaviour
     private InputAction right;
     private InputAction jump;
     private InputAction slide;
+    private InputAction pauseButton;
     private InputAction debugButton;
 
     private Lanes currentLane;
@@ -186,14 +187,17 @@ public class Movement : MonoBehaviour
         right = movementInputActions.Player.Right;
         jump = movementInputActions.Player.Jump;
         slide = movementInputActions.Player.Slide;
+        pauseButton = movementInputActions.Player.PauseGame;
         left.Enable();
         right.Enable();
         jump.Enable();
         slide.Enable();
+        pauseButton.Enable();
         left.performed += GoLeft;
         right.performed += GoRight;
         jump.performed += Jump;
         slide.performed += Slide;
+        pauseButton.performed += PauseButton;
 
         //the debug button
         //a mysterious entity that lets you test things that shouldnt
@@ -211,6 +215,7 @@ public class Movement : MonoBehaviour
         right.Disable();
         jump.Disable();
         slide.Disable();
+        pauseButton.Disable();
         debugButton.Disable();
     }
 
@@ -504,8 +509,11 @@ public class Movement : MonoBehaviour
         playerAnimation.Play(animationName);
     }
 
+    private void PauseButton(InputAction.CallbackContext obj)
+    {
+        //Arian put code here
+    }
 
-    
     public void EnablePlayerInput()
     {
         movementInputActions.Player.Enable();
