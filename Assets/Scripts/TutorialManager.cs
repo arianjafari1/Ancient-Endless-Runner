@@ -72,11 +72,10 @@ public class TutorialManager : MonoBehaviour
                 tile.SetActive(true);
             }
             playerMovement.DisablePlayerInput();
-            return;
             
         }
 
-        inputActions.Disable();
+        inputActions.Tutorial.Disable();
     }
 
     public void TriggerTutorialStep(TutorialStages tutorialStage)
@@ -86,14 +85,23 @@ public class TutorialManager : MonoBehaviour
             case TutorialStages.BeginTutorial:
                 Debug.Log("Start tuto");
                 Time.timeScale = 0;
+                inputActions.Tutorial.Advance.Enable();
                 break;
             case TutorialStages.TeachJump:
+                Time.timeScale = 0;
+                inputActions.Tutorial.Jump.Enable();
                 break;
             case TutorialStages.TeachSlide:
+                Time.timeScale = 0;
+                inputActions.Tutorial.Slide.Enable();
                 break;
             case TutorialStages.TeachSwipeLeft:
+                Time.timeScale = 0;
+                inputActions.Tutorial.Left.Enable();
                 break;
             case TutorialStages.TeachSwipeRight:
+                Time.timeScale = 0;
+                inputActions.Tutorial.Right.Enable();
                 break;
             case TutorialStages.EndOfTutorial:
                 CompleteTutorial();
@@ -103,25 +111,34 @@ public class TutorialManager : MonoBehaviour
 
     private void AdvanceTutorial_performed(InputAction.CallbackContext obj)
     {
+        inputActions.Disable();
         AdvanceTutorial();
     }
     private void TeachJump_performed(InputAction.CallbackContext obj)
     {
-
+        playerMovement.Jump(obj);
+        inputActions.Disable();
+        AdvanceTutorial();
     }
 
     private void TeachSlide_performed(InputAction.CallbackContext obj)
     {
-
+        playerMovement.Slide(obj);
+        inputActions.Disable();
+        AdvanceTutorial();
     }
     private void TeachLeft_performed(InputAction.CallbackContext obj)
     {
-
+        playerMovement.GoLeft(obj);
+        inputActions.Disable();
+        AdvanceTutorial();
     }
 
     private void TeachRight_performed(InputAction.CallbackContext obj)
     {
-
+        playerMovement.GoRight(obj);
+        inputActions.Disable();
+        AdvanceTutorial();
     }
 
 
