@@ -57,8 +57,10 @@ public class Movement : MonoBehaviour
     ///          - changed it so you can no longer jump/slide while stumbling
     /// 03/08/22 - added a bool for isSliding, which is set to true in the "slide" animation (the one that shrinks the 
     ///            player hitbox) so that the player cannot queue another slide while already sliding
-    /// 
+    /// 04/08/2022 -[Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
     /// </summary>
+    private PauseMenu pauseMenu; //reference to PauseMenu script
+    
     [SerializeField] private float horizontalSpeed;
     public enum Lanes
     {
@@ -173,8 +175,8 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         movementInputActions = new MovementInputActions();
-        
-        
+        pauseMenu = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PauseMenu>();
+
     }
     /// <summary>
     /// These variables are used with the new Unity Input System, and add functions
@@ -512,6 +514,7 @@ public class Movement : MonoBehaviour
     private void PauseButton(InputAction.CallbackContext obj)
     {
         //Arian put code here
+        pauseMenu.ShowPauseMenuScreen();
     }
 
     public void EnablePlayerInput()
