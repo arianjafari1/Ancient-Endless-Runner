@@ -31,7 +31,7 @@ public class TutorialManager : MonoBehaviour
             {
                 tile.SetActive(true);
             }
-            //playerMovement.DisablePlayerInput();
+            playerMovement.DisablePlayerInput();
         }
 
     }
