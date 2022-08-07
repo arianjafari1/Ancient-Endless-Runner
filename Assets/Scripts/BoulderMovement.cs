@@ -87,6 +87,7 @@ public class BoulderMovement : MonoBehaviour
         boulder.transform.position = new Vector3(0, 5, startZPos);
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         audioManager.PlaySound("Boulder_Movement");
+        audioManager.PlaySound("GameplayMusic");
     }
     void FixedUpdate()
     {

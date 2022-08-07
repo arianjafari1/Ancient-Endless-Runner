@@ -24,21 +24,24 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinsCollectedText;
     private ScoreManager scoreManager;
     private GameState gameState;
+    private AudioManager audioManager;
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //start audio manager
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
         gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         scoreText.text = "Score: " + scoreManager.getScore.ToString();
         timeAliveText.text = "Time alive: " + gameState.GlobalTime.ToString() + " sec";
         coinsCollectedText.text = "Coins collected: " + scoreManager.getCoins.ToString();
+        audioManager.PlaySound("GameMenuMusic"); //Play Menu Music
     }
     public void ShowGameOverScreen()//int score)
     {
         gameObject.SetActive(true); // set the gameover screen to active
         //gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
         //scoreText.text = "Score: " + score.ToString(); //set the score
-
+        audioManager.StopSound(4); //Stop Game Music
     }
 
     private void restartButton()

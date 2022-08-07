@@ -48,6 +48,7 @@ public class GameState : MonoBehaviour
 
     private gameState currentGameState; //declaring enum type as private for changing the state of the game
     private Difficulty difficulty; //declaring enum type as private for changing difficulty
+    private AudioManager audioManager; //Setup Audio Manager
 
     ///start- times at which difficulties change with long descriptive names for the designer to be able to change in the editor
     [SerializeField] private int easyDifficultyTime; //time at which difficulty changes to 80% easy Tiles, 20% medium Tiles
@@ -61,6 +62,7 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //start audio manager
         tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>(); //assigining tile movement script to tileMovement
         pauseMenu = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PauseMenu>();
         difficulty = Difficulty.veryEasy; //default difficulty when game starts is set to very easy
@@ -81,6 +83,8 @@ public class GameState : MonoBehaviour
         switch (currentGameState)
         {
             case gameState.gameOver:
+                audioManager.StopSound(4); //Stop Game Music
+                audioManager.PlaySound("GameMenuMusic"); //Play Menu Music
                 tileMovement.movementSpeedGetterSetter = 0;
                 tileMovement.speedIncreaseEverySecondGetterSetter = 0;
                 break;
@@ -89,6 +93,7 @@ public class GameState : MonoBehaviour
                 timer += Time.fixedDeltaTime; //using delta time to count time in float
                 globalTime = (int)(timer); //turning the timer to integer
                 timerUI.text = globalTime.ToString();
+                audioManager.StopSound(5); //Stop Menu Music
                 break;
             case gameState.isPaused:
                 pauseMenu.PauseGame();

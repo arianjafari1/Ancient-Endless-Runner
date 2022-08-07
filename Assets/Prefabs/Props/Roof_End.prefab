@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
       propertyPath: m_Name
       value: GMP_roofskirt_01
@@ -152,6 +156,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 662432e0d4448d748a6353a916ee929b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 662432e0d4448d748a6353a916ee929b, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 662432e0d4448d748a6353a916ee929b, type: 3}
@@ -216,6 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eb32d7bc7a7717247b63f54c948d3f44, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eb32d7bc7a7717247b63f54c948d3f44, type: 3}
       propertyPath: m_Name
       value: GMP_rooftop_01
@@ -276,6 +288,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
@@ -340,6 +356,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
       propertyPath: m_Name
       value: GMP_roofskirt_01 (2)
@@ -400,6 +420,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3614604cf16a3674bab876c5e666cee1, type: 3}
@@ -464,6 +488,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6ebb7186d943d6341bd469032534ac95, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6ebb7186d943d6341bd469032534ac95, type: 3}
       propertyPath: m_Name
       value: GMP_roofskirt_02
@@ -524,6 +552,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ebb7186d943d6341bd469032534ac95, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6ebb7186d943d6341bd469032534ac95, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6ebb7186d943d6341bd469032534ac95, type: 3}
@@ -588,6 +620,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
       propertyPath: m_Name
       value: GMP_roofskirt_01 (3)
@@ -648,6 +684,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4c9e1f5ef7b86a14a844c74d2e44fb74, type: 3}

@@ -17566,8 +17566,12 @@ MonoBehaviour:
   curveStart: 15
   curveShallowness: 0.1
   curveMaxHeight: 0.01
-  curveLeftAmount: 0.5
-  useWarp: 0
+  curveLeftMax: 0.5
+  curveRightMax: -0.5
+  curvePauseMinTime: 2
+  curvePauseMaxTime: 5
+  transSpeed: 0.1
+  useWarp: 1
 --- !u!114 &775761450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22738,6 +22742,7 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
+  - component: {fileID: 963194232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -22776,7 +22781,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.002
   far clip plane: 9999
   field of view: 60.000004
   orthographic: 0
@@ -22784,7 +22789,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -22793,7 +22798,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &963194228
@@ -22887,6 +22892,18 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326ac6a6c37b6b240871ec27453abbbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &977763442
 GameObject:
   m_ObjectHideFlags: 0
@@ -23210,7 +23227,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
-    NearClipPlane: 0.01
+    NearClipPlane: 0.002
     FarClipPlane: 9999
     Dutch: 0
     ModeOverride: 0
@@ -23606,10 +23623,10 @@ MonoBehaviour:
   minZPos: -30
   maxZPos: 50
   backwardsMovement: 0.005
-  forwardsMovement: 0.1
+  forwardsMovement: 0.15
   deathSpeedMultiplier: 5
   wiggleAmount: 0.8
-  wiggleSpeed: 1
+  wiggleSpeed: 2
 --- !u!114 &1516622362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25244,17 +25261,33 @@ PrefabInstance:
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[4].clipSound
       value: 
-      objectReference: {fileID: 8300000, guid: e5a050e9f39dfd64fb4c8b3011a5e2b4, type: 3}
+      objectReference: {fileID: 8300000, guid: b800d3dc3bed2e84b9120bceac2bdbc5, type: 3}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[4].loopSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[4].nameSound
-      value: Wilhelm_Scream2
+      value: GameplayMusic
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[5].clipSound
       value: 
-      objectReference: {fileID: 8300000, guid: e5a050e9f39dfd64fb4c8b3011a5e2b4, type: 3}
+      objectReference: {fileID: 8300000, guid: 7ac37855d97150b49b29b4b83c32b3bb, type: 3}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[5].loopSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[5].nameSound
+      value: GameMenuMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[6].clipSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e5a050e9f39dfd64fb4c8b3011a5e2b4, type: 3}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[6].nameSound
       value: Wilhelm_Scream3
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
@@ -25267,10 +25300,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[4].pitchSound
-      value: 0.66
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[5].pitchSound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[6].pitchSound
       value: 0.383
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
@@ -25287,6 +25324,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
       propertyPath: sounds.Array.data[5].volumeSound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667134351621725966, guid: 2b35344bc2758eb44a13fb6e3bb71a57, type: 3}
+      propertyPath: sounds.Array.data[6].volumeSound
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
