@@ -4917,7 +4917,7 @@ MonoBehaviour:
   IntactObstacles:
   - {fileID: 1816585407294811513}
   - {fileID: 1304731932744183424}
-  - {fileID: 1304731932744183424}
+  - {fileID: 6189066788744846124}
   - {fileID: 7620601318496318920}
   - {fileID: 4786859492853225680}
   - {fileID: 7501028108264835712}
@@ -4990,6 +4990,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2999aa2f702cafb4ea6a413dea2eedf1, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingOpen2x2x2_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2999aa2f702cafb4ea6a413dea2eedf1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2999aa2f702cafb4ea6a413dea2eedf1, type: 3}
@@ -5070,6 +5074,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ENV_ScaffoldingOpen2x3x2_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35bb0dd668202fa44b2997e3ccd87182, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35bb0dd668202fa44b2997e3ccd87182, type: 3}
 --- !u!1 &1304731932744183424 stripped
@@ -5148,6 +5156,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingBasePlate_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
@@ -5228,8 +5240,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ENV_ScaffoldingOpen2x4x2_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1d66ed828f6a51d478a19b633e240a8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d66ed828f6a51d478a19b633e240a8b, type: 3}
+--- !u!1 &6189066788744846124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d66ed828f6a51d478a19b633e240a8b, type: 3}
+  m_PrefabInstance: {fileID: 6422857259948238461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6820749844798079382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d66ed828f6a51d478a19b633e240a8b, type: 3}
@@ -5301,6 +5322,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingBasePlate_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
@@ -5380,6 +5405,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingBasePlate_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
