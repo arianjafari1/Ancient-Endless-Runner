@@ -22,7 +22,7 @@ public class CurvedWorld : MonoBehaviour {
         DistanceID = Shader.PropertyToID("_Distance");
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 curvature = CurvatureScaleUnit == 0 ? Curvature : Curvature / CurvatureScaleUnit;
 

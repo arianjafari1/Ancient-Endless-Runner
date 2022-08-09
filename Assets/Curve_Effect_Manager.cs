@@ -5,6 +5,11 @@ using System;
 
 public class Curve_Effect_Manager : MonoBehaviour
 {
+    /// <summary>
+    /// This script was all made by Oakley, I (Malachi) just added a couple of lines to prevent
+    /// the curve continuing to move despite the player being dead
+    /// </summary>
+
     [SerializeField] private float curveStart; //How far away from the camera the curve should begin
     [SerializeField] private float curveShallowness; //How extreme the curve should be
     [SerializeField] private float curveMaxHeight; //The maximum elevation of the height of the curve
@@ -20,6 +25,8 @@ public class Curve_Effect_Manager : MonoBehaviour
     private bool isCurvedLeft; // Check for direction of curve
     [SerializeField] private float transSpeed; //How fast the curve should transition
     [SerializeField] private bool useWarp;
+
+    private GameState currentGameState;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +40,7 @@ public class Curve_Effect_Manager : MonoBehaviour
         isCurvedLeft = true; //Set curved left to true
         currentPauseTime = 0.0f; //Set current pause time to zero
         targetPauseTime = UnityEngine.Random.Range(curvePauseMinTime, curvePauseMaxTime); //Set target pause time to random value between Min and Max pause time
-
+        currentGameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
 
         float useWarpVal = useWarp ? 1.0f : 0.0f;
         Shader.SetGlobalFloat("_useWarp", useWarpVal);
@@ -47,18 +54,22 @@ public class Curve_Effect_Manager : MonoBehaviour
         {
             currentPauseTime = Mathf.Lerp(currentPauseTime, targetPauseTime, Time.deltaTime);
             isPaused = true;
-        }else{
+        }
+        else
+        {
             isPaused = false;
         }
         // If isPaused is false then we curve;
-        if (!isPaused)
+        if (!isPaused && currentGameState.CurrentGameState != GameState.gameState.gameOver)
         {
             //If we are currently curved left and the curve is not yet at the right side we keep curving
             if (isCurvedLeft && Math.Abs(curveCurrentValue - curveRightMax) >= 0.01)
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveRightMax, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f); //Move the curve right over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader as we go
-            }else{ //If we are no longer curved left, or we are at the right side then we pause
+            }
+            else
+            { //If we are no longer curved left, or we are at the right side then we pause
                 isCurvedLeft = false; 
                 currentPauseTime = 0.0f; //Set current pause time to zero
                 targetPauseTime = UnityEngine.Random.Range(curvePauseMinTime, curvePauseMaxTime); //Set target pause time to random value between Min and Max pause time
@@ -67,7 +78,9 @@ public class Curve_Effect_Manager : MonoBehaviour
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin(transSpeed * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
-            }else{ //If we are no longer curved right, or we reach the left side then we pause again
+            }
+            else
+            { //If we are no longer curved right, or we reach the left side then we pause again
                 isCurvedLeft = true;
                 currentPauseTime = 0.0f; //Set current pause time to zero
                 targetPauseTime = UnityEngine.Random.Range(curvePauseMinTime, curvePauseMaxTime); //Set target pause time to random value between Min and Max pause time
