@@ -13,18 +13,16 @@ public class MainMenu : MonoBehaviour
     /// </summary>
 
     private GameState gameState;
-    private AudioManager audioManager; //Setup Audio Manager    
+    [SerializeField] private AudioManager audioManager; //Setup Audio Manager    
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //start audio manager
-        gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>(); //reference the object with script
-        audioManager.PlaySound("GameMenuMusic");
+        audioManager.PlaySound("MainMenuMusic");
     }
 
     private void startGame()
     {
         SceneManager.LoadScene("SampleScene");
-        gameState.CurrentGameState = GameState.gameState.isPlaying;
     }
 
     private void exitButton()

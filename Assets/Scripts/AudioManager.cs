@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
             return; //just to be sure that no more coded will be executed after destroying the object
         }
 
-        DontDestroyOnLoad(gameObject); // make sure that the AudioManager object that is now a prefab persists between scenes
+        //DontDestroyOnLoad(gameObject); // make sure that the AudioManager object that is now a prefab persists between scenes
 
 
 
