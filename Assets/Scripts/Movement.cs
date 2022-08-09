@@ -485,6 +485,7 @@ public class Movement : MonoBehaviour
     {
         CancelSpeedReturn();
         movementAnimations.SetTrigger("Flatten");
+        movementAnimations.SetBool("IsPlayerDead", true);
         currentPlayerState = PlayerStates.dead;
         DisablePlayerInput();
         gameState.CurrentGameState = GameState.gameState.gameOver;
