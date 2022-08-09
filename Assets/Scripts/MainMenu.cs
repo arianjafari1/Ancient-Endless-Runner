@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     private GameState gameState;
     [SerializeField] private AudioManager audioManager; //Setup Audio Manager    
     [SerializeField] private Slider volumeSlider;
+    private const float defaultSliderValue= 1f; //default value of the Volume slider
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("generalVolume")) //if there is no date from game session from the past, then the volume will be automatically set to 1
         {
-            PlayerPrefs.SetFloat("generalVolume", 1); //setting it to 1 (100%)
+            PlayerPrefs.SetFloat("generalVolume", defaultSliderValue); //setting it to 1 (100%)
             LoadPlayerVolume();
         } else
         {
@@ -76,6 +77,7 @@ public class MainMenu : MonoBehaviour
     public void ResetGameSettings() //calling it when the button Reset Game Settings to Default is clicked
     {
         resetPlayerPref();
+        volumeSlider.value = defaultSliderValue;
     }
 
     public void StartGame()
