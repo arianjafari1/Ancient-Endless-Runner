@@ -10,6 +10,7 @@ public class Curve_Effect_Manager : MonoBehaviour
     [SerializeField] private float curveMaxHeight; //The maximum elevation of the height of the curve
     [SerializeField] private float curveLeftMax; //The maximum curvature to the left
     [SerializeField] private float curveRightMax; //The maximum curvature to the right
+    [SerializeField] private int curveAmount;
     private float curveCurrentValue; //The current curvature left or right
     [SerializeField] private float curvePauseMinTime; //The minimum time that the curve should pause before moving
     [SerializeField] private float curvePauseMaxTime; //The maximum time that the curve should pause before moving
@@ -25,6 +26,7 @@ public class Curve_Effect_Manager : MonoBehaviour
         Shader.SetGlobalFloat("_curveStart", curveStart);
         Shader.SetGlobalFloat("_curveShallowness", curveShallowness);
         Shader.SetGlobalFloat("_curveMaxHeight", curveMaxHeight);
+        Shader.SetGlobalInt("_curveAmount", curveAmount);
         
         Shader.SetGlobalFloat("_curveMaxWidth", curveLeftMax); //Starts curve to the left
         curveCurrentValue = curveLeftMax; // Set current curve to Left maximum
@@ -43,7 +45,7 @@ public class Curve_Effect_Manager : MonoBehaviour
         // While current pause time is less than the target, isPaused is true. And we update the current time until it reaches max
         if (Math.Abs(targetPauseTime - currentPauseTime) <= 0.01)
         {
-            currentPauseTime = Mathf.Lerp(currentPauseTime, targetPauseTime, 0.1f);
+            currentPauseTime = Mathf.Lerp(currentPauseTime, targetPauseTime, Time.deltaTime);
             isPaused = true;
         }else{
             isPaused = false;
@@ -54,7 +56,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             //If we are currently curved left and the curve is not yet at the right side we keep curving
             if (isCurvedLeft && Math.Abs(curveCurrentValue - curveRightMax) >= 0.01)
             {
-                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveRightMax, transSpeed * Time.deltaTime); //Move the curve right over time
+                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveRightMax, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f); //Move the curve right over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader as we go
             }else{ //If we are no longer curved left, or we are at the right side then we pause
                 isCurvedLeft = false; 
@@ -63,7 +65,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             }
             if (!isCurvedLeft && Math.Abs(curveCurrentValue - curveLeftMax) >= 0.01) //If we are current curved right and the curve is not yet at the left side we curve
             {
-                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, transSpeed * Time.deltaTime); //Move left over time
+                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin(transSpeed * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
             }else{ //If we are no longer curved right, or we reach the left side then we pause again
                 isCurvedLeft = true;
@@ -71,9 +73,5 @@ public class Curve_Effect_Manager : MonoBehaviour
                 targetPauseTime = UnityEngine.Random.Range(curvePauseMinTime, curvePauseMaxTime); //Set target pause time to random value between Min and Max pause time
             }
         }
-        Debug.Log(isPaused);
-        Debug.Log(currentPauseTime);
-        Debug.Log(targetPauseTime);
-        Debug.Log(isCurvedLeft);
     }
 }

@@ -104,8 +104,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7689211, y: 0.24356541, z: 0.7467019}
+  m_Center: {x: 0.11553967, y: -0.37821838, z: -0.069365665}
 --- !u!54 &1437012251659558834
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4913,8 +4913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c05c6704242c743a0ff4d01c49a804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntactObstacle: {fileID: 1437012251659558835}
-  destroyedObstacle: {fileID: 1437012251659558835}
+  IntactObstacles: []
+  destroyedObstacle:
+  - {fileID: 0}
   dustParticles: {fileID: 1873074888478064409}
 --- !u!1001 &243891877739649942
 PrefabInstance:
