@@ -66,8 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e125a57b4ebbe6344a60c6c25164d990, type: 2}
-  - {fileID: 2100000, guid: e125a57b4ebbe6344a60c6c25164d990, type: 2}
+  - {fileID: 2100000, guid: e9a299967e0383b41bd8feafd77a3379, type: 2}
+  - {fileID: 2100000, guid: e9a299967e0383b41bd8feafd77a3379, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4896,8 +4896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c05c6704242c743a0ff4d01c49a804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntactObstacle: {fileID: 4558570670510571513}
-  destroyedObstacle: {fileID: 4558570670510571513}
+  IntactObstacles: []
+  destroyedObstacle:
+  - {fileID: 0}
   dustParticles: {fileID: 6457240571868792534}
 --- !u!65 &6910622999440687575
 BoxCollider:
@@ -4910,5 +4911,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 4, z: 0.9999999}
-  m_Center: {x: -0.4196591, y: 2.0032506, z: 0.38922352}
+  m_Size: {x: 0.39702615, y: 4, z: 0.4807124}
+  m_Center: {x: -0.118172154, y: 2.0032506, z: 0.3895843}

@@ -7,10 +7,12 @@ public class DisableFrustumCull : MonoBehaviour
      private Camera cam;
  
      void Start()
-     {
-         cam = this.GetComponent<Camera>();
+     {         
+        
+        cam = this.GetComponent<Camera>();
+        cam.ResetCullingMatrix();
      }
- 
+ /*
      void OnPreCull()
      {
          cam.cullingMatrix = Matrix4x4.Ortho(-99999, 99999, -99999, 99999, 0.001f, 99999) * 
@@ -22,4 +24,5 @@ public class DisableFrustumCull : MonoBehaviour
      {
          cam.ResetCullingMatrix();
      }
+     */
  }
