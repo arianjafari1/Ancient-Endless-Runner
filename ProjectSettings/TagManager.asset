@@ -19,6 +19,7 @@ TagManager:
   - AudioManager
   - TileMiddle
   - Light
+  - PowerUp
   layers:
   - Default
   - TransparentFX
