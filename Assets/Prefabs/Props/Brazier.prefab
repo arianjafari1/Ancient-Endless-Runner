@@ -4828,7 +4828,7 @@ GameObject:
   - component: {fileID: 2806003115304002704}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4942,6 +4942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f83e0fd3d886554f8891ed157f461a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
 --- !u!1001 &7787536926557089122
 PrefabInstance:
   m_ObjectHideFlags: 0

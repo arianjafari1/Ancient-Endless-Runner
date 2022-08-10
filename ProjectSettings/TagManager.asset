@@ -18,6 +18,7 @@ TagManager:
   - pitObstacle
   - AudioManager
   - TileMiddle
+  - Light
   layers:
   - Default
   - TransparentFX
