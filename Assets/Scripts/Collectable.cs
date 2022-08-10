@@ -83,7 +83,7 @@ public class Collectable : MonoBehaviour
                     Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
                 case CollectableType.FeatherJumpPower:
-                    playerMovement.ChangeJumpPower(true);
+                    playerMovement.IsSuperJumpActive = true;
                     Invoke(nameof(EndPowerUp), powerUpDuration);
                     break;
                 case CollectableType.CheatDeathPower:
@@ -100,7 +100,7 @@ public class Collectable : MonoBehaviour
     public void EndPowerUp()
     {
         coinMagnet.enabled = false;
-        playerMovement.ChangeJumpPower(false);
+        playerMovement.IsSuperJumpActive = false;
         playerMovement.IsShieldActive = false;
     }
 }
