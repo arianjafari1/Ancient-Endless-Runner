@@ -24,7 +24,6 @@ public class PowerUp_Spawner : MonoBehaviour
         {
             GameObject newCoin = Instantiate(powerUpType[3], this.transform.position, this.transform.rotation);
             newCoin.transform.parent = this.transform;
-            Debug.Log(GameObject.FindGameObjectWithTag("PowerUp").ToString());
             return;
         }
 

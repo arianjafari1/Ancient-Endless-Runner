@@ -58,7 +58,11 @@ public class Movement : MonoBehaviour
     ///          - Made stumbling on an object midair pull you towards the ground
     /// 03/08/22 - added a bool for isSliding, which is set to true in the "slide" animation (the one that shrinks the 
     ///            player hitbox) so that the player cannot queue another slide while already sliding
-    /// 04/08/2022 -[Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
+    /// 04/08/22 - [Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
+    /// 10/08/22 - attempted a different way of using the jump powerup as framerate gets obliterated if you jump too many
+    ///            times while the powerup is active. Attempt was to stop values changing whilst you are midair, but that 
+    ///            turned out to not be the problem. Superjump will probably have to be removed unless the reason for this
+    ///            bug is found, as there seems to be nothing in the code that is causing it.
     /// </summary>
     private PauseMenu pauseMenu; //reference to PauseMenu script
     
