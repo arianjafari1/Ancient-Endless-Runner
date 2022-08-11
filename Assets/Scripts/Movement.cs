@@ -55,9 +55,14 @@ public class Movement : MonoBehaviour
     ///          - added several more animations
     /// 02/08/22 - added look behind mechanic, which can randomly trigger if the boulder is close enough
     ///          - changed it so you can no longer jump/slide while stumbling
+    ///          - Made stumbling on an object midair pull you towards the ground
     /// 03/08/22 - added a bool for isSliding, which is set to true in the "slide" animation (the one that shrinks the 
     ///            player hitbox) so that the player cannot queue another slide while already sliding
-    /// 04/08/2022 -[Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
+    /// 04/08/22 - [Arian] called in a function for the pause menu in a function made by Malachi that checks if escape key has been pressed
+    /// 10/08/22 - attempted a different way of using the jump powerup as framerate gets obliterated if you jump too many
+    ///            times while the powerup is active. Attempt was to stop values changing whilst you are midair, but that 
+    ///            turned out to not be the problem. Superjump will probably have to be removed unless the reason for this
+    ///            bug is found, as there seems to be nothing in the code that is causing it.
     /// </summary>
     private PauseMenu pauseMenu; //reference to PauseMenu script
     
@@ -125,6 +130,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float poweredJumpHeight;
 
     private bool shieldActive = false;
+    private bool superJumpActive = false;
+    private bool willJumpBeSuper = false;
     public bool IsShieldActive
     {
         get
@@ -134,6 +141,17 @@ public class Movement : MonoBehaviour
         set
         {
             shieldActive = value;
+        }
+    }
+    public bool IsSuperJumpActive
+    {
+        get
+        {
+            return superJumpActive;
+        }
+        set
+        {
+            superJumpActive = value;
         }
     }
 
@@ -294,7 +312,7 @@ public class Movement : MonoBehaviour
             currentJumpVelocity += gravity * Time.fixedDeltaTime;
             //Vector3 targetPos = new Vector3(currentPos.x, maxJumpHeight, currentPos.z);
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.up);
-            if (player.transform.position.y >= groundHeight + currentMaxJumpHeight || currentPlayerState == PlayerStates.staggered)
+            if (player.transform.position.y >= groundHeight + (willJumpBeSuper ? poweredJumpHeight : maxJumpHeight) || currentPlayerState == PlayerStates.staggered)
             {
                 movementAnimations.SetBool("Falling", true);
                 movementAnimations.SetBool("Jump", false);
@@ -408,10 +426,16 @@ public class Movement : MonoBehaviour
         {
             return;
         }
+
+        willJumpBeSuper = false;
+        if (IsSuperJumpActive)
+        {
+            willJumpBeSuper = true;
+        }
         playerAnimation.Play("Jump");
         movementAnimations.SetBool("Jump", true);
-        currentJumpVelocity = currentJumpForce;
         isJumping = true;
+        currentJumpVelocity = willJumpBeSuper ? poweredJumpForce : jumpForce;
     }
 
     public void Slide(InputAction.CallbackContext context)
