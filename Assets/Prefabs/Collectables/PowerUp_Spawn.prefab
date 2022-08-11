@@ -47,4 +47,4 @@ MonoBehaviour:
   powerUpType:
   - {fileID: 1518045280854136074, guid: f3d0c179ab472bf488401ba54b9d5db0, type: 3}
   - {fileID: 1518045280854136074, guid: c2a32c334567c3d428c88d3377db7b7d, type: 3}
-  - {fileID: 1518045280854136074, guid: 137beeb54b9ef764eba76b1617fd37f0, type: 3}
+  - {fileID: 3016951618558541407, guid: 47a97e4cd6a6d3840afd40dcf2a6675e, type: 3}

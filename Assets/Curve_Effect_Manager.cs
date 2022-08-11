@@ -89,7 +89,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             }
             if (!isCurvedLeft && Math.Abs(curveCurrentValue - curveLeftMax) >= 0.01) //If we are current curved right and the curve is not yet at the left side we curve
             {
-                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin(transSpeed * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
+                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin((transSpeed /1000) * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
             }
             else
@@ -100,7 +100,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             }
         }
         //Script to move the lights
-        lights = GameObject.FindGameObjectsWithTag("Light");
+        /*lights = GameObject.FindGameObjectsWithTag("Light");
 
         //Check use warp
         if (useWarp)
@@ -113,6 +113,6 @@ public class Curve_Effect_Manager : MonoBehaviour
                 lightDestination = new Vector3(lightOrigin.x + curveCurrentValue, lightOrigin.y + curveMaxHeight, lightOrigin.z);
                 light.transform.position = Vector3.Lerp(lightOrigin, lightDestination, LerpAmount);
             }
-        }
+        }/*/
     }
 }
