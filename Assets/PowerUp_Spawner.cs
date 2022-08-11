@@ -9,6 +9,8 @@ public class PowerUp_Spawner : MonoBehaviour
     /// Script created 09/08/22 by Oakley
     /// 
     /// 09/08/22 - created script to choose a random powerup to spawn
+    /// 10/08/22 - [MALACHI] made it so powerups can only spawn if one doesnt exist in the scene. will
+    ///            spawn a coin instead.
     /// </summary>
 
     //[SerializeField] private Transform spawnTrans;
@@ -22,7 +24,7 @@ public class PowerUp_Spawner : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("PowerUp") != null)
         {
-            GameObject newCoin = Instantiate(powerUpType[3], this.transform.position, this.transform.rotation);
+            GameObject newCoin = Instantiate(powerUpType[powerUpType.Length - 1], this.transform.position, this.transform.rotation);
             newCoin.transform.parent = this.transform;
             return;
         }

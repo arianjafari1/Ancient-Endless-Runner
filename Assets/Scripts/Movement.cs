@@ -154,9 +154,24 @@ public class Movement : MonoBehaviour
             superJumpActive = value;
         }
     }
+    [SerializeField] private float superJumpSpeedIncrease;
+    private float speedBeforeSuperJump;
 
     private bool isJumping = false;
     private bool isFalling = false;
+
+    //used for checking if the player is in the air while super jump is active in boulder movement code.
+    public bool isPlayerAirborne
+    {
+        get
+        {
+            if (isJumping || isFalling)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
     private bool isTryingToSlide = false;
     [SerializeField] private bool isSliding = false;
     [Tooltip("Acceleration modifier for jump cancels")]
@@ -340,6 +355,10 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
+                if (willJumpBeSuper)
+                {
+                    tileMovement.movementSpeedGetterSetter = speedBeforeSuperJump;
+                }
                 movementAnimations.SetBool("Falling", false);
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
@@ -431,6 +450,8 @@ public class Movement : MonoBehaviour
         if (IsSuperJumpActive)
         {
             willJumpBeSuper = true;
+            speedBeforeSuperJump = tileMovement.movementSpeedGetterSetter;
+            tileMovement.movementSpeedGetterSetter *= superJumpSpeedIncrease;
         }
         playerAnimation.Play("Jump");
         movementAnimations.SetBool("Jump", true);
@@ -476,6 +497,11 @@ public class Movement : MonoBehaviour
         switch (currentPlayerState)
         {
             case PlayerStates.running:
+                if ((isJumping || isFalling ) && willJumpBeSuper)
+                {
+                    tileMovement.movementSpeedGetterSetter = speedBeforeSuperJump;
+                }
+
                 speedBeforeStagger = tileMovement.movementSpeedGetterSetter;
                 //tileMovement.movementSpeedGetterSetter -= staggerSpeedDecrease;
                 tileMovement.movementSpeedGetterSetter *= staggerSpeedDecrease;
