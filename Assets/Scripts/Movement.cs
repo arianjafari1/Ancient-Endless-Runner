@@ -458,7 +458,7 @@ public class Movement : MonoBehaviour
         playerAnimation.Play("Jump");
         movementAnimations.SetBool("Jump", true);
         isJumping = true;
-        currentJumpVelocity = willJumpBeSuper ? poweredJumpForce : jumpForce;
+        currentJumpVelocity = jumpForce;//willJumpBeSuper ? poweredJumpForce : jumpForce;
     }
 
     public void Slide(InputAction.CallbackContext context)
@@ -467,7 +467,6 @@ public class Movement : MonoBehaviour
         //collision box of the player.
         if (currentPlayerState == PlayerStates.staggered || isTryingToSlide || isSliding)
         {
-            Debug.Log("no slidey slidey for you :(");
             return;
         }
 
@@ -499,8 +498,9 @@ public class Movement : MonoBehaviour
         switch (currentPlayerState)
         {
             case PlayerStates.running:
-                if ((isJumping || isFalling ) && willJumpBeSuper)
+                if (isPlayerAirborne && willJumpBeSuper)
                 {
+                    Debug.Log("Player staggered midair with powerup");
                     tileMovement.movementSpeedGetterSetter = speedBeforeSuperJump;
                 }
 
@@ -519,19 +519,19 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void ChangeJumpPower(bool isPowered)
-    {
-        if (isPowered)
-        {
-            currentMaxJumpHeight = poweredJumpHeight;
-            currentJumpForce = poweredJumpForce;
-        }
-        else
-        {
-            currentMaxJumpHeight = maxJumpHeight;
-            currentJumpForce = jumpForce;
-        }
-    }
+    //public void ChangeJumpPower(bool isPowered)
+    //{
+    //    if (isPowered)
+    //    {
+    //        currentMaxJumpHeight = poweredJumpHeight;
+    //        currentJumpForce = poweredJumpForce;
+    //    }
+    //    else
+    //    {
+    //        currentMaxJumpHeight = maxJumpHeight;
+    //        currentJumpForce = jumpForce;
+    //    }
+    //}
 
     public void SetDeathState()
     {
