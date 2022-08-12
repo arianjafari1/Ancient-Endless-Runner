@@ -204,6 +204,7 @@ public class Movement : MonoBehaviour
     private float speedBeforeStagger;
     [SerializeField] private BoulderMovement boulderMovement;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private AudioManager audioManager;
 
     private void Awake()
     {
@@ -269,6 +270,7 @@ public class Movement : MonoBehaviour
         playerAnimation = gameObject.GetComponent<Animation>(); //Changing for Animator
         movementAnimations = playerModel.GetComponent<Animator>();
         gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
 
@@ -539,6 +541,8 @@ public class Movement : MonoBehaviour
         currentPlayerState = PlayerStates.dead;
         DisablePlayerInput();
         gameState.CurrentGameState = GameState.gameState.gameOver;
+        audioManager.StopSound(4);
+        audioManager.PlaySound("GameOverMusic");
     }
 
     //Once the stagger has finished, returns back to the speed it was at before

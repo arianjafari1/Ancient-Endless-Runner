@@ -34,6 +34,7 @@ public class BoulderMovement : MonoBehaviour
     /// 22/07/22 - [OAKLEY] added wavy left-right movement to boulder
     /// 27/07/22 - [OAKLEY] added audio manager and boulder sound effect
     /// 02/08/22 - serialised the speed increase of the boulder on player death
+    /// 11/08/22 - added a multiplier for backwards movement for new superjump powerup
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
