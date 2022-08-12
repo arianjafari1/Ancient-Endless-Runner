@@ -21,6 +21,8 @@ public class Collectable : MonoBehaviour
     ///          - powerup now rotates in the correct orientation
     ///          - rotation differs between collectables, so added a rotation direction enum so each collectable can be 
     ///            set individually
+    /// 12/08/22 - moved end powerup function to the score manager, as the powerup wouldnt end if the powerup object
+    ///            despawned before the end of the countdown.
     /// 
     /// </summary>
 
@@ -80,15 +82,15 @@ public class Collectable : MonoBehaviour
                     break;
                 case CollectableType.CoinMagnetPower:
                     coinMagnet.enabled = true;
-                    Invoke(nameof(EndPowerUp), powerUpDuration);
+                    scoreManager.StartPowerupCountdown(powerUpDuration);
                     break;
                 case CollectableType.FeatherJumpPower:
                     playerMovement.IsSuperJumpActive = true;
-                    Invoke(nameof(EndPowerUp), powerUpDuration);
+                    scoreManager.StartPowerupCountdown(powerUpDuration);
                     break;
                 case CollectableType.CheatDeathPower:
                     playerMovement.IsShieldActive = true;
-                    Invoke(nameof(EndPowerUp), powerUpDuration);
+                    scoreManager.StartPowerupCountdown(powerUpDuration);
                     break;
 
             }
@@ -97,10 +99,13 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    public void EndPowerUp()
-    {
-        coinMagnet.enabled = false;
-        playerMovement.IsSuperJumpActive = false;
-        playerMovement.IsShieldActive = false;
-    }
+    //public void EndPowerUp()
+    //{
+    //    Debug.Log("Powerup ends");
+    //    coinMagnet.enabled = false;
+    //    playerMovement.IsSuperJumpActive = false;
+    //    playerMovement.IsShieldActive = false;
+    //    
+    //}
+
 }

@@ -42,6 +42,7 @@ public class GameOver : MonoBehaviour
         //gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
         //scoreText.text = "Score: " + score.ToString(); //set the score
         audioManager.StopSound(4); //Stop Game Music
+        scoreManager.AddLifetimeStats();
     }
 
     private void restartButton()

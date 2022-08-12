@@ -335,7 +335,6 @@ public class Movement : MonoBehaviour
                 movementAnimations.SetBool("Jump", false);
                 isJumping = false;
                 isFalling = true;
-                Debug.Log("Height reached");
             }
 
             //failsafe to cancel the jump from shooting downwards if the jump height is never reached
@@ -365,7 +364,6 @@ public class Movement : MonoBehaviour
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isFalling = false;
-                Debug.Log("Back to ground");
             }
         }
 
@@ -451,6 +449,7 @@ public class Movement : MonoBehaviour
         willJumpBeSuper = false;
         if (IsSuperJumpActive)
         {
+            
             willJumpBeSuper = true;
             speedBeforeSuperJump = tileMovement.movementSpeedGetterSetter;
             tileMovement.movementSpeedGetterSetter *= superJumpSpeedIncrease;
@@ -459,6 +458,7 @@ public class Movement : MonoBehaviour
         movementAnimations.SetBool("Jump", true);
         isJumping = true;
         currentJumpVelocity = jumpForce;//willJumpBeSuper ? poweredJumpForce : jumpForce;
+        Debug.Log(willJumpBeSuper.ToString() + IsSuperJumpActive.ToString());
     }
 
     public void Slide(InputAction.CallbackContext context)
@@ -554,11 +554,10 @@ public class Movement : MonoBehaviour
     }
 
     //Added the ability to cancel the invoke to prevent the ground from returning to the
-    //state of moving if the player dies during the stagger phase (most likely due to the boulder)s
+    //state of moving if the player dies during the stagger phase (most likely due to the boulder)
     public void CancelSpeedReturn()
     {
         CancelInvoke();
-        
     }
 
     public void PlayAnimation(string animationName)
