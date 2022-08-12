@@ -66,8 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9a299967e0383b41bd8feafd77a3379, type: 2}
-  - {fileID: 2100000, guid: e9a299967e0383b41bd8feafd77a3379, type: 2}
+  - {fileID: 2100000, guid: c6e9e4e837d550449aabd81b35e2e496, type: 2}
+  - {fileID: 2100000, guid: c6e9e4e837d550449aabd81b35e2e496, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4896,7 +4896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c05c6704242c743a0ff4d01c49a804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntactObstacles: []
+  IntactObstacles:
+  - {fileID: 4558570670510571513}
   destroyedObstacle:
   - {fileID: 0}
   dustParticles: {fileID: 6457240571868792534}
