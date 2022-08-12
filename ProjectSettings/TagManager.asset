@@ -18,6 +18,8 @@ TagManager:
   - pitObstacle
   - AudioManager
   - TileMiddle
+  - Light
+  - PowerUp
   layers:
   - Default
   - TransparentFX

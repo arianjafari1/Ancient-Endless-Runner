@@ -34,6 +34,7 @@ public class BoulderMovement : MonoBehaviour
     /// 22/07/22 - [OAKLEY] added wavy left-right movement to boulder
     /// 27/07/22 - [OAKLEY] added audio manager and boulder sound effect
     /// 02/08/22 - serialised the speed increase of the boulder on player death
+    /// 11/08/22 - added a multiplier for backwards movement for new superjump powerup
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
@@ -49,6 +50,8 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private float maxZPos;
     [Tooltip("Speed at which the boulder retreats as the player accelerates")]
     [SerializeField] private float backwardsMovement;
+    [Tooltip("Multiplier for backwards movement while superjump is active")]
+    [SerializeField] private float SuperJumpBackwardsMultiplier;
     [Tooltip("Speed at which the boulder moves forward as the player is staggering")]
     [SerializeField] private float forwardsMovement;
     [Tooltip("The speed at which the boulder increases and goes offscreen after the player dies")]
@@ -91,7 +94,8 @@ public class BoulderMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        switch(playerMovement.getPlayerState)
+        
+        switch (playerMovement.getPlayerState)
         {
             case Movement.PlayerStates.staggered:
                 boulder.transform.Translate(Vector3.forward * forwardsMovement);
@@ -100,9 +104,16 @@ public class BoulderMovement : MonoBehaviour
                 boulder.transform.Translate(deathSpeedMultiplier * forwardsMovement * Vector3.forward);
                 break;
             case Movement.PlayerStates.running:
-                if (boulder.transform.position.z >= minZPos)
+                if (boulder.transform.position.z > minZPos)
                 {
-                    boulder.transform.Translate(Vector3.back * backwardsMovement);
+                    if (playerMovement.IsSuperJumpActive && playerMovement.isPlayerAirborne)
+                    {
+                        boulder.transform.Translate(Vector3.back * backwardsMovement * SuperJumpBackwardsMultiplier);
+                    }
+                    else
+                    {
+                        boulder.transform.Translate(Vector3.back * backwardsMovement);
+                    }
                 }
                 break;
         }

@@ -27,6 +27,15 @@ public class Curve_Effect_Manager : MonoBehaviour
     [SerializeField] private bool useWarp;
 
     private GameState currentGameState;
+    public GameObject[] lights; //Create an array to store lights in the scene
+    [SerializeField] private Camera cam; //Get camera
+    private Transform camTrans;
+    private Vector3 camPos;
+    private float camZPos;
+    private double distanceFromCam;
+    private float LerpAmount;
+    private Vector3 lightOrigin;
+    private Vector3 lightDestination;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +53,10 @@ public class Curve_Effect_Manager : MonoBehaviour
 
         float useWarpVal = useWarp ? 1.0f : 0.0f;
         Shader.SetGlobalFloat("_useWarp", useWarpVal);
+
+        camTrans = cam.GetComponent<Transform>();
+        camPos = camTrans.position;
+        camZPos = camPos.z;
     }
 
     // Update is called once per frame
@@ -76,7 +89,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             }
             if (!isCurvedLeft && Math.Abs(curveCurrentValue - curveLeftMax) >= 0.01) //If we are current curved right and the curve is not yet at the left side we curve
             {
-                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin(transSpeed * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
+                curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin((transSpeed /1000) * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
             }
             else
@@ -86,5 +99,20 @@ public class Curve_Effect_Manager : MonoBehaviour
                 targetPauseTime = UnityEngine.Random.Range(curvePauseMinTime, curvePauseMaxTime); //Set target pause time to random value between Min and Max pause time
             }
         }
+        //Script to move the lights
+        /*lights = GameObject.FindGameObjectsWithTag("Light");
+
+        //Check use warp
+        if (useWarp)
+        {
+            foreach (GameObject light in lights)
+            {
+                distanceFromCam = ((light.transform.position.z - camZPos) + curveStart) * curveShallowness;
+                LerpAmount = Convert.ToSingle(Math.Pow(distanceFromCam, curveAmount));
+                lightOrigin = light.transform.position;
+                lightDestination = new Vector3(lightOrigin.x + curveCurrentValue, lightOrigin.y + curveMaxHeight, lightOrigin.z);
+                light.transform.position = Vector3.Lerp(lightOrigin, lightDestination, LerpAmount);
+            }
+        }/*/
     }
 }

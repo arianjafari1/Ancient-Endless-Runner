@@ -85,8 +85,8 @@ public class GameState : MonoBehaviour
         switch (currentGameState)
         {
             case gameState.gameOver:
-                audioManager.StopSound(4); //Stop Game Music
-                audioManager.PlaySound("GameMenuMusic"); //Play Menu Music
+                //audioManager.StopSound(4); //Stop Game Music
+                //audioManager.PlaySound("GameMenuMusic"); //Play Menu Music
                 tileMovement.movementSpeedGetterSetter = 0;
                 tileMovement.speedIncreaseEverySecondGetterSetter = 0;
                 virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
