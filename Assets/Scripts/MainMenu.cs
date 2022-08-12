@@ -21,6 +21,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioManager audioManager; //Setup Audio Manager    
     [SerializeField] private Slider volumeSlider;
     private const float defaultSliderValue= 1f; //default value of the Volume slider
+    private List<int> widths = new List<int>() {848, 1024, 1280, 1280, 1366, 1440, 1600, 1680, 1920, 1920, 2560, 2560, 3840, 3840, 5120, 5120, 7680, 8192 }; //list of widths that will be used for resolutions
+    private List<int> heights = new List<int>() {480, 640, 720, 800, 768, 900, 900, 1050, 1080, 1200, 1400, 1600, 2160, 2400, 2880, 3200, 4320, 5120 }; //list of heights that will be used for resolutions
 
     private void Awake()
     {
@@ -61,6 +63,26 @@ public class MainMenu : MonoBehaviour
     private void resetPlayerPref()
     {
         PlayerPrefs.DeleteAll(); //resetting player prefs
+    }
+
+    public void SetScreenResolution (int i) //a function to set the screen resolution based on whether the screen is fullscreen and windows and out width and height lists
+    {
+        bool fullScreen = Screen.fullScreen; //a bolean that will return whether the game is fullscreen or not as either true or false
+        int width = widths[i];
+        int height = heights[i];
+        Screen.SetResolution(width, height, fullScreen); //setting the screen resolution
+    }
+
+    public void SetFullScreenOrWindowed(bool _fullScreen) //function to set the game to windowed or full screen
+    {
+        if (_fullScreen)
+        {
+            Screen.fullScreen = true;
+        } else
+        {
+            Screen.fullScreen = false;
+        }
+    
     }
 
     private void startGame()
