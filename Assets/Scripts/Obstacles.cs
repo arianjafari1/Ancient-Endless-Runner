@@ -79,7 +79,7 @@ public class Obstacles : MonoBehaviour
 
         if (collisionInfo.gameObject.CompareTag("pitObstacle"))
         {
-
+            audioManager.PlaySound("Scream");
             playerMovement.SetDeathState();
             switch (playerMovement.getLane)
             {
