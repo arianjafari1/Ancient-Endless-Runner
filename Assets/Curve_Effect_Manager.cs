@@ -36,6 +36,10 @@ public class Curve_Effect_Manager : MonoBehaviour
     private float LerpAmount;
     private Vector3 lightOrigin;
     private Vector3 lightDestination;
+    [SerializeField] GameObject theSun;
+    private Transform theSunTrans;
+    private float sunCurrentRot;
+    private float sunTargetRot;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,9 @@ public class Curve_Effect_Manager : MonoBehaviour
         camTrans = cam.GetComponent<Transform>();
         camPos = camTrans.position;
         camZPos = camPos.z;
+        sunCurrentRot = theSun.transform.rotation.eulerAngles.y;
+        sunTargetRot = sunCurrentRot + 90;
+        theSunTrans = theSun.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -80,6 +87,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveRightMax, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f); //Move the curve right over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader as we go
+                sunCurrentRot = Mathf.Lerp(sunCurrentRot, sunTargetRot, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f);
             }
             else
             { //If we are no longer curved left, or we are at the right side then we pause
@@ -91,6 +99,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin((transSpeed /1000) * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
+                sunCurrentRot = Mathf.Lerp(sunCurrentRot, -sunTargetRot, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f);
             }
             else
             { //If we are no longer curved right, or we reach the left side then we pause again

@@ -4994,6 +4994,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GMP_amphora_01
       objectReference: {fileID: 0}
+    - target: {fileID: 3018094305821606330, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018094305821606330, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
 --- !u!4 &209391794329813316 stripped
@@ -5016,6 +5032,14 @@ PrefabInstance:
     - target: {fileID: 1348438438263908454, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_Name
       value: Brick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348438438263908458, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_RootOrder
@@ -5083,6 +5107,14 @@ PrefabInstance:
     - target: {fileID: 1348438438263908454, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_Name
       value: Brick (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348438438263908458, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_RootOrder
@@ -5207,6 +5239,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingOpenNoTop2x1x2_01
@@ -5233,6 +5273,14 @@ PrefabInstance:
     - target: {fileID: 1348438438263908454, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_Name
       value: Brick (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348438438263908458, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_RootOrder
@@ -5345,6 +5393,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GMP_amphora_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3018094305821606330, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018094305821606330, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80d06548141d2d45894366ff52f85b2, type: 3}
 --- !u!4 &4028932845806641601 stripped
@@ -5424,6 +5488,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3f4997998dbc4f34ca666a6d7a90ddb4, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingOpenNoTop2x1x2_01 (1)
@@ -5491,6 +5563,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 73934da990dfc994194751a52185ae89, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 73934da990dfc994194751a52185ae89, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 73934da990dfc994194751a52185ae89, type: 3}
       propertyPath: m_Name
       value: GMP_lekythos_01
@@ -5517,6 +5597,14 @@ PrefabInstance:
     - target: {fileID: 1348438438263908454, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_Name
       value: Brick (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348438438263908458, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_RootOrder
@@ -5584,6 +5672,14 @@ PrefabInstance:
     - target: {fileID: 1348438438263908454, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_Name
       value: Brick (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348438438263908456, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348438438263908458, guid: 48f12a15497b4a34c817bc8792aaf638, type: 3}
       propertyPath: m_RootOrder
@@ -5704,6 +5800,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_Name
       value: ENV_ScaffoldingBasePlate_01
@@ -5782,6 +5886,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97e600eb69efe5d429da41a68b05d696, type: 3}
       propertyPath: m_Name

@@ -271,6 +271,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: af4d501b6d6f1d64383e5f6e0d820b75, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: af4d501b6d6f1d64383e5f6e0d820b75, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af4d501b6d6f1d64383e5f6e0d820b75, type: 3}
       propertyPath: m_Name
       value: tri_wall_02
@@ -1784,6 +1792,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb1d61163d86df54c93613e69f4939a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bb1d61163d86df54c93613e69f4939a3, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bb1d61163d86df54c93613e69f4939a3, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bb1d61163d86df54c93613e69f4939a3, type: 3}
       propertyPath: m_Name

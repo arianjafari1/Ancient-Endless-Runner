@@ -111,6 +111,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _Alpha_Clip_Threshold: 0.1
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
