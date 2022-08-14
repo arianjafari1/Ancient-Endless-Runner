@@ -13,13 +13,25 @@ public class BoulderRotate : MonoBehaviour
     ///          - flipped camera to show boulder (in editor)
     /// 28/06/22 - boulder rotates right instead of forwards with a default rotation on the other axis at 90 degrees
     ///          - was causing problems with moving the boulder when the other way
-    /// 
     /// 22/07/22 - Oakley came in and messed with your script!
+    /// 14/08/22 - Added getter/setter for rotation amount. 
     /// </summary>
 
 
     [SerializeField] private float forwardRotationAmount;
     [SerializeField] private GameObject boulder;
+
+    public float RotationAmount
+    {
+        get
+        {
+            return forwardRotationAmount;
+        }
+        set
+        {
+            forwardRotationAmount = value;
+        }
+    }
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.

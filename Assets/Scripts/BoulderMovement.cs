@@ -50,6 +50,17 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private float maxZPos;
     [Tooltip("Speed at which the boulder retreats as the player accelerates")]
     [SerializeField] private float backwardsMovement;
+    public float getBackwardsMovement
+    {
+        get
+        {
+            return backwardsMovement;
+        }
+        set
+        {
+            backwardsMovement = value;
+        }
+    }
     [Tooltip("Multiplier for backwards movement while superjump is active")]
     [SerializeField] private float SuperJumpBackwardsMultiplier;
     [Tooltip("Speed at which the boulder moves forward as the player is staggering")]
