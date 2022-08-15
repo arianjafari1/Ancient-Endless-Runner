@@ -1,21 +1,16 @@
 fileFormatVersion: 2
-guid: dc0355939ef75774f9a5093fd76f81b6
+guid: 02db248e7b841e047b36248584a6a1dc
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: f5e8cf68d60a8c84fa21f38b083fbbd0, type: 2}
+  externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -74,7 +69,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -83,43 +78,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 36cb7c0ed0f2d1946978cfd23f204fdd
-  - 3af380ef91c450543bab63075284e766
-  - 87c28eeca0845064dad4f7d1bd48d2e0
-  - 8f30b4778c1b2e348be7290cfb1f299f
-  - c0c49f51636d6f14a85cf84ee2d0acc6
-  - b106c654e6e8bc243a64fd1fa647099e
-  - fe8aeea1aa59b364ead607b64315a38a
-  - 0cab8261cac3fd641810346c31475f51
-  - aecf2dc2e9d874641ad0274fd6eedc73
-  - 99f5d84ca4737ab4fb2c8ee80d5a9828
-  - ee272f3e92f284b42b2be2cdeb9b7e16
-  - 59947df37b996ec4abff3403b330953c
-  - 9327da3eddd0480479960a591fb5547d
-  - 9a67ed7c59df6794b9dad018612439cb
-  - 7ec462a770ccd6b48886ac9d70d36675
-  - 5e419815171eca248bf3590209ef70a1
-  - e3ff6d616f0cce54fa2b1fb7fa451460
-  - 981a52e96c9e0b7469e0be99df601fe0
-  - 072164ce401ae9540874877e7a73fd05
-  - 35216faf79a938949a14a8f8b785c3ff
-  - f1f9b2d43c72a804e9f1f5198f359020
-  - 1e461a3b25347d24d8d6ced2c68397bb
-  - 9a9f2a03e21af174f884168fe42d8897
-  - 8000199a0b670f947b37d12dc08d83ea
-  - 612a7ed4f64df4f4c883c263db9ff587
-  - 13e0260dba7713e4a855624ef91fc81b
-  - 02db248e7b841e047b36248584a6a1dc
-  - 6ab900b96bd16f845aa010c7a0711e0f
-  - e0766ee66c21a6a4a9c864ec17c896dc
-  - b4fc09ee62958ff44ba10c35eca839c1
-  - 433f5b86b2bb5ed45a68a317f40d345b
-  - 8b72e16b72f5cdb4fa4c7dbe0373cc87
-  - c02e19e5368b8d842bc5f58d0c764a0b
-  - 0d3d16af34effb74cb220e4f92bb7fc1
-  - 61ee7eea2715cdc438c842568776d922
-  - ba48c55bd1253a24e8e454689f02240b
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -928,11 +887,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: dc0355939ef75774f9a5093fd76f81b6, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
