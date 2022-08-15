@@ -42,6 +42,7 @@ public class BoulderMovement : MonoBehaviour
     [SerializeField] private GameOver gameOverScreen;
     [SerializeField] private Movement playerMovement;
     [SerializeField] private TileMovement tileMovement;
+    [SerializeField] private GameState currentGameState;
     [Tooltip("The position at which the boulder starts - wants to be not too far back, but not so close it kills you after the first trip")]
     [SerializeField] private float startZPos;
     [Tooltip("The furthest back the boulder can go - make sure it is still visible on the camera as it needs to be intimidating")]
@@ -100,12 +101,17 @@ public class BoulderMovement : MonoBehaviour
     {
         boulder.transform.position = new Vector3(0, 5, startZPos);
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlaySound("Boulder_Movement");
+        currentGameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         audioManager.PlaySound("GameplayMusic");
     }
     void FixedUpdate()
     {
-        
+        if (currentGameState.CurrentGameState == GameState.gameState.beginningCutScene)
+        {
+            return;
+        }
+
+
         switch (playerMovement.getPlayerState)
         {
             case Movement.PlayerStates.staggered:
@@ -145,6 +151,7 @@ public class BoulderMovement : MonoBehaviour
             }
 
         }
+
 
 
         //makes boulder move left and right slowly

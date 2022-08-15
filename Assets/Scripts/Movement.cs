@@ -281,6 +281,10 @@ public class Movement : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        if (gameState.CurrentGameState == GameState.gameState.beginningCutScene)
+        {
+            return;
+        }
         int targetLane = ((int)currentLane);
         //currentPos is now virtually a relic from attempts using MoveTowards rather than translate, which resulted
         //in inputs being queued rather than performing immediately as the button was pressed.
