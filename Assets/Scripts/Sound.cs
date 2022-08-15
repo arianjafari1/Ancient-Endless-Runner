@@ -8,11 +8,12 @@ using UnityEngine;
 
     /// <summary>
     /// 27/07/2022 -[Arian] created Sound script that doesn't inherit from MonoBehaviour
+    /// 27/07/2022 -[Arian] made a Sound class to use with attributes to use as array for sounds in the AudioManager
     /// </summary>
 
     [SerializeField] private string nameSound; //name for the property sound in the editor
 
-    [SerializeField] private AudioClip clipSound; //reference to AudioPlayer from Unity
+    [SerializeField] private AudioClip clipSound;
 
 
     [Range(0f, 1f)] // to add a slider to those var in Unity Editor, we need to ad min and max
@@ -25,6 +26,8 @@ using UnityEngine;
     
     private AudioSource sourceSound; //for the play method, where the audio source is stored from Audio
 
+
+    //getters and setters
     public string NameSound 
     {
         get

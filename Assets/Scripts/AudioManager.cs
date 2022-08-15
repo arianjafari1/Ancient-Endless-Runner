@@ -10,6 +10,10 @@ public class AudioManager : MonoBehaviour
 
     /// <summary>
     /// 27/07/2022 -[Arian] created AudioManager script
+    ///            -[Arian] using the sounds class to created a Serialized array to add audio in the AudioManager object in the editor
+    ///            -[Arian] Made sure that in Awake there is no two or more instances of the audio manager with a check
+    ///            -[Arian] Added function to play sound
+    /// 03/08/2022 -[Arian] Added a stop function to stop sound already playing
     /// </summary>
 
     [SerializeField] private Sound[] sounds;
@@ -28,7 +32,6 @@ public class AudioManager : MonoBehaviour
             return; //just to be sure that no more coded will be executed after destroying the object
         }
 
-        //DontDestroyOnLoad(gameObject); // make sure that the AudioManager object that is now a prefab persists between scenes
 
 
 
@@ -45,12 +48,6 @@ public class AudioManager : MonoBehaviour
 
 
     }
-
-    //private void Start() //we can use start option to play a background music and have it continously loop by ticking that in the editor
-    //{
-    //    //if you want to play a song globally use our playSound mehthod (eg: playSound("nameOfTheSound");)
-    //    playSound("themeSong");
-    //}
 
 
     private void playSound(string name) //method to play sound
@@ -76,7 +73,6 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < sounds.Length; i++) //looping through a list of sounds to look for audio sources while the game is playing
         {
-            //Debug.Log(sounds[i].SourceSound.clip);
             try //ignore all errors
             {
                 AudioSource soundToStop = sounds[audioSourceNumberInArray].SourceSound; // the audio source that you want, based on parameter 

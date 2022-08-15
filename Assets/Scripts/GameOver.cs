@@ -56,12 +56,6 @@ public class GameOver : MonoBehaviour
     }
 
 
-
-    //public void ShowGameOverScreen(int inputScore) //getter for private function
-    //{
-    //    showGameOverScreen(inputScore);
-    //}
-
     public void RestartButton() //getter for private function
     {
         restartButton();

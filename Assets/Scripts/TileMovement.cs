@@ -162,10 +162,6 @@ public class TileMovement : MonoBehaviour
         }
         set
         {
-            //if (value < 0)
-            //    movementSpeed = 0;
-            //else
-            //    movementSpeed = value;
             movementSpeed = value;
         }
     }

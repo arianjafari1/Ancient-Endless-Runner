@@ -34,7 +34,6 @@ public class MainMenu : MonoBehaviour
         fullScreen.isOn = true; //setting the screen to full screen as default
         setDropDownMenuToCorrectResolution(); //set the dropdown menu resolution selector to correct resolution
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
-        Debug.Log (Screen.width + " X " + Screen.height);
     }
 
     public void changeVolume() //function to get the overall volume of the game from the audiolistner and assign it to the rge value of the volume slider
@@ -195,7 +194,6 @@ public class MainMenu : MonoBehaviour
     private void exitButton()
     {
         Application.Quit();
-        Debug.Log("Game is closed. As the game doesn't close in the editor otherwise.");
     }
 
     public void ResetGameSettings() //calling it when the button Reset Game Settings to Default is clicked
