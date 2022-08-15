@@ -152,7 +152,7 @@ public class TileManager : MonoBehaviour
     private void tilesAndDifficulty()
     {
         //last number in int Random.Range is exclusive
-        percentageChance = Random.Range(1, 11); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
+        percentageChance = Random.Range(1, 21); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
                                                     // switch statement to determine which tile should be spawned
 
         switch (tileEnvironment) //switch statement takes the expression of bool tileEnvironment to check whether the envirnment tiles or the right tiles are active
@@ -186,87 +186,87 @@ public class TileManager : MonoBehaviour
     {                                 //function used to determine which difficulty tiles it should pull from based on chance and difficulty
                                       //only used until we get to highest difficulty
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance <= 8)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance <= 16)
         {
             tilePrefabs = tileMovement.EasyTilePrefabs;
 
         } 
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance > 8)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance > 16)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
         }
 
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance <= 7) //check for the game state difficulty
+        if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance <= 14) //check for the game state difficulty
                                                                                                         //then for the percentage change 
         {
             tilePrefabs = tileMovement.EasyTilePrefabs; //then based on that select which Tile prefab array should there be a tile taken from
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance > 7)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance > 14)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
 
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance <= 5)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance <= 11)
         {
             tilePrefabs = tileMovement.EasyTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 5 && percentageChance < 10)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 11 && percentageChance < 20)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 9)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 19)
         {
             tilePrefabs = tileMovement.HardTilePrefabs;
 
         }
 
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance <= 5)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance <= 10)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 5 && percentageChance < 9)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 10 && percentageChance < 16)
         {
             tilePrefabs = tileMovement.EasyTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 8)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 15)
         {
             tilePrefabs = tileMovement.HardTilePrefabs;
 
         }
 
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance <= 4)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance <= 8)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 4 && percentageChance < 10)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 8 && percentageChance < 20)
         {
             tilePrefabs = tileMovement.HardTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 9)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 19)
         {
             tilePrefabs = tileMovement.EasyTilePrefabs;
 
         }
 
 
-        if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance <= 3)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance <= 6)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance > 3)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance > 6)
         {
             tilePrefabs = tileMovement.HardTilePrefabs;
 
@@ -279,12 +279,12 @@ public class TileManager : MonoBehaviour
     private void checkTheHardDifficulty() //separate function for the highest difficulty to determine which tiles to pull from
                                           //method created to make sure the other checks aren't done when highest difficulty is reached
     {
-        if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance <= 2)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance <= 4)
         {
             tilePrefabs = tileMovement.MediumTilePrefabs;
 
         }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance > 2)
+        else if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance > 4)
         {
             tilePrefabs = tileMovement.HardTilePrefabs;
 
