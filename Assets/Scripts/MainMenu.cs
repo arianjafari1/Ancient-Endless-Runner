@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
@@ -44,11 +45,15 @@ public class MainMenu : MonoBehaviour
     private void SavePlayerSettings() //function to save the player's prefered settings to
     {
         PlayerPrefs.SetFloat("generalVolume", volumeSlider.value); //save our date under the key string generalVolume, and data is the value of the volumeSlider
+        PlayerPrefs.SetInt("vSyncToggle", Convert.ToInt32(vSync.isOn)); // converting a bool for toggle into int and storing it in a player pref
+        PlayerPrefs.SetInt("fullScreenToggle", Convert.ToInt32(fullScreen.isOn)); // converting a bool for toggle into int and storing it in a player pref
     }
 
     private void LoadPlayerVolume()//load the player settings for volume
     {
         volumeSlider.value = PlayerPrefs.GetFloat("generalVolume");  //load the value with the key string generalVolume to load the player settings for volume
+        vSync.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("vSyncToggle")); //setting a toggle bool to the int converted to bool from player pref and loading it
+        fullScreen.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("fullScreenToggle"));
     }
 
     private void checkForPreviousSettings() //function to be called in awake or start to check for previous saved settings
@@ -192,8 +197,12 @@ public class MainMenu : MonoBehaviour
 
     public void ResetGameSettings() //calling it when the button Reset Game Settings to Default is clicked
     {
-        resetPlayerPref();
-        volumeSlider.value = defaultSliderValue;
+        resetPlayerPref(); //reset the prefs
+        volumeSlider.value = defaultSliderValue; //setting the volume slider to its default value
+        fullScreen.isOn = true; //full screen toggle is ticked and...
+        Screen.fullScreen = true;//... full screen is set to true
+        vSync.isOn = false; //vSync toggle is set to off and...
+        QualitySettings.vSyncCount = 0;//...v-sync is set to false
     }
 
     public void StartGame()
