@@ -17,8 +17,6 @@ public class MainMenu : MonoBehaviour
     ///            -[Arian] also added a function to be called in awake or start that checks for previous saved settings
     /// </summary>
 
-    private GameState gameState;
-    [SerializeField] private AudioManager audioManager; //Setup Audio Manager    
     [SerializeField] private Slider volumeSlider;
     private const float defaultSliderValue= 1f; //default value of the Volume slider
     private List<int> widths = new List<int>() {848, 1024, 1280, 1280, 1366, 1440, 1600, 1680, 1920, 1920, 2560, 2560, 3840, 3840, 5120, 5120, 7680, 8192 }; //list of widths that will be used for resolutions
@@ -26,8 +24,6 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); //start audio manager
-        audioManager.PlaySound("MainMenuMusic");
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
 
     }
@@ -78,11 +74,17 @@ public class MainMenu : MonoBehaviour
         if (_fullScreen)
         {
             Screen.fullScreen = true;
-        } else
+        }
+        else
         {
             Screen.fullScreen = false;
         }
     
+    }
+
+    public void SetVsyncOnOff()
+    {
+        return;
     }
 
     private void startGame()
