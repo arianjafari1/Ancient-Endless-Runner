@@ -3648,6 +3648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 805493973}
+  resolutionChanger: {fileID: 1678612133}
 --- !u!1 &1055237121
 GameObject:
   m_ObjectHideFlags: 0
