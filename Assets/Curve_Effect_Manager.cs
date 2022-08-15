@@ -80,7 +80,7 @@ public class Curve_Effect_Manager : MonoBehaviour
             isPaused = false;
         }
         // If isPaused is false then we curve;
-        if (!isPaused && currentGameState.CurrentGameState != GameState.gameState.gameOver)
+        if (!isPaused && !(currentGameState.CurrentGameState == GameState.gameState.gameOver || currentGameState.CurrentGameState == GameState.gameState.beginningCutScene))
         {
             //If we are currently curved left and the curve is not yet at the right side we keep curving
             if (isCurvedLeft && Math.Abs(curveCurrentValue - curveRightMax) >= 0.01)

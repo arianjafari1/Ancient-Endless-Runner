@@ -52,6 +52,11 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (gameState.CurrentGameState == GameState.gameState.beginningCutScene)
+        {
+            return;
+        }
+
         coinsUI.text = "x" + coinsCollected.ToString();
         scoreUI.text = "Score: " + score.ToString();
 
