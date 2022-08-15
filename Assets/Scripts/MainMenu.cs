@@ -31,7 +31,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        setDropDownMenuToCorrectResolution();
+        fullScreen.isOn = true; //setting the screen to full screen as default
+        setDropDownMenuToCorrectResolution(); //set the dropdown menu resolution selector to correct resolution
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
         Debug.Log (Screen.width + " X " + Screen.height);
     }
@@ -97,6 +98,7 @@ public class MainMenu : MonoBehaviour
         {
             Screen.fullScreen = false;
         }
+        SavePlayerSettings();
     
     }
 
@@ -112,6 +114,7 @@ public class MainMenu : MonoBehaviour
             QualitySettings.vSyncCount = 0;
             Debug.Log("V-Sync is off");
         }
+        SavePlayerSettings();
     }
 
 
