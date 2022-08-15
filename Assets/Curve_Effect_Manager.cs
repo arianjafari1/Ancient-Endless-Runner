@@ -36,10 +36,14 @@ public class Curve_Effect_Manager : MonoBehaviour
     private float LerpAmount;
     private Vector3 lightOrigin;
     private Vector3 lightDestination;
-    [SerializeField] GameObject theSun;
+    [SerializeField] private GameObject theSun;
     private Transform theSunTrans;
     private float sunCurrentRot;
     private float sunTargetRot;
+
+    [SerializeField] private float sunYRotateAmplitude;
+    [SerializeField] private float sunYDefaultRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +65,20 @@ public class Curve_Effect_Manager : MonoBehaviour
         camTrans = cam.GetComponent<Transform>();
         camPos = camTrans.position;
         camZPos = camPos.z;
-        sunCurrentRot = theSun.transform.rotation.eulerAngles.y;
-        sunTargetRot = sunCurrentRot + 90;
-        theSunTrans = theSun.GetComponent<Transform>();
+    }
+
+    ///<summary>
+    /// Change the sun's rotation to make the shadows look consistent
+    ///</summary>
+    private void UpdateSunRotation(float currentCurveValue)
+    {
+        float sunYAngle = this.sunYDefaultRotation;
+
+        float curveProportion = -currentCurveValue / Mathf.Abs(this.curveLeftMax);
+
+        sunYAngle += this.sunYRotateAmplitude * curveProportion;
+
+        this.theSun.transform.eulerAngles = new Vector3(this.theSun.transform.eulerAngles.x, sunYAngle, this.theSun.transform.eulerAngles.x);
     }
 
     // Update is called once per frame
@@ -86,8 +101,8 @@ public class Curve_Effect_Manager : MonoBehaviour
             if (isCurvedLeft && Math.Abs(curveCurrentValue - curveRightMax) >= 0.01)
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveRightMax, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f); //Move the curve right over time
+                this.UpdateSunRotation(curveCurrentValue);
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader as we go
-                sunCurrentRot = Mathf.Lerp(sunCurrentRot, sunTargetRot, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f);
             }
             else
             { //If we are no longer curved left, or we are at the right side then we pause
@@ -98,8 +113,8 @@ public class Curve_Effect_Manager : MonoBehaviour
             if (!isCurvedLeft && Math.Abs(curveCurrentValue - curveLeftMax) >= 0.01) //If we are current curved right and the curve is not yet at the left side we curve
             {
                 curveCurrentValue = Mathf.Lerp(curveCurrentValue, curveLeftMax, (Mathf.Sin((transSpeed /1000) * Time.deltaTime) +0.01f) / 2.0f); //Move left over time
+                this.UpdateSunRotation(curveCurrentValue);               
                 Shader.SetGlobalFloat("_curveMaxWidth", curveCurrentValue); //Update the shader
-                sunCurrentRot = Mathf.Lerp(sunCurrentRot, -sunTargetRot, (Mathf.Sin((transSpeed / 1000) * Time.deltaTime) +0.01f) / 2.0f);
             }
             else
             { //If we are no longer curved right, or we reach the left side then we pause again
