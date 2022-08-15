@@ -20,6 +20,9 @@ TagManager:
   - TileMiddle
   - Light
   - PowerUp
+  - Resolution
+  - Settings
+  - MainMenuCanvas
   layers:
   - Default
   - TransparentFX
