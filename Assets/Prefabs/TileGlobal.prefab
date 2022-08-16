@@ -50,6 +50,30 @@ MonoBehaviour:
   tilePosition: {fileID: 5436791841588199812}
   tileSpawnStart: {fileID: 5436791840411189064}
   groundLength: {fileID: 5436791841363800790}
+  veasyEasyWeight: 80
+  veasyMediumWeight: 20
+  veasyHardWeight: 0
+  easyEasyWeight: 70
+  easyMediumWeight: 30
+  easyHardWeight: 0
+  easymedEasyWeight: 55
+  easymedMediumWeight: 40
+  easymedHardWeight: 5
+  medeasyEasyWeight: 25
+  medeasyMediumWeight: 50
+  medeasyHardWeight: 25
+  mediumEasyWeight: 25
+  mediumMediumWeight: 50
+  mediumHardWeight: 25
+  medhardEasyWeight: 5
+  medhardMediumWeight: 40
+  medhardHardWeight: 55
+  hardmedEasyWeight: 0
+  hardmedMediumWeight: 30
+  hardmedHardWeight: 70
+  hardEasyWeight: 0
+  hardMediumWeight: 20
+  hardHardWeight: 80
 --- !u!65 &2945138527625334976
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -63,9 +63,42 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Transform groundLength; //ground child object of tile
 
     private int percentageChance; //I will assign this to get a number between 1 and 10 and based on that determines the chance, so we can use it down in the
-                                                // switch statement of tilesAndDifficulty to determine which tile should be spawned
+                                                // switch statement of tilesAndDifficulty to determine which tile should be spawned. [16/08/22 Oakley] 
 
     /// Code done by Arian- end
+    //Oakleys Edits
+    [SerializeField] private int veasyEasyWeight;
+    [SerializeField] private int veasyMediumWeight;
+    [SerializeField] private int veasyHardWeight;
+    private int veasyTotal;
+    [SerializeField] private int easyEasyWeight;
+    [SerializeField] private int easyMediumWeight;
+    [SerializeField] private int easyHardWeight;
+    private int easyTotal;
+    [SerializeField] private int easymedEasyWeight;
+    [SerializeField] private int easymedMediumWeight;
+    [SerializeField] private int easymedHardWeight;
+    private int easymedTotal;
+    [SerializeField] private int medeasyEasyWeight;
+    [SerializeField] private int medeasyMediumWeight;
+    [SerializeField] private int medeasyHardWeight;
+    private int medeasyTotal;
+    [SerializeField] private int mediumEasyWeight;
+    [SerializeField] private int mediumMediumWeight;
+    [SerializeField] private int mediumHardWeight;
+    private int mediumTotal;
+    [SerializeField] private int medhardEasyWeight;
+    [SerializeField] private int medhardMediumWeight;
+    [SerializeField] private int medhardHardWeight;
+    private int medhardTotal;
+    [SerializeField] private int hardmedEasyWeight;
+    [SerializeField] private int hardmedMediumWeight;
+    [SerializeField] private int hardmedHardWeight;
+    private int hardmedTotal;
+    [SerializeField] private int hardEasyWeight;
+    [SerializeField] private int hardMediumWeight;
+    [SerializeField] private int hardHardWeight;
+    private int hardTotal;
 
     // Start is called before the first frame update
     private void Awake()
@@ -152,7 +185,7 @@ public class TileManager : MonoBehaviour
     private void tilesAndDifficulty()
     {
         //last number in int Random.Range is exclusive
-        percentageChance = Random.Range(1, 21); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
+        //percentageChance = Random.Range(1, 21); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
                                                     // switch statement to determine which tile should be spawned
 
         switch (tileEnvironment) //switch statement takes the expression of bool tileEnvironment to check whether the envirnment tiles or the right tiles are active
@@ -184,109 +217,143 @@ public class TileManager : MonoBehaviour
 
     private void checkTheDifficulty() //function to be called in tilesAndDifficulty function to make it look cleaner
     {                                 //function used to determine which difficulty tiles it should pull from based on chance and difficulty
-                                      //only used until we get to highest difficulty
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance <= 16)
+                                      //only used until we get to highest difficulty   
+        //Changed code to be much more flexible and open for the designers to change
+        if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy) //Check the current game difficulty
         {
-            tilePrefabs = tileMovement.EasyTilePrefabs;
-
-        } 
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy && percentageChance > 16)
-        {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-        }
-
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance <= 14) //check for the game state difficulty
-                                                                                                        //then for the percentage change 
-        {
-            tilePrefabs = tileMovement.EasyTilePrefabs; //then based on that select which Tile prefab array should there be a tile taken from
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easy && percentageChance > 14)
-        {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
+            veasyTotal = veasyEasyWeight + veasyHardWeight + veasyMediumWeight; //Calculate what 100% is from the weightings
+            percentageChance = Random.Range(1, veasyTotal + 1); //Get a random number from 0 to the highest value
+            if (percentageChance <= veasyEasyWeight) //Check if the number is within the range set by the easy weighting
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs; //If true then spawn an easy tile
+            }
+            else if (percentageChance > veasyEasyWeight && percentageChance <= (veasyEasyWeight + veasyMediumWeight)) //If it was false , check if the number is within the medium range
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs; //If true spawn a medium tile
+            }
+            else if (percentageChance > (veasyEasyWeight + veasyMediumWeight)) //If both were false, check if the number was in the hard range (redundant?)
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs; //If true spawn a hard tile
+            }
 
         }
 
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance <= 11)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.easy)
         {
-            tilePrefabs = tileMovement.EasyTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 11 && percentageChance < 20)
-        {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium && percentageChance > 19)
-        {
-            tilePrefabs = tileMovement.HardTilePrefabs;
-
-        }
-
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance <= 10)
-        {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 10 && percentageChance < 16)
-        {
-            tilePrefabs = tileMovement.EasyTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy && percentageChance > 15)
-        {
-            tilePrefabs = tileMovement.HardTilePrefabs;
+            easyTotal = easyEasyWeight + easyHardWeight + easyMediumWeight;
+            percentageChance = Random.Range(1, easyTotal + 1);
+            if (percentageChance <= easyEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > easyEasyWeight && percentageChance <= (easyEasyWeight + easyMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (easyEasyWeight + easyMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
 
         }
 
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance <= 8)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.easyMedium)
         {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 8 && percentageChance < 20)
-        {
-            tilePrefabs = tileMovement.HardTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard && percentageChance > 19)
-        {
-            tilePrefabs = tileMovement.EasyTilePrefabs;
-
-        }
-
-
-        if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance <= 6)
-        {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium && percentageChance > 6)
-        {
-            tilePrefabs = tileMovement.HardTilePrefabs;
+            easymedTotal = easymedEasyWeight + easymedHardWeight + easymedMediumWeight;
+            percentageChance = Random.Range(1, easymedTotal + 1);
+            if (percentageChance <= easymedEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > easymedEasyWeight && percentageChance <= (easymedEasyWeight + easymedMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (easymedEasyWeight + easymedMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
 
         }
 
+        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumEasy)
+        {
+            medeasyTotal = medeasyEasyWeight + medeasyHardWeight + medeasyMediumWeight;
+            percentageChance = Random.Range(1, medeasyTotal + 1);
+            if (percentageChance <= medeasyEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > medeasyEasyWeight && percentageChance <= (medeasyEasyWeight + medeasyMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (medeasyEasyWeight + medeasyMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
 
+        }
+
+        if (gameState.currentDifficultyTile == GameState.Difficulty.mediumHard)
+        {
+            medhardTotal = medhardEasyWeight + medhardHardWeight + medhardMediumWeight;
+            percentageChance = Random.Range(1, medhardTotal + 1);
+            if (percentageChance <= medhardEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > medhardEasyWeight && percentageChance <= (medhardEasyWeight + medhardMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (medhardEasyWeight + medhardMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
+
+        }
+
+        if (gameState.currentDifficultyTile == GameState.Difficulty.hardMedium)
+        {
+            hardmedTotal = hardmedEasyWeight + hardmedHardWeight + hardmedMediumWeight;
+            percentageChance = Random.Range(1, hardmedTotal + 1);
+            if (percentageChance <= hardmedEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > hardmedEasyWeight && percentageChance <= (hardmedEasyWeight + hardmedMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (hardmedEasyWeight + hardmedMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
+
+        }
     }
 
 
     private void checkTheHardDifficulty() //separate function for the highest difficulty to determine which tiles to pull from
                                           //method created to make sure the other checks aren't done when highest difficulty is reached
     {
-        if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance <= 4)
+        if (gameState.currentDifficultyTile == GameState.Difficulty.hard)
         {
-            tilePrefabs = tileMovement.MediumTilePrefabs;
-
-        }
-        else if (gameState.currentDifficultyTile == GameState.Difficulty.hard && percentageChance > 4)
-        {
-            tilePrefabs = tileMovement.HardTilePrefabs;
+            hardTotal = hardEasyWeight + hardHardWeight + hardMediumWeight;
+            percentageChance = Random.Range(1, hardTotal + 1);
+            if (percentageChance <= hardEasyWeight)
+            {
+                tilePrefabs = tileMovement.EasyTilePrefabs;
+            }
+            else if (percentageChance > hardEasyWeight && percentageChance <= (hardEasyWeight + hardMediumWeight))
+            {
+                tilePrefabs = tileMovement.MediumTilePrefabs;
+            }
+            else if (percentageChance > (hardEasyWeight + hardMediumWeight))
+            {
+                tilePrefabs = tileMovement.HardTilePrefabs;
+            }
 
         }
 

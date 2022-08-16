@@ -67,7 +67,7 @@ Material:
     - _Smooth:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -79,23 +79,23 @@ Material:
     - _alb:
         m_Texture: {fileID: 2800000, guid: a72d4015ac60c6544bb4d887fb6cd63a, type: 3}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - _ao:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - _hi:
         m_Texture: {fileID: 2800000, guid: a866a3d8903e09248a45702f87b532df, type: 3}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - _no:
         m_Texture: {fileID: 2800000, guid: 0d85da3041193e54cbf21ba11e0636c1, type: 3}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - _sp:
         m_Texture: {fileID: 2800000, guid: 8318cd1309d20bb478f1c800633e0025, type: 3}
         m_Scale: {x: 1.5, y: 1.5}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.12}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
