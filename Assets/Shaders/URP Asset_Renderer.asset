@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: HighlightOpaque
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
     passTag: HighlightOpaque
-    Event: 300
+    Event: 350
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -64,7 +64,7 @@ MonoBehaviour:
     overrideMaterial: {fileID: 2100000, guid: fd3da694b0d533e4dacbe8270c56accc, type: 2}
     overrideMaterialPassIndex: 0
     overrideDepthState: 1
-    depthCompareFunction: 5
+    depthCompareFunction: 7
     enableWrite: 0
     stencilSettings:
       overrideStencilState: 0

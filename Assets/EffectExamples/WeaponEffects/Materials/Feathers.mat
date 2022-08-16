@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3902001296983536645
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -8,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Feathers
-  m_Shader: {fileID: -6465566751694194690, guid: 96d6953ec14605d4a8aee24f51867cd5, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 4ef9ffc832a55604b873996f54c0b838, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -69,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _alb:
-        m_Texture: {fileID: 2800000, guid: 477c430b429f1a24282dab34a73b4cca, type: 3}
+        m_Texture: {fileID: 2800000, guid: e6b7d40735765d54f8a049ab6ef904a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ao:
@@ -102,11 +115,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha_Clip_Threshold: 0.1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Emission: 0
+    - _Emission_Active: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.043
     - _GlossyReflections: 1
@@ -117,7 +132,7 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.3
+    - _Smoothness: 0.31
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -125,8 +140,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Albedo_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0.4745098}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission_Colour: {r: 0, g: 0, b: 0, a: 0}
+    - _Emission_Color: {r: 0.3490566, g: 0.22212042, b: 0.09385012, a: 0}
+    - _Emission_Colour: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

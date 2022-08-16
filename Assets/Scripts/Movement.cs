@@ -63,6 +63,7 @@ public class Movement : MonoBehaviour
     ///            times while the powerup is active. Attempt was to stop values changing whilst you are midair, but that 
     ///            turned out to not be the problem. Superjump will probably have to be removed unless the reason for this
     ///            bug is found, as there seems to be nothing in the code that is causing it.
+    /// 16/08/22 - [Oakley] Added variables for powerup effects
     /// </summary>
     private PauseMenu pauseMenu; //reference to PauseMenu script
     
@@ -210,7 +211,6 @@ public class Movement : MonoBehaviour
     {
         movementInputActions = new MovementInputActions();
         pauseMenu = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PauseMenu>();
-
     }
     /// <summary>
     /// These variables are used with the new Unity Input System, and add functions
@@ -410,7 +410,6 @@ public class Movement : MonoBehaviour
         {
             movementAnimations.SetTrigger("LookBehind");
         }
-
     }
     #region LaneSwitchFunctions
     //Switches the lane state to the one the player just inputted
