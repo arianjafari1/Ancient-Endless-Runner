@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering.Universal;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -42,12 +43,17 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreUI;
     private Movement playerMovement;
     private SphereCollider coinMagnet;
+    [SerializeField] private ScriptableRendererFeature ShieldEffect;
+    private ParticleSystem MagnetEffect;
+    private ParticleSystem FeatherEffect;
 
     private void Start()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         gameState = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameState>();
         coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<SphereCollider>();
+        MagnetEffect = GameObject.FindGameObjectWithTag("ShieldEffect").GetComponent<ParticleSystem>(); //I gave the tag the wrong name
+        FeatherEffect = GameObject.FindGameObjectWithTag("JumpEffect").GetComponent<ParticleSystem>();
     }
 
     private void FixedUpdate()
@@ -105,6 +111,10 @@ public class ScoreManager : MonoBehaviour
         playerMovement.IsShieldActive = false;
         playerMovement.IsSuperJumpActive = false;
         coinMagnet.enabled = false;
+
+        MagnetEffect.Stop();
+        FeatherEffect.Stop();
+        ShieldEffect.SetActive(false);
 
     }
 

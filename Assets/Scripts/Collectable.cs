@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Collectable : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class Collectable : MonoBehaviour
     ///            set individually
     /// 12/08/22 - moved end powerup function to the score manager, as the powerup wouldnt end if the powerup object
     ///            despawned before the end of the countdown.
+    /// 16/08/22 - added effects for each powerup
     /// 
     /// </summary>
 
@@ -48,12 +51,17 @@ public class Collectable : MonoBehaviour
     [SerializeField] private float powerUpDuration;
     [SerializeField] private GameObject collectable;
     private SphereCollider coinMagnet;
+    [SerializeField] private ScriptableRendererFeature ShieldEffect;
+    private ParticleSystem MagnetEffect;
+    private ParticleSystem FeatherEffect;
 
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
-        coinMagnet = GameObject.FindWithTag("CoinMagnet").GetComponent<SphereCollider>();
-        playerMovement = GameObject.FindWithTag("Player").GetComponent<Movement>();
+        coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<SphereCollider>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        MagnetEffect = GameObject.FindGameObjectWithTag("ShieldEffect").GetComponent<ParticleSystem>(); //I gave the tag the wrong name
+        FeatherEffect = GameObject.FindGameObjectWithTag("JumpEffect").GetComponent<ParticleSystem>();
     }
     private void FixedUpdate()
     {
@@ -83,14 +91,17 @@ public class Collectable : MonoBehaviour
                 case CollectableType.CoinMagnetPower:
                     coinMagnet.enabled = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
+                    MagnetEffect.Play();
                     break;
                 case CollectableType.FeatherJumpPower:
                     playerMovement.IsSuperJumpActive = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
+                    FeatherEffect.Play();
                     break;
                 case CollectableType.CheatDeathPower:
                     playerMovement.IsShieldActive = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
+                    ShieldEffect.SetActive(true);
                     break;
 
             }

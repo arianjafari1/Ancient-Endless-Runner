@@ -4911,7 +4911,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 1.5, y: 2, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1518045280854136075
 MonoBehaviour:
@@ -4930,6 +4930,7 @@ MonoBehaviour:
   rotationDirection: 0
   powerUpDuration: 5
   collectable: {fileID: 8186363657503080797}
+  ShieldEffect: {fileID: -2362101869367763067, guid: 9cea0f9b34c72734b9d25ab01becca56, type: 2}
 --- !u!54 &1518045280854136112
 Rigidbody:
   m_ObjectHideFlags: 0
