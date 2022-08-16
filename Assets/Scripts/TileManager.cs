@@ -66,7 +66,14 @@ public class TileManager : MonoBehaviour
                                                 // switch statement of tilesAndDifficulty to determine which tile should be spawned. [16/08/22 Oakley] 
 
     /// Code done by Arian- end
-    //Oakleys Edits
+    /* [ 15/08/22 - Oakley] Added a bunch of open variables that can be tweaked for individual weighting of difficulty chances.
+                            Explainer: Every difficulty level has it's own set of weightings (integers) for easy, medium and hard chances. These weightings can be set in the
+                            inspector. These weightings are then implemented into the difficulty system created by Arian. When Arian's code spawns a tile, it checks the difficulty.
+                            When it gets the difficulty level it then executes that specific spawner. It takes the weightings and converts them to percentages. The code then
+                            gets a random number from 1-100 (percentage chance). It then checks to see if the result is within the range for easy, if true it spawns an easy tile.
+                            If false, it checks if the result is in the range for a medium tile and spawns it if true. If both of these checks are false it spawns a hard tile.
+                            Some of the code here is redundant and messy due to my inexperience, but we ran out of time for Arian to clean it up for me. 
+    /*/
     [SerializeField] private int veasyEasyWeight;
     [SerializeField] private int veasyMediumWeight;
     [SerializeField] private int veasyHardWeight;
@@ -185,7 +192,7 @@ public class TileManager : MonoBehaviour
     private void tilesAndDifficulty()
     {
         //last number in int Random.Range is exclusive
-        //percentageChance = Random.Range(1, 21); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
+        //percentageChance = Random.Range(1, 11); //get a number between 1 and 10 and based on that determine chance so we can use it down in the
                                                     // switch statement to determine which tile should be spawned
 
         switch (tileEnvironment) //switch statement takes the expression of bool tileEnvironment to check whether the envirnment tiles or the right tiles are active
@@ -218,7 +225,7 @@ public class TileManager : MonoBehaviour
     private void checkTheDifficulty() //function to be called in tilesAndDifficulty function to make it look cleaner
     {                                 //function used to determine which difficulty tiles it should pull from based on chance and difficulty
                                       //only used until we get to highest difficulty   
-        //Changed code to be much more flexible and open for the designers to change
+        // [Oakley] Made some edits to Arian's code to be more flexible and open for the designers to change
         if (gameState.currentDifficultyTile == GameState.Difficulty.veryEasy) //Check the current game difficulty
         {
             veasyTotal = veasyEasyWeight + veasyHardWeight + veasyMediumWeight; //Calculate what 100% is from the weightings
