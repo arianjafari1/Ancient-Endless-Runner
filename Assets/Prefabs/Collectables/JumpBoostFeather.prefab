@@ -116,7 +116,7 @@ MonoBehaviour:
   collectableType: 2
   collectableRotation: 2
   rotationDirection: 0
-  powerUpDuration: 5
+  powerUpDuration: 15
   collectable: {fileID: 4169481331918110073}
   ShieldEffect: {fileID: -2362101869367763067, guid: 9cea0f9b34c72734b9d25ab01becca56, type: 2}
 --- !u!54 &1518045280854136112

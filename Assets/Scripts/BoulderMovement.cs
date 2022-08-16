@@ -168,6 +168,7 @@ public class BoulderMovement : MonoBehaviour
         //also stops the ground movement, removes the speed increase, and increases the boulder movement speed;
         if (collision.gameObject.CompareTag("Player"))
         {
+            audioManager.PlaySound("SquashPlayer");
             Debug.Log("Player has been flattened");
             
             //tileMovement.movementSpeedGetterSetter = 0;
@@ -187,6 +188,20 @@ public class BoulderMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("obstacleToStagger") || collision.gameObject.CompareTag("obstacleToJump") || collision.gameObject.CompareTag("obstacleToSlide"))
         {
             collision.gameObject.GetComponent<DestructableObject>().DestroyObstacle();
+
+            switch (collision.gameObject.tag)
+            {
+                case "obstacleToStagger":
+                    audioManager.PlaySound("BreakCeramics");
+                    break;
+                case "obstacleToJump":
+                    audioManager.PlaySound("BreakStone");
+                    break;
+                case "obstacleToSlide":
+                    audioManager.PlaySound("BreakWood");
+                    break;
+            }
+
         }
     }
 

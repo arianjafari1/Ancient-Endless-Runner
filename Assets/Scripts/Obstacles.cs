@@ -14,6 +14,7 @@ public class Obstacles : MonoBehaviour
     /// 15/07/22 - [MALACHI] added death trigger on pit tagged obstacles, and linked pit fall animation
     /// 27/07/22 - added audio manager
     ///          - [MALACHI] added checks for shield powerup
+    /// 16/08/22 - [MALACHI] added correct sounds for each obstacle 
     /// 
     /// </summary>
     /// 
@@ -36,13 +37,13 @@ public class Obstacles : MonoBehaviour
             if (!playerMovement.IsShieldActive)
             {
                 playerMovement.Stagger();
-                audioManager.PlaySound("HitEnemySound");
+                
                 return;
             }
 
+            audioManager.PlaySound("BreakStone");
             Debug.Log("Shield active");
             collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
-            
 
         }
 
@@ -50,7 +51,7 @@ public class Obstacles : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("obstacleToStagger"))
         {
             collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
-            audioManager.PlaySound("HitEnemySound");
+            audioManager.PlaySound("BreakCeramics");
 
             if (playerMovement.IsShieldActive)
             {
@@ -68,9 +69,11 @@ public class Obstacles : MonoBehaviour
             if (!playerMovement.IsShieldActive)
             {
                 playerMovement.Stagger();
-                audioManager.PlaySound("HitEnemySound");
                 return;
             }
+
+
+            audioManager.PlaySound("BreakWood");
             Debug.Log("Shield active");
             collisionInfo.GetComponent<DestructableObject>().DestroyObstacle();
 

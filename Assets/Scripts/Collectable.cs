@@ -39,6 +39,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] private CollectableType collectableType;
 
     private ScoreManager scoreManager;
+    private AudioManager audioManager;
     private Movement playerMovement;
     [SerializeField] private float collectableRotation;
     private enum RotationDirection
@@ -58,6 +59,7 @@ public class Collectable : MonoBehaviour
     private void Start()
     {
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<SphereCollider>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         MagnetEffect = GameObject.FindGameObjectWithTag("ShieldEffect").GetComponent<ParticleSystem>(); //I gave the tag the wrong name
@@ -87,6 +89,8 @@ public class Collectable : MonoBehaviour
             {
                 case CollectableType.Coin:
                     scoreManager.CoinCollected();
+                    audioManager.StopSound(9);
+                    audioManager.PlaySound("Coin");
                     break;
                 case CollectableType.CoinMagnetPower:
                     coinMagnet.enabled = true;
