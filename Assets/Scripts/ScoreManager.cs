@@ -92,6 +92,7 @@ public class ScoreManager : MonoBehaviour
         int PreviousSavedCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         int PreviousTotalTime = PlayerPrefs.GetInt("TotalTime", 0);
         int PreviousTotalDeaths = PlayerPrefs.GetInt("TotalDeaths", 0);
+        Debug.Log(PreviousTotalDeaths);
 
         if (score > PlayerPrefs.GetInt("HighScore", 0))
         {
@@ -100,7 +101,7 @@ public class ScoreManager : MonoBehaviour
 
         PlayerPrefs.SetInt("TotalCoins", PreviousSavedCoins + coinsCollected);
         PlayerPrefs.SetInt("TotalTime", PreviousTotalTime + gameState.GlobalTime);
-        PlayerPrefs.SetInt("TotalDeaths", PreviousTotalDeaths++);
+        PlayerPrefs.SetInt("TotalDeaths", PreviousTotalDeaths + 1);
 
 
     }

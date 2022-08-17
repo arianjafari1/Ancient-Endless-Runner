@@ -91,17 +91,16 @@ public class MainMenu : MonoBehaviour
 
     private void SetPlayerStats()
     {
-        HighScoreText.text = "Best Score: " + savedHighScore.ToString();
-        CoinsText.text = "Total Coins Collected: " + savedLifetimeCoins.ToString();
-        TimeRanText.text = "Total Time Ran: " + savedLifetimeTimeRan.ToString() + "s";
-        DeathsText.text = "Total Deaths: " + savedTotalDeaths.ToString();
+        HighScoreText.text = savedHighScore.ToString();
+        CoinsText.text = savedLifetimeCoins.ToString();
+        TimeRanText.text = savedLifetimeTimeRan.ToString() + "s";
+        DeathsText.text = savedTotalDeaths.ToString();
 
     }
 
     private void resetPlayerPref()
     {
         PlayerPrefs.DeleteAll(); //resetting player prefs
-        SetPlayerStats();
     }
 
 
@@ -230,6 +229,7 @@ public class MainMenu : MonoBehaviour
     public void ResetGameSettings() //calling it when the button Reset Game Settings to Default is clicked
     {
         resetPlayerPref(); //reset the prefs
+        SetPlayerStats();
         volumeSlider.value = defaultSliderValue; //setting the volume slider to its default value
         fullScreen.isOn = true; //full screen toggle is ticked and...
         Screen.fullScreen = true;//... full screen is set to true

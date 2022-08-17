@@ -55,7 +55,10 @@ public class CutsceneManager : MonoBehaviour
         boulderMovement.getBackwardsMovement = boulderSpeed;
         boulderRotate.RotationAmount = boulderRotation;
         currentGameState.CurrentGameState = GameState.gameState.isPlaying;
-        playerMovement.EnablePlayerInput();
+        if (PlayerPrefs.GetInt("TutorialComplete", 0) != 0) 
+        { 
+            playerMovement.EnablePlayerInput();
+        }
         audioManager.PlaySound("Boulder_Movement");
 
         foreach (ParticleSystem particleSystem in boulderParticles)
