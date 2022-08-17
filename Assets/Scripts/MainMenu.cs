@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
         setDropDownMenuToCorrectResolution(); //set the dropdown menu resolution selector to correct resolution
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
         checkPlayerSaveFile();
+        SetPlayerStats();
 
     }
 

@@ -91,7 +91,6 @@ public class GameState : MonoBehaviour
                 timer += Time.fixedDeltaTime; //using delta time to count time in float
                 globalTime = (int)(timer); //turning the timer to integer
                 timerUI.text = globalTime.ToString();
-                audioManager.StopSound(5); //Stop Menu Music
                 break;
             case gameState.isPaused:
                 pauseMenu.PauseGame();
