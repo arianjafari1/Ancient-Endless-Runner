@@ -28,12 +28,22 @@ public class MainMenu : MonoBehaviour
     private const float defaultSliderValue= 1f; //default value of the Volume slider
     private List<int> widths = new List<int>() { 848, 1024, 1280, 1280, 1366, 1440, 1600, 1680, 1920, 1920, 2560, 2560, 3840, 3840, 5120, 5120, 7680, 8192 }; //list of widths that will be used for resolutions
     private List<int> heights = new List<int>() { 480, 640, 720, 800, 768, 900, 900, 1050, 1080, 1200, 1400, 1600, 2160, 2400, 2880, 3200, 4320, 5120 }; //list of heights that will be used for resolutions
+    private int savedHighScore;
+    private int savedLifetimeCoins;
+    private int savedLifetimeTimeRan;
+    private int savedTotalDeaths;
+    [SerializeField] private TMP_Text HighScoreText;
+    [SerializeField] private TMP_Text CoinsText;
+    [SerializeField] private TMP_Text TimeRanText;
+    [SerializeField] private TMP_Text DeathsText;
 
     private void Awake()
     {
         fullScreen.isOn = true; //setting the screen to full screen as default
         setDropDownMenuToCorrectResolution(); //set the dropdown menu resolution selector to correct resolution
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
+        checkPlayerSaveFile();
+
     }
 
     public void changeVolume() //function to get the overall volume of the game from the audiolistner and assign it to the rge value of the volume slider
@@ -54,6 +64,7 @@ public class MainMenu : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("generalVolume");  //load the value with the key string generalVolume to load the player settings for volume
         vSync.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("vSyncToggle")); //setting a toggle bool to the int converted to bool from player pref and loading it
         fullScreen.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("fullScreenToggle"));
+
     }
 
     private void checkForPreviousSettings() //function to be called in awake or start to check for previous saved settings
@@ -68,9 +79,28 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private void checkPlayerSaveFile()
+    {
+        savedHighScore = PlayerPrefs.GetInt("HighScore", 0);
+        savedLifetimeCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+        savedLifetimeTimeRan = PlayerPrefs.GetInt("TotalTime", 0);
+        savedTotalDeaths = PlayerPrefs.GetInt("TotalDeaths", 0);
+        
+    }
+
+    private void SetPlayerStats()
+    {
+        HighScoreText.text = "Best Score: " + savedHighScore.ToString();
+        CoinsText.text = "Total Coins Collected: " + savedLifetimeCoins.ToString();
+        TimeRanText.text = "Total Time Ran: " + savedLifetimeTimeRan.ToString() + "s";
+        DeathsText.text = "Total Deaths: " + savedTotalDeaths.ToString();
+
+    }
+
     private void resetPlayerPref()
     {
         PlayerPrefs.DeleteAll(); //resetting player prefs
+        SetPlayerStats();
     }
 
 

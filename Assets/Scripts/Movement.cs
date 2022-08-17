@@ -383,6 +383,11 @@ public class Movement : MonoBehaviour
             player.transform.Translate(currentJumpVelocity * Time.fixedDeltaTime * Vector3.down);
             if (player.transform.position.y <= groundHeight)
             {
+                if (willJumpBeSuper)
+                {
+                    tileMovement.movementSpeedGetterSetter = speedBeforeSuperJump;
+                }
+
                 movementAnimations.SetBool("Jump", false);
                 movementAnimations.SetBool("Falling", false);
                 playerAnimation.Play("Slide");
@@ -461,7 +466,6 @@ public class Movement : MonoBehaviour
         movementAnimations.SetBool("Jump", true);
         isJumping = true;
         currentJumpVelocity = jumpForce;//willJumpBeSuper ? poweredJumpForce : jumpForce;
-        Debug.Log(willJumpBeSuper.ToString() + IsSuperJumpActive.ToString());
     }
 
     public void Slide(InputAction.CallbackContext context)
@@ -495,7 +499,6 @@ public class Movement : MonoBehaviour
     public void Stagger()
     {
         playerAnimation.Play("Stagger");
-        Debug.Log("Staggered");
         movementAnimations.SetTrigger("Stumble");
 
         switch (currentPlayerState)
