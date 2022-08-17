@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _alb:
-        m_Texture: {fileID: 2800000, guid: e6b7d40735765d54f8a049ab6ef904a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 477c430b429f1a24282dab34a73b4cca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ao:
@@ -115,7 +115,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Clip_Threshold: 0.1
+    - _Alpha_Clip_Threshold: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -139,10 +139,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Albedo_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0.4745098}
+    - _Albedo_Color: {r: 4.594794, g: 4.594794, b: 4.594794, a: 0.9137255}
+    - _Color: {r: 42.17295, g: 23.389292, b: 18.500397, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission_Color: {r: 0.3490566, g: 0.22212042, b: 0.09385012, a: 0}
+    - _Emission_Color: {r: 0.066126846, g: 0.0423509, b: 0.017831959, a: 0}
     - _Emission_Colour: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

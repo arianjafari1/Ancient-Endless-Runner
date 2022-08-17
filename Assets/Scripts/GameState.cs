@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Cinemachine;
 
 public class GameState : MonoBehaviour
 {
@@ -27,7 +26,6 @@ public class GameState : MonoBehaviour
     private TileMovement tileMovement; //tile movement script reference
     private PauseMenu pauseMenu; //pauseMenu script reference
     [SerializeField] private TMP_Text timerUI;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     public enum Difficulty //creating an enum for the difficulty of the game
     {
@@ -76,6 +74,7 @@ public class GameState : MonoBehaviour
     private void FixedUpdate()
     {
         changeGameState();
+        //Debug.Log(currentGameState);
         changedDifficulty(); //calling function to change difficulty
     }
 
@@ -86,7 +85,6 @@ public class GameState : MonoBehaviour
             case gameState.gameOver:
                 tileMovement.movementSpeedGetterSetter = 0;
                 tileMovement.speedIncreaseEverySecondGetterSetter = 0;
-                virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 break;
 
             case gameState.isPlaying:
@@ -94,7 +92,6 @@ public class GameState : MonoBehaviour
                 globalTime = (int)(timer); //turning the timer to integer
                 timerUI.text = globalTime.ToString();
                 audioManager.StopSound(5); //Stop Menu Music
-                virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
                 break;
             case gameState.isPaused:
                 pauseMenu.PauseGame();
