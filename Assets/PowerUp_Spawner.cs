@@ -14,15 +14,20 @@ public class PowerUp_Spawner : MonoBehaviour
     /// </summary>
 
     //[SerializeField] private Transform spawnTrans;
-    public GameObject[] powerUpType;
+    [SerializeField] private GameObject[] powerUpType;
     //[SerializeField] private Vector3 spawnPos;
-    // Start is called before the first frame update
+
+    private SphereCollider coinMagnet;
+    private Movement playerMovement;
+
     void Start()
     {
         //spawnTrans = spawnTrans.GetComponent<Transform>();
         //spawnPos = spawnTrans.position;
+        coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<SphereCollider>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
 
-        if (GameObject.FindGameObjectWithTag("PowerUp") != null)
+        if (GameObject.FindGameObjectWithTag("PowerUp") != null || coinMagnet.enabled == true || playerMovement.IsShieldActive == true || playerMovement.IsSuperJumpActive)
         {
             GameObject newCoin = Instantiate(powerUpType[powerUpType.Length - 1], this.transform.position, this.transform.rotation);
             newCoin.transform.parent = this.transform;
