@@ -6978,7 +6978,7 @@
     "m_RefNameGeneratedByDisplayName": "Alpha Strength",
     "m_DefaultReferenceName": "_Alpha_Strength",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": false,
+    "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_Precision": 0,
