@@ -42207,8 +42207,8 @@ MonoBehaviour:
   transSpeed: 0
   useWarp: 0
   lights: []
-  cam: {fileID: 0}
-  theSun: {fileID: 0}
+  cam: {fileID: 165482744}
+  theSun: {fileID: 1061838430}
   sunYRotateAmplitude: 0
   sunYDefaultRotation: 0
 --- !u!1001 &1314559813
