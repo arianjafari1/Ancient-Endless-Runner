@@ -26,11 +26,11 @@ public class TutorialManager : MonoBehaviour
     private InputAction teachLeft;
     private InputAction teachRight;
 
-    [SerializeField] private TMP_Text advanceText;
-    [SerializeField] private TMP_Text JumpText;
-    [SerializeField] private TMP_Text SlideText;
-    [SerializeField] private TMP_Text LeftText;
-    [SerializeField] private TMP_Text RightText;
+    [SerializeField] private GameObject advanceText;
+    [SerializeField] private GameObject JumpText;
+    [SerializeField] private GameObject SlideText;
+    [SerializeField] private GameObject LeftText;
+    [SerializeField] private GameObject RightText;
 
     private void Awake()
     {

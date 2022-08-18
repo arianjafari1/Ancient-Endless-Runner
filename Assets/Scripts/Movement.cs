@@ -392,6 +392,7 @@ public class Movement : MonoBehaviour
                 movementAnimations.SetBool("Falling", false);
                 playerAnimation.Play("Slide");
                 movementAnimations.SetTrigger("Slide");
+                audioManager.PlaySound("JumpWhoosh");
                 //Invoke("EndSlideAnimation", 1.1f);
 
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
@@ -425,12 +426,13 @@ public class Movement : MonoBehaviour
         {
             case Lanes.center:
                 currentLane = Lanes.left;
+                audioManager.PlaySound("SideWhoosh");
                 break;
             case Lanes.right:
                 currentLane = Lanes.center;
+                audioManager.PlaySound("SideWhoosh");
                 break;
         }
-        Debug.Log(currentLane);
     }
     public void GoRight(InputAction.CallbackContext context)
     {
@@ -439,12 +441,13 @@ public class Movement : MonoBehaviour
         {
             case Lanes.center:
                 currentLane = Lanes.right;
+                audioManager.PlaySound("SideWhoosh");
                 break;
             case Lanes.left:
                 currentLane = Lanes.center;
+                audioManager.PlaySound("SideWhoosh");
                 break;
         }
-        Debug.Log(currentLane);
     }
     #endregion
     public void Jump(InputAction.CallbackContext context)
@@ -464,6 +467,7 @@ public class Movement : MonoBehaviour
         }
         playerAnimation.Play("Jump");
         movementAnimations.SetBool("Jump", true);
+        audioManager.PlaySound("JumpWhoosh");
         isJumping = true;
         currentJumpVelocity = jumpForce;//willJumpBeSuper ? poweredJumpForce : jumpForce;
     }
@@ -483,6 +487,7 @@ public class Movement : MonoBehaviour
             movementAnimations.SetTrigger("Slide");
             //Invoke("EndSlideAnimation", 1.1f);
             Debug.Log("Slid");
+            audioManager.PlaySound("JumpWhoosh");
             return;
         }
 
@@ -500,6 +505,7 @@ public class Movement : MonoBehaviour
     {
         playerAnimation.Play("Stagger");
         movementAnimations.SetTrigger("Stumble");
+        PlayGrunt();
 
         switch (currentPlayerState)
         {
@@ -570,7 +576,10 @@ public class Movement : MonoBehaviour
     {
         playerAnimation.Play(animationName);
     }
-
+    public void PlayGrunt()
+    {
+        audioManager.PlaySound("Grunt");
+    }
     private void PauseButton(InputAction.CallbackContext obj)
     {
         //Arian put code here
@@ -601,11 +610,12 @@ public class Movement : MonoBehaviour
     /// 28/06/22 - Stagger with boulder
     /// 13/07/22 - disabling input
     ///          - back to stagger (disable works)
+    /// 18/08/22 - remembered to remove stagger before publishing
     /// 
     /// </summary>
     private void DebugButtonPressed(InputAction.CallbackContext obj)
     {
-        Stagger();
+        //Stagger();
         //movementInputActions.Player.Disable();
     }
 

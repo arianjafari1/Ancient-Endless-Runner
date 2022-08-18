@@ -22,6 +22,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timeAliveText;
     [SerializeField] private TextMeshProUGUI coinsCollectedText;
+    [SerializeField] private GameObject[] inGameUI;
     private ScoreManager scoreManager;
     private GameState gameState;
     private AudioManager audioManager;
@@ -38,6 +39,10 @@ public class GameOver : MonoBehaviour
     }
     public void ShowGameOverScreen()//int score)
     {
+        foreach(GameObject gameUI in inGameUI)
+        {
+            gameUI.SetActive(false);
+        }
         gameObject.SetActive(true); // set the gameover screen to active
         //gameState.CurrentGameState = GameState.gameState.gameOver; //set the game state to game over
         //scoreText.text = "Score: " + score.ToString(); //set the score

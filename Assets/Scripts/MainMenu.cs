@@ -43,7 +43,6 @@ public class MainMenu : MonoBehaviour
         setDropDownMenuToCorrectResolution(); //set the dropdown menu resolution selector to correct resolution
         checkForPreviousSettings(); //checks for previous saved settings in player prefs
         checkPlayerSaveFile();
-        SetPlayerStats();
 
     }
 
@@ -86,6 +85,7 @@ public class MainMenu : MonoBehaviour
         savedLifetimeCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         savedLifetimeTimeRan = PlayerPrefs.GetInt("TotalTime", 0);
         savedTotalDeaths = PlayerPrefs.GetInt("TotalDeaths", 0);
+        SetPlayerStats();
         
     }
 
@@ -93,7 +93,7 @@ public class MainMenu : MonoBehaviour
     {
         HighScoreText.text = savedHighScore.ToString();
         CoinsText.text = savedLifetimeCoins.ToString();
-        TimeRanText.text = savedLifetimeTimeRan.ToString() + "s";
+        TimeRanText.text = savedLifetimeTimeRan.ToString() + " seconds";
         DeathsText.text = savedTotalDeaths.ToString();
 
     }
@@ -229,7 +229,7 @@ public class MainMenu : MonoBehaviour
     public void ResetGameSettings() //calling it when the button Reset Game Settings to Default is clicked
     {
         resetPlayerPref(); //reset the prefs
-        SetPlayerStats();
+        checkPlayerSaveFile();
         volumeSlider.value = defaultSliderValue; //setting the volume slider to its default value
         fullScreen.isOn = true; //full screen toggle is ticked and...
         Screen.fullScreen = true;//... full screen is set to true

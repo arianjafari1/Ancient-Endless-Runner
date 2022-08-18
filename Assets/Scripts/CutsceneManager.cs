@@ -66,4 +66,6 @@ public class CutsceneManager : MonoBehaviour
             particleSystem.Play();
         }
     }
+
+
 }
