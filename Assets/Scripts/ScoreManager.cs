@@ -16,6 +16,9 @@ public class ScoreManager : MonoBehaviour
     /// 13/07/22 - score goes up less when staggered, and stops when player has died
     /// 14/07/22 - added score getter
     /// 12/08/22 - added high score/lifetime stats saving.
+    ///          - moved the endpowerup function to this script, as it would never be called in the powerup
+    ///            script if the tile the powerup was on gets despawned, causing infinite powerup 
+    /// 15/08/22 - score doesnt increase during the cutscene
     /// 
     /// </summary>
 
@@ -58,14 +61,17 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //cancels update during cutscne
         if (gameState.CurrentGameState == GameState.gameState.beginningCutScene)
         {
             return;
         }
 
+        //updates the coin and score text
         coinsUI.text = "x" + coinsCollected.ToString();
         scoreUI.text = "Score: " + score.ToString();
 
+        //score increment is lower if the player is staggered
         switch (playerMovement.getPlayerState)
         {
             case Movement.PlayerStates.running:
@@ -77,7 +83,7 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
-
+    //collecting a coin increases score, and increments coinscollected by 1
     public void CoinCollected()
     {
         coinsCollected++;
@@ -85,14 +91,13 @@ public class ScoreManager : MonoBehaviour
     }
 
 
-
+    //saves the players stats to the playerprefs
     public void AddLifetimeStats()
     {
 
         int PreviousSavedCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         int PreviousTotalTime = PlayerPrefs.GetInt("TotalTime", 0);
         int PreviousTotalDeaths = PlayerPrefs.GetInt("TotalDeaths", 0);
-        Debug.Log(PreviousTotalDeaths);
 
         if (score > PlayerPrefs.GetInt("HighScore", 0))
         {
@@ -106,6 +111,7 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    //turns off the powerup effects, as well as the visual effects
     private void EndPowerUp()
     {
         playerMovement.IsShieldActive = false;
@@ -117,7 +123,8 @@ public class ScoreManager : MonoBehaviour
         ShieldEffect.SetActive(false);
 
     }
-
+    //sets the invoke for ending the powerup, so that the object that used to do it doesnt get 
+    //despawned while attempting it and never turns powerup off
     public void StartPowerupCountdown(float powerUpDuration)
     {
         Invoke(nameof(EndPowerUp), powerUpDuration);

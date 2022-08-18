@@ -19,6 +19,9 @@ public class GameState : MonoBehaviour
     ///            -[Arian] changed globalTime to (int)(timer)
     /// 20/07/2022 -[Arian] added an overall gameState, with things such as beginningCutScene, isPlaying, gameOver, isPaused
     /// 04/08/2022 -[Arian] referenced the PauseMenu script so I can call its PauseGame function to pause the game when game state is at isPaused
+    /// 12/08/2022 -[Malachi] removed audiomanager trying to play menu music every single frame (moved to gameover)
+    /// 17/07/2022 -[Malachi] removed several functions being called every frame in ChangeGameState that were causing errors, or
+    ///             didn't need to be called every single frame
     /// </summary>
 
     private float timer; // this is the float timer

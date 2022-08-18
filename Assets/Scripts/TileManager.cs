@@ -139,7 +139,7 @@ public class TileManager : MonoBehaviour
 
         if (tileMovement.movementSpeedGetterSetter > tileMovement.maxMovementSpeedGetter + tileMovement.maxMovementSpeedGetter * 20 / 100) //check if movement speed is higher than maximum speed + 20 %
         {
-            Debug.LogError("Movement speed should be lower than " + tileMovement.maxMovementSpeedGetter); //custom error message in case movementSpeed goes over the maximum speed
+            //Debug.LogError("Movement speed should be lower than " + tileMovement.maxMovementSpeedGetter); //custom error message in case movementSpeed goes over the maximum speed
             return; //returning nothing
         }
 
@@ -161,7 +161,7 @@ public class TileManager : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("Player")) //if collision info compares with the tile death point tag, then execute the code undeneath
         {
                 Instantiate(tilePrefabs[randomTile], tileSpawnStart.position, tileSpawnStart.rotation); // use random tile to instantiate a new tile, at the tile spawn point
-                Debug.Log("TileEnvironment needs spawning");
+                
             
             /// Commented out Object Pooling Starts
             //GameObject easyTiles = tileMovement.getPooledTiles();

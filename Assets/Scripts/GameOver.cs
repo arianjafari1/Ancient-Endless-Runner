@@ -17,6 +17,7 @@ public class GameOver : MonoBehaviour
     ///          - [MALACHI] made score update automatically rather than having it as a parameter in the function
     /// 20/07/2022 -[Arian] change gameState from GameState Script to gameOver in the ShowGameOverScreen function 
     /// 22/07/22 - [MALACHI] moved changing gamestate to gameover when player dies and not when the gameover screen appears
+    /// 12/08/22 - [MALACHI] added lifetime stats function to the gameover screen to save player's score
     /// </summary>
 
     [SerializeField] private TextMeshProUGUI scoreText;

@@ -35,6 +35,8 @@ public class BoulderMovement : MonoBehaviour
     /// 27/07/22 - [OAKLEY] added audio manager and boulder sound effect
     /// 02/08/22 - serialised the speed increase of the boulder on player death
     /// 11/08/22 - added a multiplier for backwards movement for new superjump powerup
+    /// 14/08/22 - added a getter/setter for backwards movement
+    /// 15/08/22 - fixedupdate gets stopped if cutscene is playing
     /// </summary>
 
     [Tooltip("This is for the parent object, not the actual boulder")]
@@ -96,7 +98,7 @@ public class BoulderMovement : MonoBehaviour
     //    }
     //}
 
-
+    //makes sure the boulder is in the correct space, and plays the game music.
     void Start()
     {
         boulder.transform.position = new Vector3(0, 5, startZPos);
@@ -106,6 +108,7 @@ public class BoulderMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //no movement if cutscene is playing
         if (currentGameState.CurrentGameState == GameState.gameState.beginningCutScene)
         {
             return;
@@ -114,12 +117,16 @@ public class BoulderMovement : MonoBehaviour
 
         switch (playerMovement.getPlayerState)
         {
+            //moves towards the player when staggered
             case Movement.PlayerStates.staggered:
                 boulder.transform.Translate(Vector3.forward * forwardsMovement);
                 break;
+            //moves towards and past the player at a much higher speed when the player dies
             case Movement.PlayerStates.dead:
                 boulder.transform.Translate(deathSpeedMultiplier * forwardsMovement * Vector3.forward);
                 break;
+            //moves slowly backwards (up to min point) while the player is running normally. moves
+            //much quicker if super jump is active and the player has jumped
             case Movement.PlayerStates.running:
                 if (boulder.transform.position.z > minZPos)
                 {
@@ -134,6 +141,7 @@ public class BoulderMovement : MonoBehaviour
                 }
                 break;
         }
+        //shows the gameover screen once the boulder has reached its despawn point, and destroys the boulder
         if (boulder.transform.position.z >= maxZPos)
         {
 
@@ -141,6 +149,7 @@ public class BoulderMovement : MonoBehaviour
             Destroy(boulder);
         }
 
+        //if the boulder is close to the player, triggers the look behind animation of the player
         if (boulder.transform.position.z >= -10)
         {
             int random = UnityEngine.Random.Range(0, 400);
@@ -169,7 +178,6 @@ public class BoulderMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             audioManager.PlaySound("SquashPlayer");
-            Debug.Log("Player has been flattened");
             
             //tileMovement.movementSpeedGetterSetter = 0;
             //tileMovement.speedIncreaseEverySecondGetterSetter = 0;
@@ -183,6 +191,10 @@ public class BoulderMovement : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Destroys the obstacle the boulder just ran over, and then plays the corresponding sound
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("obstacleToStagger") || collision.gameObject.CompareTag("obstacleToJump") || collision.gameObject.CompareTag("obstacleToSlide"))
@@ -205,7 +217,7 @@ public class BoulderMovement : MonoBehaviour
         }
     }
 
-
+    //stops the boulder rolling sound once it despawns
     private void OnDestroy()
     {
         audioManager.StopSound(2);

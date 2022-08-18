@@ -17,10 +17,11 @@ public class DestructableObject : MonoBehaviour
 
 
     [SerializeField] GameObject[] IntactObstacles;
-    [SerializeField] GameObject[] destroyedObstacle;
+    [SerializeField] GameObject[] destroyedObstacle; //obsolete as we never requested rubble/shards
     [SerializeField] ParticleSystem dustParticles;
 
 
+    //turns each object that is part of the obstacle array off and plays the particle effect.
     public void DestroyObstacle()
     {
         dustParticles.Play();
@@ -29,6 +30,7 @@ public class DestructableObject : MonoBehaviour
             obstacle.SetActive(false);
             
         }
+        //also turns the collider of the obstacle off so it doesnt trigger for both shielded player and boukder collision
         gameObject.GetComponent<BoxCollider>().enabled = false;
         //IntactObstacle.gameObject.SetActive(false);
     }

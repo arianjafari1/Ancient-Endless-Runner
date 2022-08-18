@@ -29,6 +29,7 @@ public class CoinMagnet : MonoBehaviour
         tileMovement = GameObject.FindGameObjectWithTag("GameManager").GetComponent<TileMovement>();
     }
 
+    //adds any coins which enter the collider to the array to move them towards the player
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coin" && gameObject.GetComponent<CoinMagnet>().enabled == true)

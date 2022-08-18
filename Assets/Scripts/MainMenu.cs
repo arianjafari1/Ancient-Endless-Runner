@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
     ///            -[Arian] also added a function to be called in awake or start that checks for previous saved settings
     /// 15/08/2022 -[Arian] added a switch statement ensuring that the correct resolution is selected in the dropdown menu
     ///            -[Arian] V-sync toggle fully working
+    /// 16/08/2022 -[Malachi] Added player stats to the menu
     /// </summary>
 
     [SerializeField] private Slider volumeSlider;
@@ -79,6 +80,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads the players stats from the playerprefs set in scoremanager. will default them to 0
+    /// if no stats exist
+    /// </summary>
     private void checkPlayerSaveFile()
     {
         savedHighScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -89,6 +94,9 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Sets the text in the menu to have the correct stats after they have been retrieved
+    /// </summary>
     private void SetPlayerStats()
     {
         HighScoreText.text = savedHighScore.ToString();
@@ -136,12 +144,10 @@ public class MainMenu : MonoBehaviour
         if (_verticleSync) //if toggle is on then vsync is true
         {
             QualitySettings.vSyncCount = 1;
-            Debug.Log("V-Sync is on");
         }
         else //otherwise vsync is off
         {
             QualitySettings.vSyncCount = 0;
-            Debug.Log("V-Sync is off");
         }
         SavePlayerSettings();
     }

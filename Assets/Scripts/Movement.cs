@@ -63,7 +63,14 @@ public class Movement : MonoBehaviour
     ///            times while the powerup is active. Attempt was to stop values changing whilst you are midair, but that 
     ///            turned out to not be the problem. Superjump will probably have to be removed unless the reason for this
     ///            bug is found, as there seems to be nothing in the code that is causing it.
+    /// 11/08/22 - changed superjump to a leap forwards rather than increasing height to combat framerate issues
+    /// 12/08/22 - added audiomanager and several sounds
+    /// 15/08/22 - made sure fixedupdate doesnt run during cutscene
     /// 16/08/22 - [Oakley] Added variables for powerup effects
+    /// 17/08/22 - fixed bug where slide cancelling with superjump didnt revert speed back
+    /// 18/08/22 - added more sounds
+    ///          - turned off the debug button
+    /// 
     /// </summary>
     private PauseMenu pauseMenu; //reference to PauseMenu script
     
@@ -126,10 +133,11 @@ public class Movement : MonoBehaviour
     [Tooltip("How high the player jumps")]
     [SerializeField] private float maxJumpHeight;
     [Tooltip("Force of the powered up jump")]
-    [SerializeField] private float poweredJumpForce;
+    [SerializeField] private float poweredJumpForce; //obsolete
     [Tooltip("Height of the powered up jump")]
-    [SerializeField] private float poweredJumpHeight;
+    [SerializeField] private float poweredJumpHeight; //obsolete
 
+    //checks used for powerups
     private bool shieldActive = false;
     private bool superJumpActive = false;
     private bool willJumpBeSuper = false;
@@ -155,6 +163,7 @@ public class Movement : MonoBehaviour
             superJumpActive = value;
         }
     }
+    [Tooltip("multiplier of the superjump to tile movement")]
     [SerializeField] private float superJumpSpeedIncrease;
     private float speedBeforeSuperJump;
 
@@ -181,8 +190,8 @@ public class Movement : MonoBehaviour
 
     private Animation playerAnimation;
     private Animator movementAnimations;
-    //[SerializeField] private Animator animator; (too much for my brain to handle, went back to simple animation component)
     [SerializeField] private GameObject playerModel; //Added by Oakley to reference the player model
+    //used for look behind animation
     private bool boulderIsClose = false;
     public bool IsBoulderClose
     {
@@ -258,7 +267,8 @@ public class Movement : MonoBehaviour
 
     /// <summary>
     /// Sets the player to always start in the center lane, and gets the y position of the player
-    /// to work with during the landing function so it knows where to stop falling
+    /// to work with during the landing function so it knows where to stop falling. also sets several
+    /// variables to the corresponding components
     /// </summary>
     void Start()
     {
@@ -281,12 +291,13 @@ public class Movement : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        //no update if cutscene is playing. prevents possibility of any updating messing with the player's position/rotation
         if (gameState.CurrentGameState == GameState.gameState.beginningCutScene)
         {
             return;
         }
         int targetLane = ((int)currentLane);
-        //currentPos is now virtually a relic from attempts using MoveTowards rather than translate, which resulted
+        //currentPos is now essentially a relic from attempts using MoveTowards rather than translate, which resulted
         //in inputs being queued rather than performing immediately as the button was pressed.
         Vector3 currentPos = player.transform.position; 
 
@@ -398,7 +409,6 @@ public class Movement : MonoBehaviour
                 player.transform.position = new Vector3(currentPos.x, groundHeight, currentPos.z);
                 currentJumpVelocity = 0;
                 isTryingToSlide = false;
-                Debug.Log("Cancelled jump into slide");
             }
 
         }
@@ -452,12 +462,14 @@ public class Movement : MonoBehaviour
     #endregion
     public void Jump(InputAction.CallbackContext context)
     {
+        //doesnt jump if player is already midair, or staggered
         if (isJumping || isFalling || isTryingToSlide || currentPlayerState == PlayerStates.staggered) 
         {
             return;
         }
 
         willJumpBeSuper = false;
+        //if super jump is active, it will increase the speed of the ground as if the player does a massive leap forwards
         if (IsSuperJumpActive)
         {
             
@@ -474,8 +486,7 @@ public class Movement : MonoBehaviour
 
     public void Slide(InputAction.CallbackContext context)
     {
-        //plays the slide "animation", which essentially just shrinks and lowers the 
-        //collision box of the player.
+        
         if (currentPlayerState == PlayerStates.staggered || isTryingToSlide || isSliding)
         {
             return;
@@ -483,17 +494,18 @@ public class Movement : MonoBehaviour
 
         else if (!isJumping && !isFalling)
         {
+            //plays the slide "animation", which essentially just shrinks and lowers the 
+            //collision box of the player.
             playerAnimation.Play("Slide");
             movementAnimations.SetTrigger("Slide");
             //Invoke("EndSlideAnimation", 1.1f);
-            Debug.Log("Slid");
             audioManager.PlaySound("JumpWhoosh");
             return;
         }
 
         
         
-        //triggers the jump cancel, allowing the player to quickly slide even if midair.
+        //triggers the jump cancel if player is in the air, allowing the player to quickly slide even if midair.
         isJumping = false;
         isFalling = false;
         isTryingToSlide = true;
@@ -510,9 +522,10 @@ public class Movement : MonoBehaviour
         switch (currentPlayerState)
         {
             case PlayerStates.running:
+                //makes sure the speed goes back to normal before applying the decrease if super jump was active
+                //when they staggered
                 if (isPlayerAirborne && willJumpBeSuper)
                 {
-                    Debug.Log("Player staggered midair with powerup");
                     tileMovement.movementSpeedGetterSetter = speedBeforeSuperJump;
                 }
 
@@ -547,6 +560,7 @@ public class Movement : MonoBehaviour
 
     public void SetDeathState()
     {
+        //sets player state, death state, and several animation/sound triggers. also disables input
         CancelSpeedReturn();
         movementAnimations.SetTrigger("Flatten");
         movementAnimations.SetBool("IsPlayerDead", true);
@@ -562,7 +576,6 @@ public class Movement : MonoBehaviour
     {
         tileMovement.movementSpeedGetterSetter = speedBeforeStagger;
         currentPlayerState = PlayerStates.running;
-        Debug.Log("Speed back up");
     }
 
     //Added the ability to cancel the invoke to prevent the ground from returning to the
@@ -572,20 +585,24 @@ public class Movement : MonoBehaviour
         CancelInvoke();
     }
 
+    //can play an animation from another function without requiring them to have the animation component
     public void PlayAnimation(string animationName)
     {
         playerAnimation.Play(animationName);
     }
+    //used to play the grunt sound in the cutscene
     public void PlayGrunt()
     {
         audioManager.PlaySound("Grunt");
     }
+
+    //pauses the game
     private void PauseButton(InputAction.CallbackContext obj)
     {
-        //Arian put code here
         pauseMenu.ShowPauseMenuScreen();
     }
 
+    //used to enable/disable player input in the tutorial and after the player dies
     public void EnablePlayerInput()
     {
         movementInputActions.Player.Enable();

@@ -81,10 +81,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IntactObstacles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3130730235244324535}
+  - {fileID: 3196557866233217101}
+  - {fileID: 7639346239620007001}
   destroyedObstacle:
   - {fileID: 0}
   dustParticles: {fileID: 6548240666454531669}
@@ -4944,6 +4943,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c15cd515fd301be41bf75bc0175432ca, type: 3}
   m_PrefabInstance: {fileID: 2860910968095710182}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3130730235244324535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c15cd515fd301be41bf75bc0175432ca, type: 3}
+  m_PrefabInstance: {fileID: 2860910968095710182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3196557866233120485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5026,6 +5030,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 54a9cf01843431742a3126013891032d, type: 3}
   m_PrefabInstance: {fileID: 3196557866233120485}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3196557866233217101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 54a9cf01843431742a3126013891032d, type: 3}
+  m_PrefabInstance: {fileID: 3196557866233120485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7405326536482060552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5086,5 +5095,10 @@ PrefabInstance:
 --- !u!4 &7012025740769369827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6aff4907a2f295349af472f8c5fe9395, type: 3}
+  m_PrefabInstance: {fileID: 7405326536482060552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7639346239620007001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6aff4907a2f295349af472f8c5fe9395, type: 3}
   m_PrefabInstance: {fileID: 7405326536482060552}
   m_PrefabAsset: {fileID: 0}

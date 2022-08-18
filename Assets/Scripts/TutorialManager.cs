@@ -6,6 +6,25 @@ using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
+    /// <summary>
+    /// Code and dev notes by Malachi unless otherwise specified
+    /// Script created 03/08/22 by Malachi
+    /// 
+    /// 03/08/22 - Created 2 arrays, one for regular start tiles and one for tutorial, and use playerprefs
+    ///            to decide which ones are set to active at the start of the game. If no playerprefs is 
+    ///            found, it spawns tutorial tiles, otherwise regular ones are spawned
+    ///          - Created enum for tutorial stages
+    ///          - set it so regular controls are disabled during the tutorial, which gets renabled in the 
+    ///            complete tutorial function
+    /// 04/08/22 - created trigger function for each stage of the tutorial
+    ///          - added special input actions for the tutorial so i dont have to enable the regular controls
+    ///          - created functions for each stage of the tutorial
+    ///          - added advance tutorial function which sets timescale to 1
+    ///          - sets timescale to 0 to pause the game for each stage of the tutorial.
+    ///          - added each required input to the corresponding stage of the tutorial
+    ///          - added the text popups to the tutorial which show up when required
+    /// 17/08/22 - changed tmp objects to gameobjects, as i gave them backgrounds
+    /// </summary>
     public enum TutorialStages
     {
         BeginTutorial,
@@ -66,7 +85,8 @@ public class TutorialManager : MonoBehaviour
         teachRight.Disable();
     }
 
-
+    //Checks if the tutorial has been completed before. if it has, will turn off the normal start tiles,
+    //turn on the tutorial and turn off regular input.
     private void Start()
     {
         if (PlayerPrefs.GetInt("TutorialComplete", 0) == 0)
@@ -82,16 +102,20 @@ public class TutorialManager : MonoBehaviour
             playerMovement.DisablePlayerInput();
             
         }
-
+        //this gets disabled so specific actions can be enabled for each tutorial stage
         inputActions.Tutorial.Disable();
     }
-
+    
+    /// <summary>
+    /// These pause the game, the enable the specific  input action for each stage to prevent the player
+    /// doing inputs when not prompted. this prevents death/staggering during the tutorial.
+    /// </summary>
+    /// <param name="tutorialStage">the stage the tutorial is on</param>
     public void TriggerTutorialStep(TutorialStages tutorialStage)
     {
         switch (tutorialStage)
         {
             case TutorialStages.BeginTutorial:
-                Debug.Log("Start tuto");
                 Time.timeScale = 0;
                 inputActions.Tutorial.Advance.Enable();
                 advanceText.gameObject.SetActive(true);
@@ -122,6 +146,13 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Each stage will remove the info text, redisable the input, then advance the tutorial. stages where
+    /// an input will make player move (jump/slide/left/right) will trigger the corresponding function
+    /// from player movement.
+    /// </summary>
+    #region tutorial stages
+    
     private void AdvanceTutorial_performed(InputAction.CallbackContext obj)
     {
         advanceText.gameObject.SetActive(false);
@@ -159,12 +190,20 @@ public class TutorialManager : MonoBehaviour
         AdvanceTutorial();
     }
 
+    #endregion
 
+    /// <summary>
+    /// unpauses the game
+    /// </summary>
     public void AdvanceTutorial()
     {
         Time.timeScale = 1;
     }
 
+    /// <summary>
+    /// sets the playerpref for tutorial complete so it doesnt trigger past the first run
+    /// unless they reset their save file
+    /// </summary>
     public void CompleteTutorial()
     {
         PlayerPrefs.SetInt("TutorialComplete", 1);

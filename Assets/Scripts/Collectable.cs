@@ -29,6 +29,7 @@ public class Collectable : MonoBehaviour
     /// 
     /// </summary>
 
+    //the 4 types of collectable, can be expanded easily
     private enum CollectableType
     {
         Coin,
@@ -42,6 +43,8 @@ public class Collectable : MonoBehaviour
     private AudioManager audioManager;
     private Movement playerMovement;
     [SerializeField] private float collectableRotation;
+    //due to the way blender imported models, some are on a different axis so require a different rotation.
+    //this enum is a fix for that to save the artists' time having to reimport them
     private enum RotationDirection
     {
         up,
@@ -58,6 +61,7 @@ public class Collectable : MonoBehaviour
 
     private void Start()
     {
+        //assigning the required components
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         coinMagnet = GameObject.FindGameObjectWithTag("CoinMagnet").GetComponent<SphereCollider>();
@@ -87,21 +91,25 @@ public class Collectable : MonoBehaviour
         {
             switch (collectableType)
             {
+                //adds a coin to the players total + score
                 case CollectableType.Coin:
                     scoreManager.CoinCollected();
                     audioManager.StopSound(9);
                     audioManager.PlaySound("Coin");
                     break;
+                //turns on the coin magnet collider, which then starts "magnetising" the coins towards the player
                 case CollectableType.CoinMagnetPower:
                     coinMagnet.enabled = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
                     MagnetEffect.Play();
                     break;
+                //activates the superjump variable in the player movement, allowing for massive forwards jumps
                 case CollectableType.FeatherJumpPower:
                     playerMovement.IsSuperJumpActive = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
                     FeatherEffect.Play();
                     break;
+                //activates a shield around the player and sets the glow shader to active
                 case CollectableType.CheatDeathPower:
                     playerMovement.IsShieldActive = true;
                     scoreManager.StartPowerupCountdown(powerUpDuration);
@@ -109,7 +117,7 @@ public class Collectable : MonoBehaviour
                     break;
 
             }
-
+            //turns the object off once it has been collected
             gameObject.SetActive(false);
         }
     }

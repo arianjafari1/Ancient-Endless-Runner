@@ -33,8 +33,7 @@ public class BoulderRotate : MonoBehaviour
         }
     }
     /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
+    /// rotates the boulder in the direction of the player to give the illusion of movement 
     /// </summary>
     private void FixedUpdate()
     {
