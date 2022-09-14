@@ -6,7 +6,10 @@ This is a group project for Birmingham City University where we had to develop a
 The game can be downloaded by using the Itch.Io link in the releases section.
 
 
+
+
 Core development team
+
 Programmers:
 
 Arian Jafari-Tadi (https://www.linkedin.com/in/arian-jafari-tadi-b83144249)
