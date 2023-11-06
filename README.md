@@ -12,7 +12,7 @@ Core development team
 
 Programmers:
 
-Arian Jafari-Tadi (https://www.linkedin.com/in/arian-jafari-tadi-b83144249)
+Arian Jafari-Tadi (https://www.linkedin.com/in/arian-jafari-tadi)
 
 Malachi Kiloh-Munns (https://www.linkedin.com/in/malachi-kiloh-munns-036a4922b/)
 
